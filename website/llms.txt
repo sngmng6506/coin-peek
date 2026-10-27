@@ -1,6 +1,6 @@
 # Coin Peek (몰래코인)
 
-> Free, open-source desktop widget for Windows and Mac that shows Upbit (KRW) and Binance (USDT) cryptocurrency prices when you move the mouse to the screen edge. No account, no API key, no exchange connection. Current version: v0.1.0.
+> Free, open-source desktop widget for Windows and Mac that shows Upbit (KRW) and Binance (USDT) cryptocurrency prices when you move the mouse to the screen edge. No account, no API key, no exchange connection. Current version: v0.1.1.
 
 Coin Peek lives in the system tray (menu bar on Mac). Moving the cursor to the left or right screen edge slides in a panel with the watchlist: price, change, a 90-day daily chart, and profit and loss when an amount and average price are entered. Moving the cursor away hides it. It is the crypto sibling of Stock Peek (https://stock-peek.com).
 
