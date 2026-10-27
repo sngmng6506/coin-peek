@@ -6,7 +6,6 @@
 
 - [ ] GitHub에 `sngmng6506/coin-peek` 저장소 생성 후 push (Actions 권한: Read and write)
 - [ ] `badges` 브랜치 생성 + Rulesets로 삭제 차단 (다운로드 배지·사용 통계용)
-- [ ] 아이콘 교체: `build/icon.ico`, `build/icon.png`, `resources/icon.png`, `resources/trayTemplate*.png` (지금은 몰래주식 아이콘 그대로)
 - [ ] 실제 앱에서 확인: 업비트 `비트코인`·`BTC` 검색, 바이낸스 `SOL` 검색, 소액 코인(`SHIB`, `PEPE`) 가격 자릿수, 소수 수량 보유 손익
 - [ ] 바이낸스 접속이 막힌 네트워크(사내망 등)에서 `api.binance.com` 폴백 동작 확인
 
