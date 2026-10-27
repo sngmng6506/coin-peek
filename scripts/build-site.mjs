@@ -142,7 +142,7 @@ function render(lang, page) {
     `<meta name="twitter:image" content="${site.origin}/og.png" />`,
     `<link rel="preconnect" href="https://fonts.googleapis.com" />`,
     `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`,
-    `<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Do+Hyeon&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700${s.font ? `&family=${s.font}` : ''}&display=swap" rel="stylesheet" />`,
+    `<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gothic+A1:wght@400;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,700${s.font ? `&family=${s.font}` : ''}&display=swap" rel="stylesheet" />`,
     `<link rel="icon" href="/favicon.ico" sizes="any" />`,
     `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`,
     `<link rel="stylesheet" href="/style.css?v=${site.assetVersion}" />`,

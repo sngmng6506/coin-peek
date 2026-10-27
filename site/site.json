@@ -2,7 +2,7 @@
   "origin": "https://coin-peek.com",
   "defaultLang": "ko",
   "updated": "2026-10-27",
-  "assetVersion": 1,
+  "assetVersion": 2,
   "author": "Sangmyeong Lee",
   "downloadUrl": "https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe",
   "downloadUrlMac": "https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-mac.dmg",

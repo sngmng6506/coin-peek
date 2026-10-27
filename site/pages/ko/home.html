@@ -105,66 +105,71 @@
 
 <!-- @main -->
 <main>
-  <div class="wrap">
-    <section class="hero">
+  <section class="hero">
+    <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow"><b>24/7</b>업비트 · 바이낸스</div>
-        <h1>코인은 몰래,<br /><em>마우스만 살짝.</em></h1>
-        <p class="hero-sub">화면 끝에 마우스를 대면 관심 코인 시세가 나오고, 치우면 들어갑니다. 거래소 앱이나 브라우저 탭을 열 필요가 없습니다.</p>
-        <div class="hero-cta">
-          {{downloadButtons}}
-          <span class="hero-meta">무료 · Windows 10·11, macOS 12 이상 · 현재 <span class="mono" id="appVer">v{{version}}</span> · <a href="/guide/#install">설치 안내</a></span>
-        </div>
+        <h1>코인 시세는<br />화면 끝에 숨겨두세요.</h1>
+        <p class="hero-sub">마우스를 화면 오른쪽 끝에 대면 업비트와 바이낸스 시세가 나오고, 치우면 들어갑니다. 거래소 앱이나 브라우저 탭을 따로 열 필요가 없습니다.</p>
+        <div class="hero-cta">{{downloadButtons}}</div>
+        <p class="hero-meta">무료입니다. Windows 10·11, macOS 12 이상에서 돌아가고, 지금 버전은 <span id="appVer">v{{version}}</span>입니다.</p>
+        <p class="edge-hint" data-edge-hint hidden>이 페이지에서도 됩니다. 창 오른쪽 끝에 마우스를 대보세요.</p>
       </div>
-
       <div class="demo" data-demo="hover" aria-hidden="true">
         <div class="demo-hint">화면 끝에 마우스를 대보세요</div>
         <div class="sp-indicator" data-indicator></div>
         <div class="sp-panel" data-panel><div class="sp-head"><span class="sp-handle"></span><span class="sp-icons"><i></i><i></i><i></i><i></i></span></div><div class="sp-cards"><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">비트코인</span><span class="sp-chg up">+1.24%</span></div><div class="sp-row"><span class="sp-price sp-num">114,820,000원</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">이더리움</span><span class="sp-chg down">-0.86%</span></div><div class="sp-row"><span class="sp-price sp-num">5,312,000원</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div><div class="sp-row sp-hold"><span class="sp-qty">0.5 ETH</span><span class="up">+184,000원 (+7.4%)</span></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">BTC</span><span class="sp-chg down">-0.44%</span></div><div class="sp-row"><span class="sp-price sp-num">$79,887.05</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">SOL</span><span class="sp-chg up">+2.31%</span></div><div class="sp-row"><span class="sp-price sp-num">$100.09</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div></div></div>
         <svg class="demo-cursor" data-cursor width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>
       </div>
-    </section>
-  </div>
-
-  <section class="venues" aria-label="업비트 · 바이낸스">
-    <div class="wrap venues-inner"><span class="venue"><strong>업비트</strong><span class="mono">KRW</span></span><span class="venues-sep" aria-hidden="true"></span><span class="venue"><strong>바이낸스</strong><span class="mono">USDT</span></span><span class="venues-sep" aria-hidden="true"></span><span>키·계정 없이 공개 시세만</span></div>
-  </section>
-
-  <section class="features" id="features">
-    <div class="wrap">
-      <div class="section-head"><p class="section-kicker">기능</p><h2 class="section-title">보고 싶을 때만, 딱 거기에</h2></div>
-      <div class="feat-grid">
-        <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="desk" data-demo="drag"><div class="mon"><div class="mon-screen" data-display></div></div><div class="mon"><div class="mon-screen" data-display></div></div><div class="sp-indicator mini" data-indicator></div><div class="sp-panel mini" data-panel><div class="sp-head"><span class="sp-handle"></span></div><div class="sp-cards"><i class="up"></i><i class="down"></i><i class="up"></i></div></div><svg class="demo-cursor" data-cursor width="13" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></div></div><div class="feat-body"><h3>마우스를 대면 나오고, 치우면 들어갑니다</h3><p>단축키나 클릭은 필요 없습니다. 패널 윗부분을 잡고 끌면 반대쪽 가장자리나 다른 모니터로 옮겨집니다.</p></div></div>
-        <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="coin-list"><div class="coin-row"><span>UPBIT</span><b>BTC</b><span class="up">+1.2%</span></div><div class="coin-row"><span>UPBIT</span><b>XRP</b><span class="down">−0.6%</span></div><div class="coin-row"><span>BINANCE</span><b>SOL</b><span class="up">+2.3%</span></div><div class="coin-row"><span>BINANCE</span><b>DOGE</b><span class="up">+0.9%</span></div><div class="coin-row"><span>보유</span><b>0.5 ETH</b><span class="up">+7.4%</span></div></div></div><div class="feat-body"><h3>업비트 원화와 바이낸스 USDT를 한 목록에</h3><p>한글·영문 이름이나 티커로 검색해 추가합니다. 보유 수량과 평균 매입가를 넣으면 평가손익도 같이 보입니다.</p></div></div>
-        <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="decimals"><div>0.05 BTC<span>qty</span></div><div>$0.00000485<span>SHIB</span></div><div>0.0201원<span>KRW</span></div></div></div><div class="feat-body"><h3>0.00000485까지 그대로</h3><p>소액 코인은 유효숫자 네 자리까지 보여주고, 보유 수량은 소수점 여덟 자리까지 넣을 수 있습니다. 최근 90일 차트도 함께 나옵니다.</p></div></div>
-      </div>
     </div>
   </section>
 
-  <section class="trust">
-    <div class="wrap">
-      <div class="trust-box">
-        <div><p class="section-kicker">안심</p><h2 class="section-title">API 키도, 계정도<br />필요 없습니다.</h2></div>
-        <div class="trust-list">
-          <div class="trust-item"><strong>거래소 연동 없음</strong><p>거래소 로그인, API 키, 주문 기능이 없습니다. 시세만 봅니다.</p></div>
-          <div class="trust-item"><strong>데이터는 내 PC에</strong><p>관심 코인, 보유 수량, 평균 매입가, 설정은 PC에만 저장되고 따로 수집하지 않습니다.</p></div>
-          <div class="trust-item"><strong>오픈소스</strong><p>코드는 GitHub에 MIT 라이선스로 공개되어 있습니다.</p></div>
-        </div>
+  <section class="how" id="features">
+    <div class="wrap how-grid">
+      <h2>하던 일은 그대로 두고</h2>
+      <div class="how-list">
+        <div><h3>마우스를 대면 나오고, 치우면 들어갑니다</h3><p>단축키나 클릭은 필요 없습니다. 패널 윗부분을 잡고 끌면 반대쪽 가장자리나 다른 모니터로 옮겨집니다.</p></div>
+        <div><h3>업비트와 바이낸스를 한 목록에</h3><p>이름이나 티커로 검색해 추가합니다. 보유 수량과 평균 매입가를 넣으면 평가손익도 같이 보입니다.</p></div>
+        <div><h3>트레이에 조용히</h3><p>시스템 트레이(Mac은 메뉴 막대)에 상주하고, 컴퓨터를 켤 때 자동으로 실행되게 할 수 있습니다.</p></div>
       </div>
+      <div class="how-vis" aria-hidden="true"><div class="desk" data-demo="drag"><div class="mon"><div class="mon-screen" data-display></div></div><div class="mon"><div class="mon-screen" data-display></div></div><div class="sp-indicator mini" data-indicator></div><div class="sp-panel mini" data-panel><div class="sp-head"><span class="sp-handle"></span></div><div class="sp-cards"><i class="up"></i><i class="down"></i><i class="up"></i></div></div><svg class="demo-cursor" data-cursor width="13" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></div></div>
     </div>
+  </section>
+
+  <section class="spec">
+    <div class="wrap"><div class="spec-grid">
+      <h2>한눈에 보기</h2>
+      <dl>
+        <div><dt>거래소</dt><dd>업비트 원화(KRW) 마켓, 바이낸스 USDT 마켓</dd></div>
+        <div><dt>검색</dt><dd>업비트는 한글·영문 이름과 티커, 바이낸스는 티커</dd></div>
+        <div><dt>갱신</dt><dd>24시간 3초마다</dd></div>
+        <div><dt>등락률</dt><dd>업비트는 전일(한국 시간 0시) 대비, 바이낸스는 24시간 대비</dd></div>
+        <div><dt>차트</dt><dd>최근 90일 일봉</dd></div>
+        <div><dt>보유 정보</dt><dd>수량은 소수점 여덟 자리까지. 평균 매입가를 넣으면 평가손익 표시</dd></div>
+        <div><dt>소액 코인</dt><dd>유효숫자 네 자리까지 표시. 예: $0.00000485</dd></div>
+        <div><dt>저장</dt><dd>내 PC에만. 회원가입, 거래소 로그인, API 키 없음</dd></div>
+        <div><dt>라이선스</dt><dd>무료, MIT 라이선스 오픈소스</dd></div>
+      </dl>
+    </div></div>
   </section>
 
   <section class="faq" id="install">
-    <div class="wrap">
+    <div class="wrap"><div class="spec-grid">
       <h2>자주 묻는 질문</h2>
-      <details><summary>설치할 때 Windows 경고가 떠요.</summary><div class="faq-a">개인이 만든 앱이라 코드 서명이 없어서 SmartScreen 경고가 뜹니다. “추가 정보” → “실행”을 누르면 설치됩니다. GitHub에서 소스를 보고 직접 빌드해도 됩니다.</div></details>
-      <details><summary>시세는 어디서 가져오나요?</summary><div class="faq-a">업비트와 바이낸스가 공개한 시세 API에서 직접 가져오고, 3초마다 갱신합니다. 등락률은 업비트가 전일(한국 시간 0시) 대비, 바이낸스가 24시간 대비입니다.</div></details>
-      <details><summary>회사 PC에서도 되나요?</summary><div class="faq-a">Windows의 프록시·인증서 설정을 그대로 씁니다. 다만 거래소 사이트를 막아 둔 회사가 많아서, 사내망에서 업비트나 바이낸스 접속이 차단돼 있으면 시세가 나오지 않습니다.</div></details>
-      <details><summary>Mac에서는 어떻게 설치하나요?</summary><div class="faq-a">macOS 12 이상에서 쓸 수 있습니다. 내려받은 파일을 열어 앱을 응용 프로그램 폴더로 옮기세요. Apple 공증이 없어서 처음 열 때 차단되면 시스템 설정 → 개인정보 보호 및 보안에서 “그래도 열기”를 누르면 됩니다. Mac은 자동 설치가 안 되고, 새 버전이 나오면 알림을 눌러 다시 내려받습니다.</div></details>
-      <p class="faq-more">설치 방법과 자세한 사용법은 <a href="/guide/">가이드</a>에 있습니다.</p>
-    </div>
+      <div>
+        <details><summary>설치할 때 Windows 경고가 떠요.</summary><div class="faq-a">개인이 만든 앱이라 코드 서명이 없어서 SmartScreen 경고가 뜹니다. “추가 정보” → “실행”을 누르면 설치됩니다. GitHub에서 소스를 보고 직접 빌드해도 됩니다.</div></details>
+        <details><summary>시세는 어디서 가져오나요?</summary><div class="faq-a">업비트와 바이낸스가 공개한 시세 API에서 직접 가져오고, 3초마다 갱신합니다. 등락률은 업비트가 전일(한국 시간 0시) 대비, 바이낸스가 24시간 대비입니다.</div></details>
+        <details><summary>회사 PC에서도 되나요?</summary><div class="faq-a">Windows의 프록시·인증서 설정을 그대로 씁니다. 다만 거래소 사이트를 막아 둔 회사가 많아서, 사내망에서 업비트나 바이낸스 접속이 차단돼 있으면 시세가 나오지 않습니다.</div></details>
+        <details><summary>Mac에서는 어떻게 설치하나요?</summary><div class="faq-a">macOS 12 이상에서 쓸 수 있습니다. 내려받은 파일을 열어 앱을 응용 프로그램 폴더로 옮기세요. Apple 공증이 없어서 처음 열 때 차단되면 시스템 설정 → 개인정보 보호 및 보안에서 “그래도 열기”를 누르면 됩니다. Mac은 자동 설치가 안 되고, 새 버전이 나오면 알림을 눌러 다시 내려받습니다.</div></details>
+        <p class="faq-more">설치 방법과 자세한 사용법은 <a href="/guide/">가이드</a>에 있습니다.</p>
+      </div>
+    </div></div>
   </section>
 </main>
+
+<aside class="edge" data-edge aria-hidden="true">
+  <div class="edge-ind" data-edge-ind></div>
+  <div class="sp-panel edge-panel" data-edge-panel><div class="sp-head"><span class="sp-handle"></span><span class="sp-icons"><i></i><i></i><i></i><i></i></span></div><div class="sp-cards"><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">비트코인</span><span class="sp-chg up">+1.24%</span></div><div class="sp-row"><span class="sp-price sp-num">114,820,000원</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">이더리움</span><span class="sp-chg down">-0.86%</span></div><div class="sp-row"><span class="sp-price sp-num">5,312,000원</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div><div class="sp-row sp-hold"><span class="sp-qty">0.5 ETH</span><span class="up">+184,000원 (+7.4%)</span></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">BTC</span><span class="sp-chg down">-0.44%</span></div><div class="sp-row"><span class="sp-price sp-num">$79,887.05</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">SOL</span><span class="sp-chg up">+2.31%</span></div><div class="sp-row"><span class="sp-price sp-num">$100.09</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div></div></div>
+</aside>
 
 <!-- @footer -->
 <a href="/guide/">제품 가이드</a>

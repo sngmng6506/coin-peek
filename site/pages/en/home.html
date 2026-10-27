@@ -105,66 +105,71 @@
 
 <!-- @main -->
 <main>
-  <div class="wrap">
-    <section class="hero">
+  <section class="hero">
+    <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow"><b>24/7</b>Upbit · Binance</div>
-        <h1>Check crypto<br /><em>without looking.</em></h1>
-        <p class="hero-sub">Touch the screen edge and your coin prices slide in. Move away and they hide. No exchange app, no browser tab.</p>
-        <div class="hero-cta">
-          {{downloadButtons}}
-          <span class="hero-meta">Free · Windows 10 and 11, macOS 12+ · Current <span class="mono" id="appVer">v{{version}}</span> · <a href="/en/guide/#install">How to install</a></span>
-        </div>
+        <h1>Keep crypto prices<br />at the edge of your screen.</h1>
+        <p class="hero-sub">Touch the right edge of the screen and your Upbit and Binance prices slide in. Move away and they hide. No exchange app, no extra browser tab.</p>
+        <div class="hero-cta">{{downloadButtons}}</div>
+        <p class="hero-meta">Free. Runs on Windows 10 and 11 and macOS 12 or later. Current version <span id="appVer">v{{version}}</span>.</p>
+        <p class="edge-hint" data-edge-hint hidden>Try it here: move the mouse to the right edge of this window.</p>
       </div>
-
       <div class="demo" data-demo="hover" aria-hidden="true">
         <div class="demo-hint">Move the mouse to the screen edge</div>
         <div class="sp-indicator" data-indicator></div>
         <div class="sp-panel" data-panel><div class="sp-head"><span class="sp-handle"></span><span class="sp-icons"><i></i><i></i><i></i><i></i></span></div><div class="sp-cards"><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">Bitcoin</span><span class="sp-chg up">+1.24%</span></div><div class="sp-row"><span class="sp-price sp-num">₩114,820,000</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">Ethereum</span><span class="sp-chg down">-0.86%</span></div><div class="sp-row"><span class="sp-price sp-num">₩5,312,000</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div><div class="sp-row sp-hold"><span class="sp-qty">0.5 ETH</span><span class="up">+₩184,000 (+7.4%)</span></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">BTC</span><span class="sp-chg down">-0.44%</span></div><div class="sp-row"><span class="sp-price sp-num">$79,887.05</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">SOL</span><span class="sp-chg up">+2.31%</span></div><div class="sp-row"><span class="sp-price sp-num">$100.09</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div></div></div>
         <svg class="demo-cursor" data-cursor width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>
       </div>
-    </section>
-  </div>
-
-  <section class="venues" aria-label="Upbit · Binance">
-    <div class="wrap venues-inner"><span class="venue"><strong>Upbit</strong><span class="mono">KRW</span></span><span class="venues-sep" aria-hidden="true"></span><span class="venue"><strong>Binance</strong><span class="mono">USDT</span></span><span class="venues-sep" aria-hidden="true"></span><span>Public prices only, no keys or accounts</span></div>
-  </section>
-
-  <section class="features" id="features">
-    <div class="wrap">
-      <div class="section-head"><p class="section-kicker">Features</p><h2 class="section-title">Only when you want it, right where you look</h2></div>
-      <div class="feat-grid">
-        <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="desk" data-demo="drag"><div class="mon"><div class="mon-screen" data-display></div></div><div class="mon"><div class="mon-screen" data-display></div></div><div class="sp-indicator mini" data-indicator></div><div class="sp-panel mini" data-panel><div class="sp-head"><span class="sp-handle"></span></div><div class="sp-cards"><i class="up"></i><i class="down"></i><i class="up"></i></div></div><svg class="demo-cursor" data-cursor width="13" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></div></div><div class="feat-body"><h3>Shows on hover, hides when you leave</h3><p>No shortcut or click. Grab the top of the panel and drag it to the other edge or another monitor.</p></div></div>
-        <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="coin-list"><div class="coin-row"><span>UPBIT</span><b>BTC</b><span class="up">+1.2%</span></div><div class="coin-row"><span>UPBIT</span><b>XRP</b><span class="down">−0.6%</span></div><div class="coin-row"><span>BINANCE</span><b>SOL</b><span class="up">+2.3%</span></div><div class="coin-row"><span>BINANCE</span><b>DOGE</b><span class="up">+0.9%</span></div><div class="coin-row"><span>Held</span><b>0.5 ETH</b><span class="up">+7.4%</span></div></div></div><div class="feat-body"><h3>Upbit KRW and Binance USDT in one list</h3><p>Search by name or ticker. Add your amount and average price to see profit and loss.</p></div></div>
-        <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="decimals"><div>0.05 BTC<span>qty</span></div><div>$0.00000485<span>SHIB</span></div><div>₩0.0201<span>KRW</span></div></div></div><div class="feat-body"><h3>Down to 0.00000485</h3><p>Small-cap coins show four significant digits, and holdings take up to eight decimal places. A 90-day chart comes with every coin.</p></div></div>
-      </div>
     </div>
   </section>
 
-  <section class="trust">
-    <div class="wrap">
-      <div class="trust-box">
-        <div><p class="section-kicker">Trust</p><h2 class="section-title">No API keys.<br />No account.</h2></div>
-        <div class="trust-list">
-          <div class="trust-item"><strong>No exchange connection</strong><p>No exchange login, API key or trading. It only shows prices.</p></div>
-          <div class="trust-item"><strong>Your data stays on your PC</strong><p>Watchlist, amounts, average prices and settings are stored only on your computer and never collected.</p></div>
-          <div class="trust-item"><strong>Open source</strong><p>The code is on GitHub under the MIT License.</p></div>
-        </div>
+  <section class="how" id="features">
+    <div class="wrap how-grid">
+      <h2>Your work stays where it is</h2>
+      <div class="how-list">
+        <div><h3>Shows on hover, hides when you leave</h3><p>No shortcut or click. Grab the top of the panel and drag it to the other edge or another monitor.</p></div>
+        <div><h3>Upbit and Binance in one list</h3><p>Search by name or ticker. Add your amount and average price to see profit and loss.</p></div>
+        <div><h3>Quiet in the tray</h3><p>It lives in the system tray (the menu bar on Mac) and can start with your computer.</p></div>
       </div>
+      <div class="how-vis" aria-hidden="true"><div class="desk" data-demo="drag"><div class="mon"><div class="mon-screen" data-display></div></div><div class="mon"><div class="mon-screen" data-display></div></div><div class="sp-indicator mini" data-indicator></div><div class="sp-panel mini" data-panel><div class="sp-head"><span class="sp-handle"></span></div><div class="sp-cards"><i class="up"></i><i class="down"></i><i class="up"></i></div></div><svg class="demo-cursor" data-cursor width="13" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></div></div>
     </div>
+  </section>
+
+  <section class="spec">
+    <div class="wrap"><div class="spec-grid">
+      <h2>At a glance</h2>
+      <dl>
+        <div><dt>Exchanges</dt><dd>Upbit KRW market, Binance USDT market</dd></div>
+        <div><dt>Search</dt><dd>Upbit by English or Korean name or ticker; Binance by ticker</dd></div>
+        <div><dt>Refresh</dt><dd>Every 3 seconds, around the clock</dd></div>
+        <div><dt>Change</dt><dd>Upbit against the previous close (00:00 KST); Binance against 24 hours ago</dd></div>
+        <div><dt>Chart</dt><dd>Last 90 days, daily</dd></div>
+        <div><dt>Holdings</dt><dd>Amounts up to eight decimals. Add an average price to see profit and loss</dd></div>
+        <div><dt>Small coins</dt><dd>Four significant digits, for example $0.00000485</dd></div>
+        <div><dt>Storage</dt><dd>On your computer only. No sign-up, no exchange login, no API key</dd></div>
+        <div><dt>License</dt><dd>Free and open source, MIT</dd></div>
+      </dl>
+    </div></div>
   </section>
 
   <section class="faq" id="install">
-    <div class="wrap">
+    <div class="wrap"><div class="spec-grid">
       <h2>FAQ</h2>
-      <details><summary>Windows shows a warning when I install it.</summary><div class="faq-a">The app is not code-signed, so SmartScreen warns about it. Click “More info” → “Run anyway”. You can also read the source on GitHub and build it yourself.</div></details>
-      <details><summary>Where do the prices come from?</summary><div class="faq-a">Directly from the public market data APIs of Upbit and Binance, refreshed every 3 seconds. Upbit’s change is against the previous close (00:00 KST); Binance’s is against 24 hours ago.</div></details>
-      <details><summary>Does it work on a work computer?</summary><div class="faq-a">It uses the system proxy and certificates. Many companies block exchange sites, though, and if Upbit or Binance is blocked on your network, prices will not load.</div></details>
-      <details><summary>How do I install it on a Mac?</summary><div class="faq-a">It runs on macOS 12 or later. Open the downloaded file and move the app to Applications. It is not notarized, so if macOS blocks the first launch, click “Open Anyway” in System Settings → Privacy & Security. Mac has no automatic install; when a new version is out, click the notification and download it again.</div></details>
-      <p class="faq-more">Installation and detailed usage are in the <a href="/en/guide/">guide</a>.</p>
-    </div>
+      <div>
+        <details><summary>Windows shows a warning when I install it.</summary><div class="faq-a">The app is not code-signed, so SmartScreen warns about it. Click “More info” → “Run anyway”. You can also read the source on GitHub and build it yourself.</div></details>
+        <details><summary>Where do the prices come from?</summary><div class="faq-a">Directly from the public market data APIs of Upbit and Binance, refreshed every 3 seconds. Upbit’s change is against the previous close (00:00 KST); Binance’s is against 24 hours ago.</div></details>
+        <details><summary>Does it work on a work computer?</summary><div class="faq-a">It uses the system proxy and certificates. Many companies block exchange sites, though, and if Upbit or Binance is blocked on your network, prices will not load.</div></details>
+        <details><summary>How do I install it on a Mac?</summary><div class="faq-a">It runs on macOS 12 or later. Open the downloaded file and move the app to Applications. It is not notarized, so if macOS blocks the first launch, click “Open Anyway” in System Settings → Privacy & Security. Mac has no automatic install; when a new version is out, click the notification and download it again.</div></details>
+        <p class="faq-more">Installation and detailed usage are in the <a href="/en/guide/">guide</a>.</p>
+      </div>
+    </div></div>
   </section>
 </main>
+
+<aside class="edge" data-edge aria-hidden="true">
+  <div class="edge-ind" data-edge-ind></div>
+  <div class="sp-panel edge-panel" data-edge-panel><div class="sp-head"><span class="sp-handle"></span><span class="sp-icons"><i></i><i></i><i></i><i></i></span></div><div class="sp-cards"><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">Bitcoin</span><span class="sp-chg up">+1.24%</span></div><div class="sp-row"><span class="sp-price sp-num">₩114,820,000</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">Ethereum</span><span class="sp-chg down">-0.86%</span></div><div class="sp-row"><span class="sp-price sp-num">₩5,312,000</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div><div class="sp-row sp-hold"><span class="sp-qty">0.5 ETH</span><span class="up">+₩184,000 (+7.4%)</span></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">BTC</span><span class="sp-chg down">-0.44%</span></div><div class="sp-row"><span class="sp-price sp-num">$79,887.05</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">SOL</span><span class="sp-chg up">+2.31%</span></div><div class="sp-row"><span class="sp-price sp-num">$100.09</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div></div></div>
+</aside>
 
 <!-- @footer -->
 <a href="/en/guide/">Guide</a>
