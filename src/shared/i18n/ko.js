@@ -22,7 +22,7 @@ export default {
   'app.empty': '코인이 비어있어요',
   'app.emptyAdd': '+ 코인 추가',
   'help.chart':
-    '차트는 최근 90일 일봉입니다. 등락률: 업비트는 전일(0시) 대비, 바이낸스는 24시간 대비.',
+    '차트는 최근 90일 일봉입니다. 등락률: 업비트는 전일(0시) 대비, 바이낸스와 bitbank는 24시간 대비.',
   // StockCard
   'card.remove': '삭제',
   'card.editHolding': '보유 정보 편집',
@@ -49,6 +49,7 @@ export default {
   'add.close': '닫기',
   'add.searchPlaceholder.UPBIT': '예: 비트코인, Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': '예: BTC, SOL',
+  'add.searchPlaceholder.BITBANK': '예: BTC, XRP',
   'add.alreadyAdded': '이미 추가됨',
   'add.alreadyAddedTitle': '이미 추가된 코인',
   'add.searchFail': '검색 실패',
@@ -85,6 +86,7 @@ export default {
   // 공통 표기 ({v}, {n}은 값 자리)
   'market.UPBIT': '업비트',
   'market.BINANCE': '바이낸스',
+  'market.BITBANK': 'bitbank',
   'common.example': '예: {v}',
   // 오류 코드 (main에서 코드로 던짐)
   'error.ERR_DUPLICATE': '이미 추가된 코인이에요',

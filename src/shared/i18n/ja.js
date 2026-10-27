@@ -22,7 +22,7 @@ export default {
   'app.empty': 'コインがまだありません',
   'app.emptyAdd': '+ コインを追加',
   'help.chart':
-    'チャートは直近90日の日足です。騰落率: Upbitは前日終値(韓国時間0時)比、Binanceは24時間比。',
+    'チャートは直近90日の日足です。騰落率: Upbitは前日終値(韓国時間0時)比、Binanceとbitbankは24時間比。',
   // StockCard
   'card.remove': '削除',
   'card.editHolding': '保有情報を編集',
@@ -49,6 +49,7 @@ export default {
   'add.close': '閉じる',
   'add.searchPlaceholder.UPBIT': '例: Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': '例: BTC, SOL',
+  'add.searchPlaceholder.BITBANK': '例: ビットコイン, BTC',
   'add.alreadyAdded': '追加済み',
   'add.alreadyAddedTitle': 'ウォッチリストに追加済み',
   'add.searchFail': '検索に失敗しました',
@@ -85,6 +86,7 @@ export default {
   // 共通表記（{v}・{n} は値の位置）
   'market.UPBIT': 'Upbit',
   'market.BINANCE': 'Binance',
+  'market.BITBANK': 'bitbank',
   'common.example': '例: {v}',
   // エラーコード（main から送られる）
   'error.ERR_DUPLICATE': 'すでに追加されています',

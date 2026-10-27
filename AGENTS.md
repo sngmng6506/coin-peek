@@ -5,7 +5,7 @@ AI·기여자용 작업 규칙. 사용자 소개는 [README.md](README.md).
 ## 개요
 
 - Windows·Mac 데스크톱 위젯. 화면 가장자리 hover 시 관심 코인 시세 패널 표시. [stock-peek](https://github.com/sngmng6506/stock-peek)(몰래주식) 포크
-- 데이터: 업비트 KRW 마켓, 바이낸스 USDT 마켓 공개 시세 API (키 없음). 바이낸스는 `data-api.binance.vision` 먼저, 실패 시 `api.binance.com`
+- 데이터: 업비트 KRW, 바이낸스 USDT, bitbank JPY 마켓 공개 시세 API (키 없음). 바이낸스는 `data-api.binance.vision` 먼저, 실패 시 `api.binance.com`. bitbank는 `/tickers_jpy` 한 번으로 전체 시세, 일봉은 연 단위(`/candlestick/1day/YYYY`)라 90일이 안 차면 작년 것도 이어 붙임
 - 스택: Electron, electron-vite, React 19, `electron-store`
 - 계정·거래소 API 키 연동 없음
 
@@ -30,10 +30,10 @@ npm run check:site             # website/가 최신인지 검사
 src/shared/markets.js     시장(거래소) 정의 (통화·소수 자릿수·심볼 규칙) — main·renderer 공용
 src/shared/languages.js   지원 언어 (코드·로케일·방향·시장 순서)
 src/shared/i18n/          언어별 번역 (ko.js가 키 기준) — main·renderer 공용
-src/main/markets/         거래소 provider (upbit.js, binance.js 팩토리, batch.js 같은 틱 시세 묶음 조회, search.js 목록 검색 순위, index.js 등록)
+src/main/markets/         거래소 provider (upbit.js, binance.js, bitbank.js 팩토리, batch.js 같은 틱 시세 묶음 조회, search.js 목록 검색 순위, index.js 등록)
 src/main/index.js         창·트레이·IPC 핸들러·자동 업데이트
 src/main/stockService.js  폴링, lastGood 캐시, 시세·보유 병합
-src/main/watchlist.js     관심종목 CRUD (검증은 markets.js 규칙)
+src/main/watchlist.js     관심종목 CRUD (검증은 markets.js 규칙). 첫 실행 기본 목록은 화면 언어별 `watchlistModel.js` `defaultItems`
 src/main/preferences.js   도킹·언어·welcome 설정
 src/preload/index.js      contextBridge IPC 화이트리스트
 src/renderer/src/         App.jsx, components/, i18n/ (Provider), lib/ (금액 포맷·오류 번역)

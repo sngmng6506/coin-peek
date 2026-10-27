@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { createUpbitProvider } from '../src/main/markets/upbit.js'
 import { createBinanceProvider } from '../src/main/markets/binance.js'
+import { createBitbankProvider } from '../src/main/markets/bitbank.js'
 import { createBatcher } from '../src/main/markets/batch.js'
 import { rankMatches } from '../src/main/markets/search.js'
 import { getMarket, isMarketOpen } from '../src/shared/markets.js'
@@ -16,6 +17,8 @@ test('symbols normalize to the bare coin ticker', () => {
   assert.equal(getMarket('UPBIT').normalizeSymbol('USDT'), 'USDT')
   assert.equal(getMarket('BINANCE').normalizeSymbol('solusdt'), 'SOL')
   assert.equal(getMarket('BINANCE').normalizeSymbol('1000SATS'), '1000SATS')
+  assert.equal(getMarket('BITBANK').normalizeSymbol('btc_jpy'), 'BTC')
+  assert.equal(getMarket('BITBANK').normalizeSymbol('xrp'), 'XRP')
   assert.ok(isMarketOpen('UPBIT', new Date('2026-10-25T03:00:00Z'))) // 일요일도 장중
 })
 
@@ -170,4 +173,72 @@ test('Upbit: unknown market (400 or 404) becomes "not found" without breaking th
     assert.equal(btc.value.price, 1)
     assert.match(nope.reason.message, /not found/)
   }
+})
+
+test('bitbank: one /tickers_jpy call for many coins, change vs 24h open, Japanese name', async () => {
+  const urls = []
+  const rows = [
+    { pair: 'btc_jpy', last: '12000000', open: '11880000', vol: '100' },
+    { pair: 'xrp_jpy', last: '0.0123', open: '0.0125', vol: '1000000' },
+    { pair: 'bcc_jpy', last: '60000', open: '60000', vol: '5' }
+  ]
+  const fetchJson = (url) => {
+    urls.push(url)
+    if (url.endsWith('/tickers_jpy')) return ok({ success: 1, data: rows })
+    if (url.includes('/candlestick/1day/'))
+      return ok({
+        success: 1,
+        data: {
+          candlestick: [
+            {
+              ohlcv: [
+                ['1', '1', '1', '10', '1', 0],
+                ['1', '1', '1', '11', '1', 0]
+              ]
+            }
+          ]
+        }
+      })
+    return fail(404)
+  }
+  const bitbank = createBitbankProvider({ fetchJson, now: () => Date.UTC(2026, 9, 27) })
+  const [btc, xrp, bch, nope] = await Promise.allSettled(
+    ['BTC', 'XRP', 'BCC', 'NOPE'].map((s) => bitbank.fetch(s))
+  )
+  assert.equal(urls.filter((u) => u.endsWith('/tickers_jpy')).length, 1)
+  assert.equal(btc.value.price, 12000000)
+  assert.ok(Math.abs(btc.value.changeRatio - (120000 / 11880000) * 100) < 1e-9)
+  assert.equal(btc.value.isUp, true)
+  assert.equal(btc.value.localName, 'ビットコイン')
+  assert.equal(xrp.value.isUp, false)
+  assert.equal(bch.value.name, 'Bitcoin Cash')
+  assert.match(nope.reason.message, /not found/)
+  // 올해 캔들이 90개 미만이면 작년 것도 가져와 이어 붙임
+  await tick()
+  assert.ok(urls.some((u) => u.endsWith('/btc_jpy/candlestick/1day/2026')))
+  assert.ok(urls.some((u) => u.endsWith('/btc_jpy/candlestick/1day/2025')))
+  const again = await bitbank.fetch('BTC')
+  assert.deepEqual(again.prices, [10, 11, 10, 11])
+})
+
+test('bitbank search ranks by yen volume and matches Japanese names', async () => {
+  const bitbank = createBitbankProvider({
+    fetchJson: () =>
+      ok({
+        success: 1,
+        data: [
+          { pair: 'eth_jpy', last: '500000', vol: '10' },
+          { pair: 'etc_jpy', last: '3000', vol: '10' },
+          { pair: 'btc_jpy', last: '12000000', vol: '0' }
+        ]
+      })
+  })
+  assert.deepEqual(
+    (await bitbank.search('et')).map((r) => r.symbol),
+    ['ETH', 'ETC']
+  )
+  assert.deepEqual(
+    (await bitbank.search('イーサ')).map((r) => r.symbol),
+    ['ETH']
+  )
 })

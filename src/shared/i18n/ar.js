@@ -21,7 +21,7 @@ export default {
   'app.empty': 'لا توجد عملات بعد',
   'app.emptyAdd': '+ إضافة عملة',
   'help.chart':
-    'تعرض الرسوم البيانية الأسعار اليومية لآخر 90 يومًا. التغير: Upbit مقارنة بإغلاق اليوم السابق (منتصف الليل بتوقيت كوريا)، وBinance مقارنة بآخر 24 ساعة.',
+    'تعرض الرسوم البيانية الأسعار اليومية لآخر 90 يومًا. التغير: Upbit مقارنة بإغلاق اليوم السابق (منتصف الليل بتوقيت كوريا)، وBinance وbitbank مقارنة بآخر 24 ساعة.',
   // StockCard
   'card.remove': 'حذف',
   'card.editHolding': 'تعديل المركز',
@@ -48,6 +48,7 @@ export default {
   'add.close': 'إغلاق',
   'add.searchPlaceholder.UPBIT': 'مثال: Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': 'مثال: BTC, SOL',
+  'add.searchPlaceholder.BITBANK': 'مثال: BTC, XRP',
   'add.alreadyAdded': 'مضاف بالفعل',
   'add.alreadyAddedTitle': 'موجودة في قائمة المتابعة',
   'add.searchFail': 'فشل البحث',
@@ -84,6 +85,7 @@ export default {
   // Shared formats ({v}, {n} are placeholders)
   'market.UPBIT': 'Upbit',
   'market.BINANCE': 'Binance',
+  'market.BITBANK': 'bitbank',
   'common.example': 'مثال: {v}',
   // Error codes (thrown by main)
   'error.ERR_DUPLICATE': 'موجودة بالفعل في قائمة المتابعة',

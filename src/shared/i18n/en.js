@@ -22,7 +22,7 @@ export default {
   'app.empty': 'No coins yet',
   'app.emptyAdd': '+ Add coin',
   'help.chart':
-    'Charts show the last 90 days of daily prices. Change: Upbit vs. previous close (00:00 KST), Binance vs. 24 hours ago.',
+    'Charts show the last 90 days of daily prices. Change: Upbit vs. previous close (00:00 KST), Binance and bitbank vs. 24 hours ago.',
   // StockCard
   'card.remove': 'Remove',
   'card.editHolding': 'Edit holding',
@@ -49,6 +49,7 @@ export default {
   'add.close': 'Close',
   'add.searchPlaceholder.UPBIT': 'e.g. Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': 'e.g. BTC, SOL',
+  'add.searchPlaceholder.BITBANK': 'e.g. BTC, XRP',
   'add.alreadyAdded': 'Already added',
   'add.alreadyAddedTitle': 'Already in watchlist',
   'add.searchFail': 'Search failed',
@@ -85,6 +86,7 @@ export default {
   // Shared formats ({v}, {n} are placeholders)
   'market.UPBIT': 'Upbit',
   'market.BINANCE': 'Binance',
+  'market.BITBANK': 'bitbank',
   'common.example': 'e.g. {v}',
   // Error codes (thrown by main)
   'error.ERR_DUPLICATE': 'Already in your watchlist',

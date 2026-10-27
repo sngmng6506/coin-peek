@@ -28,7 +28,7 @@ import {
   refreshAll,
   reorderCache
 } from './stockService.js'
-import { addItem, removeItem, reorderWatchlist, updateHolding } from './watchlist.js'
+import { addItem, removeItem, reorderWatchlist, seedWatchlist, updateHolding } from './watchlist.js'
 import { getProvider } from './markets/index.js'
 import { eFetch } from './markets/http.js'
 import {
@@ -698,6 +698,8 @@ app.on('second-instance', () => {
 
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.coinpeek.app')
+  // 첫 실행이면 화면 언어에 맞는 거래소의 코인으로 시작 (일본어 → bitbank 엔화)
+  seedWatchlist(resolveLanguage())
   // 트레이 상주 앱: Mac Dock에 아이콘을 띄우지 않음
   if (IS_MAC) {
     app.dock?.hide()

@@ -1,3 +1,29 @@
+// 처음 설치했을 때의 관심 코인: 화면 언어 사용자가 익숙한 거래소·통화로
+const DEFAULTS_BY_LANG = {
+  ko: [
+    ['UPBIT', 'BTC'],
+    ['UPBIT', 'ETH'],
+    ['BINANCE', 'BTC'],
+    ['BINANCE', 'SOL']
+  ],
+  ja: [
+    ['BITBANK', 'BTC'],
+    ['BITBANK', 'ETH'],
+    ['BITBANK', 'XRP'],
+    ['BINANCE', 'SOL']
+  ]
+}
+const DEFAULTS_OTHER = [
+  ['BINANCE', 'BTC'],
+  ['BINANCE', 'ETH'],
+  ['BINANCE', 'SOL'],
+  ['BINANCE', 'XRP']
+]
+
+export function defaultItems(lang) {
+  return (DEFAULTS_BY_LANG[lang] || DEFAULTS_OTHER).map(([market, symbol]) => ({ market, symbol }))
+}
+
 // Pure operations: validate before writing so a failed edit cannot erase holdings.
 export function holdingFields(raw) {
   const result = {}

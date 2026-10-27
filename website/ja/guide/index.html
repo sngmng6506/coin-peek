@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coin Peek ガイド — 無料のWindows・Mac仮想通貨価格ウィジェット</title>
-  <meta name="description" content="Coin Peekとは何か、インストール方法、対応するUpbit・Binance市場、価格の取得元と騰落率の基準、評価損益、データの保存方法とよくある質問をまとめました。" />
+  <meta name="description" content="Coin Peekとは何か、インストール方法、対応するbitbank・Binance・Upbit市場、価格の取得元と騰落率の基準、評価損益、データの保存方法とよくある質問をまとめました。" />
   <meta name="author" content="Sangmyeong Lee" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <link rel="canonical" href="https://coin-peek.com/ja/guide/" />
@@ -44,7 +44,7 @@
         "@id": "https://coin-peek.com/ja/guide/#webpage",
         "url": "https://coin-peek.com/ja/guide/",
         "name": "Coin Peek ガイド",
-        "description": "Coin Peekとは何か、インストール方法、対応するUpbit・Binance市場、価格の取得元と騰落率の基準、評価損益、データの保存方法とよくある質問をまとめました。",
+        "description": "Coin Peekとは何か、インストール方法、対応するbitbank・Binance・Upbit市場、価格の取得元と騰落率の基準、評価損益、データの保存方法とよくある質問をまとめました。",
         "inLanguage": "ja",
         "dateModified": "2026-10-27",
         "isPartOf": {
@@ -99,7 +99,7 @@
             "@type": "HowToStep",
             "position": 2,
             "name": "コインを追加",
-            "text": "＋ボタンを押してUpbitかBinanceを選び、名前やティッカーで検索して追加します。必要なら保有数量と平均取得単価も入力します。",
+            "text": "＋ボタンを押してbitbank・Binance・Upbitから選び、名前やティッカーで検索して追加します。必要なら保有数量と平均取得単価も入力します。",
             "url": "https://coin-peek.com/ja/guide/#watchlist"
           },
           {
@@ -128,7 +128,7 @@
             "name": "どのコインに対応していますか？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "UpbitのKRW市場とBinanceのUSDT市場に上場しているコインです。上場廃止や取引停止中のコインは取得できません。"
+              "text": "bitbankの円市場、BinanceのUSDT市場、UpbitのKRW市場に上場しているコインです。上場廃止や取引停止中のコインは取得できません。"
             }
           },
           {
@@ -184,14 +184,14 @@
 
     <div class="answer-box">
       <strong>ひとことで言うと</strong>
-      <p>画面の左右どちらかの端にマウスを近づけると、Upbit・Binanceのコイン価格、直近90日の推移、評価損益が表示される無料のオープンソースWindows・Macウィジェットです。</p>
+      <p>画面の左右どちらかの端にマウスを近づけると、bitbank・Binance・Upbitのコイン価格、直近90日の推移、評価損益が表示される無料のオープンソースWindows・Macウィジェットです。</p>
     </div>
 
     <section>
       <h2>主な機能</h2>
       <ul>
         <li>マウスが画面の端に届くとパネルが現れ、離れると自動で隠れます。</li>
-        <li>UpbitのKRW市場は英語・韓国語の名前やティッカーで、BinanceのUSDT市場はティッカーで検索します。Binanceの検索結果は24時間の売買代金順です。</li>
+        <li>bitbankの円市場はティッカーや日本語名で、BinanceのUSDT市場はティッカーで、UpbitのKRW市場は英語・韓国語の名前やティッカーで検索します。bitbankとBinanceの検索結果は売買代金順です。</li>
         <li>保有数量（小数点以下8桁まで）と平均取得単価を入れると評価損益を表示します。</li>
         <li>少額コインは有効数字4桁まで表示します（例：$0.00000485）。</li>
         <li>直近90日の日足を小さなチャートで表示します。</li>
@@ -204,7 +204,7 @@
       <h2>インストールと使い方</h2>
       <ol>
         <li id="install"><strong>ダウンロード:</strong> このサイトまたはGitHub Releasesから最新のインストーラーを入手します。Windowsは<code>.exe</code>、Macは<code>.dmg</code>です。</li>
-        <li id="watchlist"><strong>コインを追加:</strong> ＋ボタンを押してUpbitかBinanceを選び、名前やティッカーで検索して追加します。必要なら保有数量と平均取得単価も入力します。</li>
+        <li id="watchlist"><strong>コインを追加:</strong> ＋ボタンを押してbitbank・Binance・Upbitから選び、名前やティッカーで検索して追加します。必要なら保有数量と平均取得単価も入力します。</li>
         <li id="use"><strong>画面の端で確認:</strong> マウスを画面の端に近づけるとパネルが開き、離すと隠れます。</li>
       </ol>
       <p class="doc-note">コード署名がないため、Windows SmartScreenの警告が出ることがあります。「詳細情報」→「実行」を選んでください。Macは公証がないため、初回起動がブロックされたらシステム設定 → プライバシーとセキュリティで「このまま開く」を押してください。</p>
@@ -212,8 +212,8 @@
 
     <section>
       <h2>価格の取得元と更新間隔</h2>
-      <p>UpbitとBinanceが公開している価格APIから直接取得します。APIキーや取引所アカウントは使いません。コインは24時間取引されるため常に3秒ごとに更新し、同じ取引所のコインはまとめて1回のリクエストで取得します。</p>
-      <p>騰落率の基準は取引所ごとに異なります。Upbitは前日終値（韓国時間0時）比、Binanceは24時間前比です。チャートはどちらも直近90日の日足です。</p>
+      <p>bitbank、Binance、Upbitが公開している価格APIから直接取得します。APIキーや取引所アカウントは使いません。コインは24時間取引されるため常に3秒ごとに更新し、同じ取引所のコインはまとめて1回のリクエストで取得します。</p>
+      <p>騰落率の基準は取引所ごとに異なります。bitbankとBinanceは24時間前比、Upbitは前日終値（韓国時間0時）比です。チャートはすべて直近90日の日足です。</p>
     </section>
 
     <section>
@@ -225,7 +225,7 @@
       <h2>よくある質問</h2>
       <dl>
         <div><dt>Coin Peekは無料ですか？</dt><dd>はい。アプリ内に広告・課金・会員登録はなく、ソースコードはすべてMITライセンスで公開しています。</dd></div>
-        <div><dt>どのコインに対応していますか？</dt><dd>UpbitのKRW市場とBinanceのUSDT市場に上場しているコインです。上場廃止や取引停止中のコインは取得できません。</dd></div>
+        <div><dt>どのコインに対応していますか？</dt><dd>bitbankの円市場、BinanceのUSDT市場、UpbitのKRW市場に上場しているコインです。上場廃止や取引停止中のコインは取得できません。</dd></div>
         <div><dt>株価も見られますか？</dt><dd>株価は同じ開発者の<a href="https://stock-peek.com/ja">Stock Peek</a>で見られます。2つのアプリは別々にインストールして動作します。</dd></div>
         <div><dt>会社のPCでも使えますか？</dt><dd>システムのプロキシと証明書を使いますが、会社のネットワークが取引所サイトをブロックしている場合は価格を取得できません。</dd></div>
         <div><dt>表示された価格で取引してもいいですか？</dt><dd>表示される価格は公式の約定データや投資助言ではありません。取引前に取引所で最新の価格を確認してください。</dd></div>

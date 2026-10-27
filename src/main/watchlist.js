@@ -1,18 +1,14 @@
 import Store from 'electron-store'
-import { holdingFields, reorderItems } from './watchlistModel.js'
+import { defaultItems, holdingFields, reorderItems } from './watchlistModel.js'
 import { getMarket } from '../shared/markets.js'
 
-const DEFAULTS = [
-  { market: 'UPBIT', symbol: 'BTC' },
-  { market: 'UPBIT', symbol: 'ETH' },
-  { market: 'BINANCE', symbol: 'BTC' },
-  { market: 'BINANCE', symbol: 'SOL' }
-]
+// 기본 목록은 화면 언어에 따라 첫 실행 때 seedWatchlist()가 넣음.
+// (예전 버전은 Store defaults로 저장했으므로 기존 사용자 목록은 그대로)
+const store = new Store({ name: 'watchlist' })
 
-const store = new Store({
-  name: 'watchlist',
-  defaults: { items: DEFAULTS }
-})
+export function seedWatchlist(lang) {
+  if (!store.has('items')) store.set('items', defaultItems(lang))
+}
 
 // 에러 메시지는 코드로 던지고 화면에서 번역 (i18n error.<CODE>)
 function fail(code) {
@@ -39,7 +35,7 @@ function applyHolding(item, raw) {
 }
 
 export function getItems() {
-  return store.get('items')
+  return store.get('items') || []
 }
 
 export function addItem(market, symbol, holding) {

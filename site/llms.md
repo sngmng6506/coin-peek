@@ -1,6 +1,6 @@
 # Coin Peek (몰래코인)
 
-> Free, open-source desktop widget for Windows and Mac that shows Upbit (KRW) and Binance (USDT) cryptocurrency prices when you move the mouse to the screen edge. No account, no API key, no exchange connection. Current version: v{{version}}.
+> Free, open-source desktop widget for Windows and Mac that shows Binance (USDT), Upbit (KRW) and bitbank (JPY) cryptocurrency prices when you move the mouse to the screen edge. No account, no API key, no exchange connection. Current version: v{{version}}.
 
 Coin Peek lives in the system tray (menu bar on Mac). Moving the cursor to the left or right screen edge slides in a panel with the watchlist: price, change, a 90-day daily chart, and profit and loss when an amount and average price are entered. Moving the cursor away hides it. It is the crypto sibling of Stock Peek (https://stock-peek.com).
 
@@ -8,9 +8,10 @@ Key facts:
 
 - Platforms: Windows 10 and 11; macOS 12 or later (universal build)
 - Price and license: free, MIT License
-- Markets: Upbit KRW market (search by Korean or English name or ticker) and Binance USDT market (search by ticker, ranked by 24-hour volume)
-- Price sources: Upbit and Binance public market data APIs, called directly from the user's computer. Binance uses data-api.binance.vision first and api.binance.com as a fallback
-- Change figure: Upbit is against the previous close (00:00 KST); Binance is against 24 hours ago
+- Markets: Binance USDT market (search by ticker, ranked by 24-hour volume), Upbit KRW market (search by Korean or English name or ticker) and bitbank JPY market (search by ticker or Japanese name, ranked by trading volume)
+- Price sources: Binance, Upbit and bitbank public market data APIs, called directly from the user's computer. Binance uses data-api.binance.vision first and api.binance.com as a fallback; bitbank uses public.bitbank.cc
+- Change figure: Binance and bitbank are against 24 hours ago; Upbit is against the previous close (00:00 KST)
+- Default watchlist on first launch follows the display language: Korean starts with Upbit, Japanese with bitbank, others with Binance
 - Refresh: every 3 seconds, around the clock; one batched request per exchange
 - Display: small-cap coins keep four significant digits (up to 8 decimals); holdings accept up to 8 decimals
 - Languages: Korean, English, Japanese, Arabic (app and website)

@@ -11,7 +11,7 @@ export const LANGUAGES = [
     locale: 'ko-KR',
     dir: 'ltr',
     sitePath: '/',
-    marketOrder: ['UPBIT', 'BINANCE']
+    marketOrder: ['UPBIT', 'BINANCE', 'BITBANK']
   },
   {
     code: 'en',
@@ -19,7 +19,7 @@ export const LANGUAGES = [
     locale: 'en-US',
     dir: 'ltr',
     sitePath: '/en',
-    marketOrder: ['BINANCE', 'UPBIT']
+    marketOrder: ['BINANCE', 'UPBIT', 'BITBANK']
   },
   {
     code: 'ja',
@@ -27,7 +27,7 @@ export const LANGUAGES = [
     locale: 'ja-JP',
     dir: 'ltr',
     sitePath: '/ja',
-    marketOrder: ['BINANCE', 'UPBIT']
+    marketOrder: ['BITBANK', 'BINANCE', 'UPBIT']
   },
   {
     code: 'ar',
@@ -35,7 +35,7 @@ export const LANGUAGES = [
     locale: 'ar-SA',
     dir: 'rtl',
     sitePath: '/ar',
-    marketOrder: ['BINANCE', 'UPBIT']
+    marketOrder: ['BINANCE', 'BITBANK', 'UPBIT']
   }
 ]
 

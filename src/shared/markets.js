@@ -4,7 +4,7 @@ import { getLanguageInfo } from './languages.js'
 // 시장 추가: 여기에 항목 하나 + src/main/markets/index.js에 provider 연결 + 번역 키(market.<ID> 등).
 // 코인 시장은 alwaysOpen(24시간 거래)이라 장 시간 대신 항상 빠른 폴링.
 // autoDecimals: 가격 크기에 따라 소수 자릿수를 늘림 (0.00001234 같은 소액 코인).
-// localLang: 원어 종목명 언어 (업비트 한글 이름).
+// localLang: 원어 종목명 언어 (업비트 한글 이름, bitbank 일본어 이름).
 // 심볼은 기준 통화를 뺀 코인 티커만 저장 (BTC). 기준 통화는 시장이 정함 (KRW, USDT).
 // 배열 순서 = 기본 표시 순서. 화면 언어별 순서는 languages.js marketOrder.
 
@@ -41,6 +41,19 @@ export const MARKETS = [
     symbolPattern: COIN_SYMBOL,
     // 'BTCUSDT', 'btc' → 'BTC'
     normalizeSymbol: normalizeCoin('USDT')
+  },
+  {
+    id: 'BITBANK',
+    currency: 'JPY',
+    quote: 'JPY',
+    decimals: 0,
+    autoDecimals: true,
+    alwaysOpen: true,
+    localLang: 'ja', // 일본어 코인 이름 (주요 코인만)
+    examplePrice: 12000000,
+    symbolPattern: COIN_SYMBOL,
+    // 'btc_jpy', 'BTC' → 'BTC'
+    normalizeSymbol: normalizeCoin('JPY')
   }
 ]
 
