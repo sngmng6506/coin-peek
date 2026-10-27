@@ -75,6 +75,8 @@ a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px soli
 .desk [data-panel], .desk [data-indicator], .desk [data-cursor] { position: absolute; top: 0; left: 0; will-change: transform; }
 .demo-cursor { z-index: 4; pointer-events: none; transform-origin: 2px 2px; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3)); }
 .demo-cursor.is-down path { fill: #e9e9e9; }
+/* 실제 마우스가 데모 화면 위에 있으면 가짜 커서는 숨김 */
+.demo.is-live [data-cursor] { visibility: hidden; }
 
 .sp-indicator { z-index: 1; width: 6px; height: 50px; border-radius: 3px; background: rgba(120, 160, 220, 0.35); box-shadow: 0 0 8px rgba(120, 160, 220, 0.2); opacity: 0; transition: background 150ms; }
 .sp-indicator.is-visible { opacity: 1; }
