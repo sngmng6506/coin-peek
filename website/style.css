@@ -180,7 +180,7 @@ footer.wrap { padding-block: 0 8px; }
 .doc h3 { font-size: 21px; margin: 22px 0 6px; }
 .doc p, .doc li, .doc dd { color: var(--ink-2); line-height: 1.8; }
 .doc p + p { margin-top: 12px; }
-.doc a { color: var(--ink); text-underline-offset: 3px; }
+.doc a:not(.btn-dl) { color: var(--ink); text-underline-offset: 3px; }
 .doc ul, .doc ol { padding-inline-start: 22px; display: grid; gap: 8px; }
 .doc li::marker { color: var(--ink-2); }
 .doc strong { color: var(--ink); }
