@@ -1,7 +1,7 @@
 /* ============================================================
    몰래코인 (Coin Peek) — landing
    Plain paper and ink. Red stays in the app icon only.
-   Soft rounded Korean headings (Gowun Dodum), Gothic A1 for reading.
+   Headings in Nanum Gothic Coding (a ticker-board feel), Gothic A1 for reading.
    One trick: the real panel slides in from the right edge
    of this very browser window.
    ============================================================ */
@@ -15,7 +15,7 @@
   --screen: #26262b;
   --up: #138a52;
   --down: #d9162f;
-  --head: 'Gowun Dodum', 'Bricolage Grotesque', 'Gothic A1', sans-serif;
+  --head: 'Nanum Gothic Coding', 'Gothic A1', monospace;
   --body: 'Gothic A1', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   color-scheme: light;
 }
@@ -33,7 +33,7 @@ body {
   overflow-wrap: break-word;
   font-variant-numeric: tabular-nums;
 }
-h1, h2, h3 { font-family: var(--head); font-weight: 400; text-wrap: balance; line-height: 1.15; }
+h1, h2, h3 { font-family: var(--head); font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; line-height: 1.2; }
 a { color: inherit; }
 a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 .wrap { max-width: 1120px; margin: 0 auto; padding-left: max(28px, env(safe-area-inset-left, 0px)); padding-right: max(28px, env(safe-area-inset-right, 0px)); }
@@ -41,7 +41,7 @@ a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px soli
 /* Nav */
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(251, 251, 250, 0.94); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .nav-inner { max-width: 1120px; margin: 0 auto; padding: 0 max(28px, env(safe-area-inset-right, 0px)) 0 max(28px, env(safe-area-inset-left, 0px)); height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.brand { font-family: var(--head); font-size: 22px; display: flex; align-items: center; gap: 10px; white-space: nowrap; text-decoration: none; }
+.brand { font-family: var(--head); font-weight: 700; font-size: 20px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; white-space: nowrap; text-decoration: none; }
 .brand-mark { width: 30px; height: 30px; display: block; border-radius: 7px; }
 .nav-right { display: flex; align-items: center; gap: 22px; font-size: 14.5px; }
 .nav-right a { text-decoration: none; }
@@ -54,7 +54,7 @@ a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px soli
 .hero { padding-block: 80px 72px; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
 .hero-copy { min-width: 0; }
-.hero h1 { font-size: clamp(42px, 6vw, 74px); line-height: 1.12; letter-spacing: -0.01em; }
+.hero h1 { font-size: clamp(38px, 5.4vw, 64px); line-height: 1.18; letter-spacing: -0.03em; }
 .hero-sub { margin-top: 24px; font-size: 18px; line-height: 1.75; color: var(--ink-2); max-width: 28em; }
 .hero-cta { margin-top: 34px; }
 .hero-meta { margin-top: 16px; font-size: 14px; color: var(--ink-2); }
@@ -186,7 +186,7 @@ footer.wrap { padding-block: 0 8px; }
 .doc strong { color: var(--ink); }
 .doc code { font-size: 0.92em; padding: 1px 6px; border-radius: 4px; background: var(--paper-2); color: var(--ink); }
 .answer-box { background: var(--paper-2); border-radius: 8px; padding: 22px 24px; }
-.answer-box strong { display: block; font-family: var(--head); font-weight: 400; font-size: 20px; margin-bottom: 6px; }
+.answer-box strong { display: block; font-family: var(--head); font-weight: 700; font-size: 20px; margin-bottom: 6px; }
 .answer-box p { color: var(--ink) !important; }
 .doc-note { margin-top: 18px; padding-left: 14px; border-left: 2px solid var(--line); font-size: 15px !important; }
 .doc dl { display: grid; }
@@ -217,7 +217,7 @@ footer.wrap { padding-block: 0 8px; }
   .brand-name { display: none; }
   .nav-right { gap: 12px; }
   .nav-dl { padding: 7px 12px; font-size: 13px; }
-  .hero h1 { font-size: 44px; }
+  .hero h1 { font-size: 38px; }
   .hero-sub { font-size: 16.5px; }
   .demo { height: 350px; }
   .sp-panel { width: 208px; }
@@ -230,14 +230,12 @@ footer.wrap { padding-block: 0 8px; }
 }
 
 /* 일본어 */
-html[lang="ja"] body { word-break: normal; line-break: strict; --body: 'Noto Sans JP', 'Gothic A1', 'Hiragino Sans', 'Yu Gothic UI', sans-serif; --head: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif; }
+html[lang="ja"] body { word-break: normal; line-break: strict; --body: 'Noto Sans JP', 'Gothic A1', 'Hiragino Sans', 'Yu Gothic UI', sans-serif; --head: 'M PLUS 1 Code', 'Noto Sans JP', monospace; }
 html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3, html[lang="ja"] .brand { font-family: var(--head); }
 html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3 { font-weight: 700; }
-html[lang="ja"] .hero h1 { font-size: clamp(36px, 5vw, 60px); line-height: 1.25; }
+html[lang="ja"] .hero h1 { font-size: clamp(34px, 4.8vw, 56px); line-height: 1.28; }
 /* 영어 */
-html[lang="en"] body { --head: 'Bricolage Grotesque', 'Gothic A1', sans-serif; }
-html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3, html[lang="en"] .brand { font-family: var(--head); font-weight: 700; letter-spacing: -0.03em; }
-html[lang="en"] .hero h1 { font-size: clamp(42px, 5.8vw, 74px); }
+html[lang="en"] .hero h1 { font-size: clamp(36px, 5vw, 60px); }
 /* 아랍어: 오른쪽→왼쪽. 데모와 가장자리 패널은 실제 화면이라 방향 고정 */
 html[lang="ar"] body { --body: 'Noto Sans Arabic', 'Gothic A1', Tahoma, sans-serif; --head: 'Noto Kufi Arabic', 'Noto Sans Arabic', sans-serif; line-height: 1.8; }
 html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] .brand { font-family: var(--head); font-weight: 700; }

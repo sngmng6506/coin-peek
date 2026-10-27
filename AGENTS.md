@@ -85,7 +85,7 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 - 웹사이트 버전·갱신일: 릴리즈 때 `sync:version`(= `build-site --touch`)이 `site/site.json`과 `website/`를 갱신해 버전 커밋에 포함
 - 웹사이트 수정: `site/` 고치고 `npm run build:site` 후 둘 다 커밋. `website/` 충돌은 손으로 풀지 말고 다시 생성
 - CSS·JS 변경 시 `site/site.json`의 `assetVersion` 올리기 (브라우저 캐시 무효화)
-- 웹 스타일: 흰 종이·잉크, 빨강은 앱 아이콘에만. 한글 제목 Gowun Dodum, 본문 Gothic A1. 카드·그라데이션·작은 대문자 라벨 같은 템플릿 장식 쓰지 않기. 데모 패널은 앱 화면과 같게 유지. 홈에서는 실제 창 오른쪽 끝에 패널이 나옴(`data-edge`)
+- 웹 스타일: 흰 종이·잉크, 빨강은 앱 아이콘에만. 제목 나눔고딕코딩(일본어 M PLUS 1 Code, 아랍어 Noto Kufi Arabic), 본문 Gothic A1. 카드·그라데이션·작은 대문자 라벨 같은 템플릿 장식 쓰지 않기. 데모 패널은 앱 화면과 같게 유지. 홈에서는 실제 창 오른쪽 끝에 패널이 나옴(`data-edge`)
 - 언어 자동 이동: 기준 언어 홈(`/`)에서만, 브라우저 언어 기준. 직접 고른 언어는 `localStorage cp-lang`
 
 ## 체크리스트
