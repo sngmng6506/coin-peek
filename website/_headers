@@ -1,0 +1,5 @@
+# Cloudflare 정적 자산 응답 헤더. 한글이 들어간 텍스트 파일이 깨지지 않게 charset 명시
+/llms.txt
+  Content-Type: text/plain; charset=utf-8
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
