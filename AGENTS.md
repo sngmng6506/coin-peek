@@ -70,7 +70,7 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 | 대상          | 트리거                                      | 방식                                                                                                                                                                                              |
 | ------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 앱            | main에 앱 파일 push                         | `release.yml`: 패치 버전 증가 → lint·i18n·테스트 → Win 빌드 → Release → Mac 빌드 자산 추가                                                                                                        |
-| 웹사이트      | main에 `website/**` push                    | Cloudflare Workers Git 연동이 `wrangler.jsonc`대로 `website/` 배포 (coin-peek.com, Actions 아님)                                                                                                                            |
+| 웹사이트      | main에 `website/**` push                    | Cloudflare Workers Git 연동이 `wrangler.jsonc`대로 `website/` 배포 (coin-peek.com, Actions 아님)                                                                                                  |
 | 검사          | `src/`·`tests/`·`site/`·`website/` 변경, PR | `check.yml`: lint, 빌드, 단위 테스트, 번역 키, 생성 결과 최신 여부                                                                                                                                |
 | Mac 확인      | Release 성공 후 (수동 실행 가능)            | `mac-release-check.yml`: 배포된 zip·dmg를 Apple Silicon·Intel 맥에서 체크섬·universal·ad-hoc 서명·LSUIElement 확인 후 실행 검사 (`SMOKE_APP`). 실행 중 github.com 차단(통계 오염 방지)            |
 | 다운로드 배지 | 매일 (수동 실행 가능)                       | `download-badge.yml`: 설치 파일 다운로드 합계(배지) + `ping-*` 관측 간 증가분 → `badges` 브랜치 `downloads.json`·`usage.csv`·`stats-state.json` (실제 구간은 `period_start_utc`~`period_end_utc`) |
@@ -85,7 +85,7 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 - 웹사이트 버전·갱신일: 릴리즈 때 `sync:version`(= `build-site --touch`)이 `site/site.json`과 `website/`를 갱신해 버전 커밋에 포함
 - 웹사이트 수정: `site/` 고치고 `npm run build:site` 후 둘 다 커밋. `website/` 충돌은 손으로 풀지 말고 다시 생성
 - CSS·JS 변경 시 `site/site.json`의 `assetVersion` 올리기 (브라우저 캐시 무효화)
-- 웹 스타일: 몰래주식(그레이지 종이·잉크)과 일부러 다름. 가넷 바탕·크림 글자·코인 테두리 무늬(`--reed`)·Do Hyeon/Bricolage 제목. 데모 패널은 앱 화면과 같게 유지
+- 웹 스타일: 흰 종이·잉크, 빨강은 앱 아이콘에만. 한글 제목 Gowun Dodum, 본문 Gothic A1. 카드·그라데이션·작은 대문자 라벨 같은 템플릿 장식 쓰지 않기. 데모 패널은 앱 화면과 같게 유지. 홈에서는 실제 창 오른쪽 끝에 패널이 나옴(`data-edge`)
 - 언어 자동 이동: 기준 언어 홈(`/`)에서만, 브라우저 언어 기준. 직접 고른 언어는 `localStorage cp-lang`
 
 ## 체크리스트
