@@ -75,14 +75,9 @@ a:focus-visible, summary:focus-visible, button:focus-visible { outline: 3px soli
 .desk [data-panel], .desk [data-indicator], .desk [data-cursor] { position: absolute; top: 0; left: 0; will-change: transform; }
 .demo-cursor { z-index: 4; pointer-events: none; transform-origin: 2px 2px; filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3)); }
 .demo-cursor.is-down path { fill: #e9e9e9; }
-/* 마우스를 대야 하는 칸: 패널이 닫혀 있을 때만, 판정 영역과 같은 크기 */
-.demo-zone { position: absolute; top: 0; left: 0; z-index: 2; pointer-events: none; opacity: 0;
-  background: linear-gradient(90deg, rgba(110, 160, 235, 0) 0%, rgba(110, 160, 235, 0.38) 100%);
-  box-shadow: inset -3px 0 0 rgba(140, 185, 245, 0.95);
-  transition: opacity 200ms; }
-.demo-zone.is-visible { opacity: 1; animation: zone-breathe 2.4s ease-in-out infinite; }
-.demo-zone.is-hover { opacity: 1; animation: none; background: linear-gradient(90deg, rgba(110, 160, 235, 0.15) 0%, rgba(110, 160, 235, 0.6) 100%); }
-@keyframes zone-breathe { 50% { opacity: 0.55; } }
+/* 첫 화면 데모: 끝에 튀어나온 표시 막대를 앱보다 조금 또렷하게 */
+.demo .sp-indicator { background: rgba(120, 160, 220, 0.6); box-shadow: 0 0 10px rgba(120, 160, 220, 0.45); }
+.demo .sp-indicator.is-hover { background: rgba(140, 185, 245, 0.95); }
 /* 실제 마우스가 데모 화면 위에 있으면 가짜 커서는 숨김 */
 .demo.is-live [data-cursor] { visibility: hidden; }
 
@@ -231,7 +226,7 @@ footer.wrap { padding-block: 0 8px; }
 @media (hover: none), (pointer: coarse) { .edge { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .sp-card, .sp-actions, .sp-indicator, .edge-panel, .edge-ind, .demo-zone { transition: none; animation: none; }
+  .sp-card, .sp-actions, .sp-indicator, .edge-panel, .edge-ind { transition: none; }
 }
 
 /* 일본어 */

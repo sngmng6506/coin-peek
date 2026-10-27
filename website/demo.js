@@ -24,7 +24,6 @@
     this.panel = root.querySelector('[data-panel]')
     this.cursor = root.querySelector('[data-cursor]')
     this.indicator = root.querySelector('[data-indicator]')
-    this.zone = root.querySelector('[data-zone]')
     this.displayEls = Array.prototype.slice.call(root.querySelectorAll('[data-display]'))
     if (!this.displayEls.length) this.displayEls = [root]
     this.clock = 0
@@ -83,8 +82,6 @@
     var d = this.d()
     var w = this.cfg.trigger || 8
     var x = this.dock.edge === 'left' ? d.x : d.x + d.w - w
-    // 첫 화면 데모는 벽 전체가 감지 영역 (눈에 보이는 띠와 같게)
-    if (this.cfg.fullWall) return { x: x, y: d.y, w: w, h: d.h }
     return { x: x, y: this.panelY(), w: w, h: this.ph }
   }
 
@@ -211,15 +208,6 @@
         'translate(' + ix + 'px,' + (this.panelY() + (this.cfg.indicatorOffset || 0)) + 'px)'
       this.indicator.classList.toggle('is-visible', hidden)
       this.indicator.classList.toggle('is-hover', hidden && this.inRect(this.cur, tr))
-    }
-    if (this.zone) {
-      // 마우스를 대야 하는 칸 = 실제 판정 영역 그대로
-      var zr = this.trigger()
-      this.zone.style.transform = 'translate(' + zr.x + 'px,' + zr.y + 'px)'
-      this.zone.style.width = zr.w + 'px'
-      this.zone.style.height = zr.h + 'px'
-      this.zone.classList.toggle('is-visible', hidden)
-      this.zone.classList.toggle('is-hover', hidden && this.inRect(this.cur, zr))
     }
     this.cursor.style.transform =
       'translate(' + this.cur.x.toFixed(2) + 'px,' + this.cur.y.toFixed(2) + 'px)'
@@ -355,8 +343,7 @@
         return Math.round(d.h * 0.08)
       },
       indicatorOffset: 30,
-      trigger: 16,
-      fullWall: true
+      trigger: 16
     })
     if (reduce) {
       hs.state = 'shown'
