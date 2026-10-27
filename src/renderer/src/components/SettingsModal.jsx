@@ -14,7 +14,6 @@ function SettingsModal({ onClose }) {
   const [version, setVersion] = useState('')
   const [updateAvailable, setUpdateAvailable] = useState(null)
   const [updateReady, setUpdateReady] = useState(null)
-  const [qr, setQr] = useState(null)
   const [check, setCheck] = useState(null) // null | 'checking' | 'latest' | 'available' | 'ready' | 'error'
 
   useEffect(() => {
@@ -23,12 +22,6 @@ function SettingsModal({ onClose }) {
       .then((s) => {
         setAutoStart(!!s.autoStart)
         setVersion(s.version || '')
-      })
-      .catch(() => {})
-    window.api
-      .getDonateQr()
-      .then((d) => {
-        if (d) setQr(d)
       })
       .catch(() => {})
     window.api
@@ -246,12 +239,6 @@ function SettingsModal({ onClose }) {
               <span>{t('settings.supportKofi')}</span>
               <span aria-hidden="true">↗</span>
             </button>
-            {qr && (
-              <details className="settings-qr">
-                <summary>{t('settings.donateKakao')}</summary>
-                <img src={qr} alt={t('settings.donateKakao')} />
-              </details>
-            )}
           </section>
         </div>
       </div>

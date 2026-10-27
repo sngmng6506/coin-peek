@@ -726,8 +726,6 @@ body,
   vertical-align: middle;
 }
 
-/* 카카오페이 QR (Ko-fi와 함께 표시) */
-
 /* ? 도움말 버튼 + 팝오버 */
 .help-btn.active {
   color: rgba(120, 160, 220, 0.95);
@@ -1056,24 +1054,8 @@ body,
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
-.settings-qr summary {
-  padding: 10px 0;
-  min-height: 40px;
-  font-size: 13px;
-  cursor: pointer;
-}
-.settings-qr img {
-  display: block;
-  width: 132px;
-  max-width: 100%;
-  padding: 6px;
-  margin: 8px auto;
-  background: white;
-  border-radius: 8px;
-}
 .settings-close:hover,
-.settings-modal .setting-action:hover,
-.settings-qr summary:hover {
+.settings-modal .setting-action:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 .settings-modal :focus-visible {

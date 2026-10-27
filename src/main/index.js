@@ -10,7 +10,6 @@ import {
   Tray
 } from 'electron'
 import { join } from 'path'
-import fs from 'node:fs/promises'
 import { PANEL_BASE_WIDTH } from '../shared/panelSize.js'
 import { panelGeometry, resizedPanelGeometry } from './panelGeometry.js'
 import { electronApp, is } from '@electron-toolkit/utils'
@@ -763,14 +762,6 @@ app.whenReady().then(() => {
     applyAutoStart(!!enabled)
     refreshTrayMenu()
     return app.getLoginItemSettings().openAtLogin
-  })
-  ipcMain.handle('settings:get-donate-qr', async () => {
-    try {
-      const data = await fs.readFile(resourcePath('icon_qr.jpg'))
-      return `data:image/jpeg;base64,${data.toString('base64')}`
-    } catch {
-      return null
-    }
   })
   ipcMain.on('shell:open-external', (_e, url) => {
     if (typeof url === 'string' && /^(https?:\/\/|mailto:)/.test(url)) {

@@ -69,7 +69,6 @@ export default {
   'settings.checkFailed': 'تعذّر التحقق',
   'settings.donateDesc': 'إذا كان Coin Peek مفيدًا لك، ما رأيك بكوب قهوة؟',
   'settings.donateBtn': 'Ko-fi',
-  'settings.donateKakao': 'امسح عبر KakaoPay',
   'settings.close': 'إغلاق',
   // WelcomeModal
   'welcome.title': 'مرحبًا بك في Coin Peek',

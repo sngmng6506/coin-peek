@@ -48,7 +48,6 @@ const api = {
   },
   getSettings: () => ipcRenderer.invoke('settings:get'),
   setAutoStart: (enabled) => ipcRenderer.invoke('settings:set-autostart', enabled),
-  getDonateQr: () => ipcRenderer.invoke('settings:get-donate-qr'),
   openExternal: (url) => ipcRenderer.send('shell:open-external', url),
   quitApp: () => ipcRenderer.send('app:quit'),
   pinPanel: () => ipcRenderer.send('panel:pin'),
