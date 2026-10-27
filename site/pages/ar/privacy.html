@@ -1,0 +1,94 @@
+<!--
+{
+  "title": "الخصوصية ومعالجة البيانات في Coin Peek",
+  "description": "ما يحفظه Coin Peek على جهازك وما يرسله من طلبات شبكة للأسعار والتحديثات.",
+  "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+  "ogType": "article",
+  "ogTitle": "خصوصية Coin Peek",
+  "ogDescription": "كيف يتعامل Coin Peek مع البيانات دون حسابات أو ربط بالمنصات.",
+  "twitterTitle": "خصوصية Coin Peek",
+  "twitterDescription": "ما يحفظه وما يرسله من طلبات."
+}
+-->
+
+<!-- @head -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://coin-peek.com/ar/privacy/#webpage",
+      "url": "https://coin-peek.com/ar/privacy/",
+      "name": "خصوصية Coin Peek",
+      "description": "ما يحفظه Coin Peek على جهازك وما يرسله من طلبات شبكة للأسعار والتحديثات.",
+      "inLanguage": "ar",
+      "dateModified": "{{dateModified}}",
+      "isPartOf": {
+        "@id": "https://coin-peek.com/#website"
+      },
+      "about": {
+        "@id": "https://coin-peek.com/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://coin-peek.com/ar/privacy/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://coin-peek.com/ar/privacy/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Coin Peek",
+          "item": "https://coin-peek.com/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "الخصوصية",
+          "item": "https://coin-peek.com/ar/privacy/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- @nav -->
+<a href="/ar/#features" class="muted">الميزات</a>
+<a href="/ar/guide/" class="muted">الدليل</a>
+<a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+
+<!-- @main -->
+<main class="doc">
+  <nav class="doc-breadcrumb" aria-label="موقعك الحالي"><a href="/ar/">Coin Peek</a> / الخصوصية</nav>
+  <h1>الخصوصية ومعالجة البيانات</h1>
+  <p class="doc-lead">لا يتطلب Coin Peek تسجيلًا ولا حسابًا في أي منصة. تبقى قائمة المتابعة والمحفظة على جهازك.</p>
+
+  <section>
+    <h2>ما يُحفظ على جهازك</h2>
+    <p>تُحفظ المعلومات التالية على جهازك باستخدام <code>electron-store</code>.</p><ul><li>عملات قائمة المتابعة (المنصة والرمز) وترتيبها</li><li>الكميات ومتوسط الأسعار</li><li>موضع اللوحة والشاشة والحافة اليسرى أو اليمنى</li><li>اللغة وما إذا عُرضت شاشة الترحيب</li></ul>
+  </section>
+
+  <section>
+    <h2>طلبات الشبكة</h2>
+    <ul><li><strong>الأسعار:</strong> تُرسل الطلبات مباشرة إلى واجهات بيانات السوق العامة في Upbit (<code>api.upbit.com</code>) وBinance (<code>data-api.binance.vision</code>، ثم <code>api.binance.com</code> عند الفشل). لا تحتوي الطلبات إلا على رموز العملات المطلوبة.</li><li><strong>التحقق من التحديثات:</strong> يتحقق التطبيق من GitHub Releases بحثًا عن إصدار جديد.</li><li><strong>عدّ المستخدمين اليومي:</strong> مرة يوميًا ينزّل التطبيق ملفًا بحجم بايت واحد من إصدار GitHub. لا يُرسل أي شيء، ويُحتسب عدد التنزيلات فقط.</li></ul><p>لا يحتوي التطبيق على أدوات تحليل أو حزم إعلانية.</p>
+  </section>
+
+  <section>
+    <h2>التواصل</h2>
+    <p>للاستفسار عن الخصوصية أو معالجة البيانات: <a href="mailto:sngmng6506@gmail.com">sngmng6506@gmail.com</a>.</p>
+  </section>
+</main>
+
+<!-- @footer -->
+<a href="/ar/guide/">الدليل</a>
+<a href="/ar/releases/">الإصدارات</a>
+<a href="/ar/privacy/">الخصوصية</a>
+<a href="https://stock-peek.com/ar">Stock Peek</a>
+<a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+<a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">الدعم</a>
+<a href="mailto:sngmng6506@gmail.com">تواصل</a>

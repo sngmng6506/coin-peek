@@ -1,0 +1,94 @@
+<!--
+{
+  "title": "Coin Peek privacy and data handling",
+  "description": "What Coin Peek stores on your computer and which network requests it makes for prices and updates.",
+  "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+  "ogType": "article",
+  "ogTitle": "Coin Peek privacy",
+  "ogDescription": "How Coin Peek handles data without accounts or exchange connections.",
+  "twitterTitle": "Coin Peek privacy",
+  "twitterDescription": "What it stores and which requests it makes."
+}
+-->
+
+<!-- @head -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://coin-peek.com/en/privacy/#webpage",
+      "url": "https://coin-peek.com/en/privacy/",
+      "name": "Coin Peek privacy",
+      "description": "What Coin Peek stores on your computer and which network requests it makes for prices and updates.",
+      "inLanguage": "en",
+      "dateModified": "{{dateModified}}",
+      "isPartOf": {
+        "@id": "https://coin-peek.com/#website"
+      },
+      "about": {
+        "@id": "https://coin-peek.com/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://coin-peek.com/en/privacy/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://coin-peek.com/en/privacy/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Coin Peek",
+          "item": "https://coin-peek.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Privacy",
+          "item": "https://coin-peek.com/en/privacy/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- @nav -->
+<a href="/en/#features" class="muted">Features</a>
+<a href="/en/guide/" class="muted">Guide</a>
+<a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+
+<!-- @main -->
+<main class="doc">
+  <nav class="doc-breadcrumb" aria-label="Breadcrumb"><a href="/en/">Coin Peek</a> / Privacy</nav>
+  <h1>Privacy and data handling</h1>
+  <p class="doc-lead">Coin Peek needs no sign-up and no exchange account. Your watchlist and holdings stay on your computer.</p>
+
+  <section>
+    <h2>Stored on your computer</h2>
+    <p>The following is stored on your computer with <code>electron-store</code>.</p><ul><li>Watchlist coins (exchange and ticker) and their order</li><li>Amounts and average prices</li><li>Panel position, monitor and left or right edge</li><li>Language and whether the welcome screen was shown</li></ul>
+  </section>
+
+  <section>
+    <h2>Network requests</h2>
+    <ul><li><strong>Prices:</strong> requests go directly to the public market data APIs of Upbit (<code>api.upbit.com</code>) and Binance (<code>data-api.binance.vision</code>, falling back to <code>api.binance.com</code>). Requests contain only the tickers being looked up.</li><li><strong>Update checks:</strong> GitHub Releases is checked for new versions.</li><li><strong>Daily user count:</strong> once a day the app downloads a 1-byte file from the GitHub release. Nothing is sent; only the download count is tallied.</li></ul><p>The app contains no analytics or advertising SDKs.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Questions about privacy or data handling: <a href="mailto:sngmng6506@gmail.com">sngmng6506@gmail.com</a>.</p>
+  </section>
+</main>
+
+<!-- @footer -->
+<a href="/en/guide/">Guide</a>
+<a href="/en/releases/">Releases</a>
+<a href="/en/privacy/">Privacy</a>
+<a href="https://stock-peek.com/en">Stock Peek</a>
+<a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+<a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">Support</a>
+<a href="mailto:sngmng6506@gmail.com">Contact</a>

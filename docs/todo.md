@@ -9,6 +9,8 @@
 - [ ] 실제 앱에서 확인: 업비트 `비트코인`·`BTC` 검색, 바이낸스 `SOL` 검색, 소액 코인(`SHIB`, `PEPE`) 가격 자릿수, 소수 수량 보유 손익
 - [ ] 바이낸스 접속이 막힌 네트워크(사내망 등)에서 `api.binance.com` 폴백 동작 확인
 
-## 나중에
+## 웹사이트 (coin-peek.com)
 
-- [ ] 웹사이트 (지금 Mac 업데이트 알림은 GitHub 최신 릴리즈 페이지로 연결)
+- [ ] Cloudflare Pages 프로젝트 만들기: Git 연동 → `sngmng6506/coin-peek`, 프로덕션 브랜치 `main`, 빌드 명령 비움, 출력 디렉터리 `website`
+- [ ] Custom domains에 `coin-peek.com`(과 `www.coin-peek.com`) 추가. 도메인이 Cloudflare에 없으면 네임서버를 Cloudflare로 옮기기
+- [ ] Google Search Console·네이버 서치어드바이저에 사이트 등록 후 `https://coin-peek.com/sitemap.xml` 제출

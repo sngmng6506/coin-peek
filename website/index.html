@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>몰래코인 — 데스크톱 코인 시세 위젯 (업비트·바이낸스 무료)</title>
+  <meta name="description" content="화면 끝으로 마우스를 가져가면 업비트·바이낸스 관심 코인의 시세와 평가손익이 나타나는 무료 Windows·Mac 데스크톱 위젯." />
+  <meta name="keywords" content="코인 시세 위젯, 비트코인 시세 위젯, 데스크톱 코인 시세, 업비트 시세, 바이낸스 시세, 윈도우 코인 위젯, 맥 코인 위젯, 몰래 코인 보기, 몰래주식" />
+  <meta name="author" content="Sangmyeong Lee" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://coin-peek.com/" />
+  <link rel="alternate" hreflang="ko" href="https://coin-peek.com/" />
+  <link rel="alternate" hreflang="en" href="https://coin-peek.com/en" />
+  <link rel="alternate" hreflang="ja" href="https://coin-peek.com/ja" />
+  <link rel="alternate" hreflang="ar" href="https://coin-peek.com/ar" />
+  <link rel="alternate" hreflang="x-default" href="https://coin-peek.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ar_SA" />
+  <meta property="og:site_name" content="몰래코인" />
+  <meta property="og:title" content="몰래코인 — 데스크톱 코인 시세 위젯" />
+  <meta property="og:description" content="화면 끝으로 마우스를 가져가면 업비트·바이낸스 관심 코인 시세가 나타나는 무료 Windows·Mac 위젯." />
+  <meta property="og:url" content="https://coin-peek.com/" />
+  <meta property="og:image" content="https://coin-peek.com/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="몰래코인 — 데스크톱 코인 시세 위젯" />
+  <meta name="twitter:description" content="마우스만 화면 끝으로 — 업비트·바이낸스 코인 시세를 바로 확인하세요." />
+  <meta name="twitter:image" content="https://coin-peek.com/og.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Do+Hyeon&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/style.css?v=1" />
+  <script>
+  (function () {
+    try {
+      if (/bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|whatsapp|telegram|discord/i.test(navigator.userAgent)) return;
+      if (localStorage.getItem('cp-lang')) return;
+      if (document.referrer && new URL(document.referrer).host === location.host) return;
+      var targets = {"ko":"","en":"/en","ja":"/ja","ar":"/ar"};
+      var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      var to = "/en";
+      for (var i = 0; i < prefs.length; i++) {
+        var code = String(prefs[i]).toLowerCase().split('-')[0];
+        if (code in targets) { to = targets[code]; break; }
+      }
+      if (to) location.replace(to + location.search + location.hash);
+    } catch (e) {}
+  })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://coin-peek.com/#website",
+        "url": "https://coin-peek.com/",
+        "name": "몰래코인",
+        "alternateName": "Coin Peek",
+        "inLanguage": [
+          "ko",
+          "en",
+          "ja",
+          "ar"
+        ],
+        "publisher": {
+          "@id": "https://coin-peek.com/#author"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://coin-peek.com/#author",
+        "name": "Sangmyeong Lee",
+        "email": "sngmng6506@gmail.com",
+        "url": "https://github.com/sngmng6506",
+        "sameAs": [
+          "https://github.com/sngmng6506"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://coin-peek.com/#software",
+        "name": "몰래코인",
+        "alternateName": "Coin Peek",
+        "description": "화면 가장자리로 마우스를 가져가면 업비트(원화)·바이낸스(USDT) 관심 코인의 시세와 평가손익을 보여주는 Windows·Mac 데스크톱 위젯.",
+        "url": "https://coin-peek.com/",
+        "image": "https://coin-peek.com/og.png",
+        "operatingSystem": "Windows 10, Windows 11, macOS 12+",
+        "applicationCategory": "FinanceApplication",
+        "softwareVersion": "0.1.0",
+        "downloadUrl": "https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe",
+        "releaseNotes": "https://coin-peek.com/releases/",
+        "license": "https://opensource.org/license/mit",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "KRW"
+        },
+        "author": {
+          "@id": "https://coin-peek.com/#author"
+        },
+        "sameAs": [
+          "https://github.com/sngmng6506/coin-peek"
+        ],
+        "featureList": [
+          "업비트 원화 마켓 시세",
+          "바이낸스 USDT 마켓 시세",
+          "최근 90일 일봉 미니 차트",
+          "소수점 보유 수량과 평가손익",
+          "드래그앤드롭 순서 변경",
+          "멀티모니터 좌·우 배치",
+          "시스템 트레이 상주와 자동 시작",
+          "화면 가장자리 마우스 감지"
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://coin-peek.com/#webpage",
+        "url": "https://coin-peek.com/",
+        "name": "몰래코인 — 데스크톱 코인 시세 위젯",
+        "description": "화면 끝으로 마우스를 가져가면 업비트·바이낸스 관심 코인의 시세와 평가손익이 나타나는 무료 Windows·Mac 데스크톱 위젯.",
+        "inLanguage": "ko",
+        "dateModified": "2026-10-27",
+        "isPartOf": {
+          "@id": "https://coin-peek.com/#website"
+        },
+        "about": {
+          "@id": "https://coin-peek.com/#software"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav" aria-label="주요 메뉴">
+    <div class="nav-inner">
+      <a href="/" class="brand"><img class="brand-mark" src="/apple-touch-icon.png" alt="" width="24" height="24" /><span class="brand-name">몰래코인</span></a>
+      <div class="nav-right">
+        <a href="#features" class="muted">기능</a>
+        <a href="/guide/" class="muted">가이드</a>
+        <a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+        <a href="/en" class="lang" lang="en" hreflang="en">EN</a>
+        <a href="/ja" class="lang" lang="ja" hreflang="ja">日本語</a>
+        <a href="/ar" class="lang" lang="ar" hreflang="ar">العربية</a>
+        <a href="https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe" class="nav-dl" data-dl>다운로드</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><b>24/7</b>업비트 · 바이낸스</div>
+          <h1>코인은 몰래,<br /><em>마우스만 살짝.</em></h1>
+          <p class="hero-sub">화면 끝에 마우스를 대면 관심 코인 시세가 나오고, 치우면 들어갑니다. 거래소 앱이나 브라우저 탭을 열 필요가 없습니다.</p>
+          <div class="hero-cta">
+            <span class="dl-pair"><a href="https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe" class="btn-dl" data-dl-os="win">Windows용 다운로드</a><a href="https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-mac.dmg" class="btn-dl btn-dl-alt" data-dl-os="mac">Mac용 다운로드</a></span>
+            <span class="hero-meta">무료 · Windows 10·11, macOS 12 이상 · 현재 <span class="mono" id="appVer">v0.1.0</span> · <a href="/guide/#install">설치 안내</a></span>
+          </div>
+        </div>
+
+        <div class="demo" data-demo="hover" aria-hidden="true">
+          <div class="demo-hint">화면 끝에 마우스를 대보세요</div>
+          <div class="sp-indicator" data-indicator></div>
+          <div class="sp-panel" data-panel><div class="sp-head"><span class="sp-handle"></span><span class="sp-icons"><i></i><i></i><i></i><i></i></span></div><div class="sp-cards"><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">비트코인</span><span class="sp-chg up">+1.24%</span></div><div class="sp-row"><span class="sp-price sp-num">114,820,000원</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">이더리움</span><span class="sp-chg down">-0.86%</span></div><div class="sp-row"><span class="sp-price sp-num">5,312,000원</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div><div class="sp-row sp-hold"><span class="sp-qty">0.5 ETH</span><span class="up">+184,000원 (+7.4%)</span></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">BTC</span><span class="sp-chg down">-0.44%</span></div><div class="sp-row"><span class="sp-price sp-num">$79,887.05</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">SOL</span><span class="sp-chg up">+2.31%</span></div><div class="sp-row"><span class="sp-price sp-num">$100.09</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div></div></div>
+          <svg class="demo-cursor" data-cursor width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+      </section>
+    </div>
+
+    <section class="venues" aria-label="업비트 · 바이낸스">
+      <div class="wrap venues-inner"><span class="venue"><strong>업비트</strong><span class="mono">KRW</span></span><span class="venues-sep" aria-hidden="true"></span><span class="venue"><strong>바이낸스</strong><span class="mono">USDT</span></span><span class="venues-sep" aria-hidden="true"></span><span>키·계정 없이 공개 시세만</span></div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="wrap">
+        <div class="section-head"><p class="section-kicker">기능</p><h2 class="section-title">보고 싶을 때만, 딱 거기에</h2></div>
+        <div class="feat-grid">
+          <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="desk" data-demo="drag"><div class="mon"><div class="mon-screen" data-display></div></div><div class="mon"><div class="mon-screen" data-display></div></div><div class="sp-indicator mini" data-indicator></div><div class="sp-panel mini" data-panel><div class="sp-head"><span class="sp-handle"></span></div><div class="sp-cards"><i class="up"></i><i class="down"></i><i class="up"></i></div></div><svg class="demo-cursor" data-cursor width="13" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></div></div><div class="feat-body"><h3>마우스를 대면 나오고, 치우면 들어갑니다</h3><p>단축키나 클릭은 필요 없습니다. 패널 윗부분을 잡고 끌면 반대쪽 가장자리나 다른 모니터로 옮겨집니다.</p></div></div>
+          <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="coin-list"><div class="coin-row"><span>UPBIT</span><b>BTC</b><span class="up">+1.2%</span></div><div class="coin-row"><span>UPBIT</span><b>XRP</b><span class="down">−0.6%</span></div><div class="coin-row"><span>BINANCE</span><b>SOL</b><span class="up">+2.3%</span></div><div class="coin-row"><span>BINANCE</span><b>DOGE</b><span class="up">+0.9%</span></div><div class="coin-row"><span>보유</span><b>0.5 ETH</b><span class="up">+7.4%</span></div></div></div><div class="feat-body"><h3>업비트 원화와 바이낸스 USDT를 한 목록에</h3><p>한글·영문 이름이나 티커로 검색해 추가합니다. 보유 수량과 평균 매입가를 넣으면 평가손익도 같이 보입니다.</p></div></div>
+          <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="decimals"><div>0.05 BTC<span>qty</span></div><div>$0.00000485<span>SHIB</span></div><div>0.0201원<span>KRW</span></div></div></div><div class="feat-body"><h3>0.00000485까지 그대로</h3><p>소액 코인은 유효숫자 네 자리까지 보여주고, 보유 수량은 소수점 여덟 자리까지 넣을 수 있습니다. 최근 90일 차트도 함께 나옵니다.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust">
+      <div class="wrap">
+        <div class="trust-box">
+          <div><p class="section-kicker">안심</p><h2 class="section-title">API 키도, 계정도<br />필요 없습니다.</h2></div>
+          <div class="trust-list">
+            <div class="trust-item"><strong>거래소 연동 없음</strong><p>거래소 로그인, API 키, 주문 기능이 없습니다. 시세만 봅니다.</p></div>
+            <div class="trust-item"><strong>데이터는 내 PC에</strong><p>관심 코인, 보유 수량, 평균 매입가, 설정은 PC에만 저장되고 따로 수집하지 않습니다.</p></div>
+            <div class="trust-item"><strong>오픈소스</strong><p>코드는 GitHub에 MIT 라이선스로 공개되어 있습니다.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="install">
+      <div class="wrap">
+        <h2>자주 묻는 질문</h2>
+        <details><summary>설치할 때 Windows 경고가 떠요.</summary><div class="faq-a">개인이 만든 앱이라 코드 서명이 없어서 SmartScreen 경고가 뜹니다. “추가 정보” → “실행”을 누르면 설치됩니다. GitHub에서 소스를 보고 직접 빌드해도 됩니다.</div></details>
+        <details><summary>시세는 어디서 가져오나요?</summary><div class="faq-a">업비트와 바이낸스가 공개한 시세 API에서 직접 가져오고, 3초마다 갱신합니다. 등락률은 업비트가 전일(한국 시간 0시) 대비, 바이낸스가 24시간 대비입니다.</div></details>
+        <details><summary>회사 PC에서도 되나요?</summary><div class="faq-a">Windows의 프록시·인증서 설정을 그대로 씁니다. 다만 거래소 사이트를 막아 둔 회사가 많아서, 사내망에서 업비트나 바이낸스 접속이 차단돼 있으면 시세가 나오지 않습니다.</div></details>
+        <details><summary>Mac에서는 어떻게 설치하나요?</summary><div class="faq-a">macOS 12 이상에서 쓸 수 있습니다. 내려받은 파일을 열어 앱을 응용 프로그램 폴더로 옮기세요. Apple 공증이 없어서 처음 열 때 차단되면 시스템 설정 → 개인정보 보호 및 보안에서 “그래도 열기”를 누르면 됩니다. Mac은 자동 설치가 안 되고, 새 버전이 나오면 알림을 눌러 다시 내려받습니다.</div></details>
+        <p class="faq-more">설치 방법과 자세한 사용법은 <a href="/guide/">가이드</a>에 있습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="foot"><div class="foot-left">© 2026 몰래코인 (Coin Peek)</div><div class="foot-links"><a href="/guide/">제품 가이드</a><a href="/releases/">업데이트 내역</a><a href="/privacy/">개인정보 안내</a><a href="https://stock-peek.com/">몰래주식</a><a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">후원</a><a href="mailto:sngmng6506@gmail.com">문의</a><a href="/en" lang="en">English</a><a href="/ja" lang="ja">日本語</a><a href="/ar" lang="ar">العربية</a></div></div>
+    <p class="disclaimer">표시되는 시세는 투자 판단이나 주문 체결을 위한 공식 거래 데이터가 아닙니다. 거래소와 네트워크 상황에 따라 지연되거나 실제 거래 가격과 차이가 있을 수 있습니다. 가상자산은 가격 변동이 크니 거래 전에 거래소에서 다시 확인하세요.</p>
+  </footer>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://coin-peek.com/#faq",
+    "isPartOf": {
+      "@id": "https://coin-peek.com/#webpage"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "설치할 때 Windows 경고가 떠요.",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "개인이 만든 앱이라 코드 서명이 없어서 SmartScreen 경고가 뜹니다. “추가 정보” → “실행”을 누르면 설치됩니다. GitHub에서 소스를 보고 직접 빌드해도 됩니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "시세는 어디서 가져오나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "업비트와 바이낸스가 공개한 시세 API에서 직접 가져오고, 3초마다 갱신합니다. 등락률은 업비트가 전일(한국 시간 0시) 대비, 바이낸스가 24시간 대비입니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "회사 PC에서도 되나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Windows의 프록시·인증서 설정을 그대로 씁니다. 다만 거래소 사이트를 막아 둔 회사가 많아서, 사내망에서 업비트나 바이낸스 접속이 차단돼 있으면 시세가 나오지 않습니다."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Mac에서는 어떻게 설치하나요?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "macOS 12 이상에서 쓸 수 있습니다. 내려받은 파일을 열어 앱을 응용 프로그램 폴더로 옮기세요. Apple 공증이 없어서 처음 열 때 차단되면 시스템 설정 → 개인정보 보호 및 보안에서 “그래도 열기”를 누르면 됩니다. Mac은 자동 설치가 안 되고, 새 버전이 나오면 알림을 눌러 다시 내려받습니다."
+        }
+      }
+    ]
+  }
+  </script>
+  <script>
+  (function () {
+    var el = document.getElementById('appVer');
+    if (!el) return;
+    fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases/latest')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j && j.tag_name) el.textContent = j.tag_name; })
+      .catch(function () {});
+  })();
+  </script>
+  <script src="/demo.js?v=1" defer></script>
+</body>
+</html>

@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 화면 가장자리에 마우스를 대면 관심 코인 시세가 나타나는 Windows·Mac 위젯. [몰래주식](https://github.com/sngmng6506/stock-peek)의 코인 버전.
+[coin-peek.com](https://coin-peek.com/) · [English](https://coin-peek.com/en)
 
 ## 설치
 

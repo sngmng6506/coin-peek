@@ -20,6 +20,8 @@ npm test                       # 단위 테스트 (tests/*.test.mjs, Electron �
 npm run build                  # 번들
 npm run build:win              # Windows 설치파일 → dist/
 npm run build:mac              # Mac dmg·zip → dist/ (macOS에서만)
+npm run build:site             # site/ → website/ 생성
+npm run check:site             # website/가 최신인지 검사
 ```
 
 ## 구조
@@ -35,7 +37,9 @@ src/main/watchlist.js     관심종목 CRUD (검증은 markets.js 규칙)
 src/main/preferences.js   도킹·언어·welcome 설정
 src/preload/index.js      contextBridge IPC 화이트리스트
 src/renderer/src/         App.jsx, components/, i18n/ (Provider), lib/ (금액 포맷·오류 번역)
-scripts/                  prepare-release.mjs, check-i18n.mjs, native-smoke.cjs, download_stats.py
+site/                     웹사이트 원본 (site.json, strings/<lang>.json, pages/<lang>/<page>.html, llms.md)
+website/                  생성 결과 — HTML·sitemap·llms.txt 직접 수정 금지 (demo.js, style.css, robots.txt, 이미지는 직접)
+scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, native-smoke.cjs, download_stats.py
 ```
 
 ## 규칙
@@ -52,22 +56,24 @@ scripts/                  prepare-release.mjs, check-i18n.mjs, native-smoke.cjs,
 - main 오류: 문구 대신 코드(`ERR_*`)로 던지고 화면에서 `error.<CODE>`로 번역
 - 미니멀: 기능 추가보다 제거·단순화 우선
 - Mac: Apple 서명·공증 없음(ad-hoc). 자동 설치 불가 → `IS_MAC`이면 새 버전 알림 + 다운로드 페이지만. Dock 숨김(`LSUIElement`), 메뉴 막대는 `resources/trayTemplate*.png`
-- 사용자 수 집계: 하루 한 번 최신 릴리즈의 `ping-win`/`ping-mac`(1바이트)만 받음 (`dailyPing`). 식별자·사용 정보 전송 금지. 바꾸면 `PRIVACY.md` 같이 수정
+- 사용자 수 집계: 하루 한 번 최신 릴리즈의 `ping-win`/`ping-mac`(1바이트)만 받음 (`dailyPing`). 식별자·사용 정보 전송 금지. 바꾸면 개인정보 페이지 4개 언어·`PRIVACY.md`·`site/llms.md` 같이 수정
 - 비밀값: 토큰·계정 ID·인증서 커밋 금지
 
 ## 시장·언어 추가
 
 - 시장: `src/shared/markets.js` 항목 → `src/main/markets/index.js` provider 연결 → `market.<ID>`, `add.searchPlaceholder.<ID>` 번역 → `languages.js` 각 언어 `marketOrder`에 추가 → `tests/providers.test.mjs`에 응답 형태 테스트
 - 앱 언어: `src/shared/languages.js` 항목 → `src/shared/i18n/<code>.js` → `i18n/index.js` 등록 → `npm run check:i18n`
+- 웹 언어: `site/strings/<code>.json` + `site/pages/<code>/*.html` → `npm run build:site`. hreflang·언어 전환·sitemap은 자동
 
 ## 배포
 
-| 대상          | 트리거                           | 방식                                                                                                                                                                                              |
-| ------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 앱            | main에 앱 파일 push              | `release.yml`: 패치 버전 증가 → lint·i18n·테스트 → Win 빌드 → Release → Mac 빌드 자산 추가                                                                                                        |
-| 검사          | `src/`·`tests/` 변경, PR         | `check.yml`: lint, 빌드, 단위 테스트, 번역 키                                                                                                                                                     |
-| Mac 확인      | Release 성공 후 (수동 실행 가능) | `mac-release-check.yml`: 배포된 zip·dmg를 Apple Silicon·Intel 맥에서 체크섬·universal·ad-hoc 서명·LSUIElement 확인 후 실행 검사 (`SMOKE_APP`). 실행 중 github.com 차단(통계 오염 방지)            |
-| 다운로드 배지 | 매일 (수동 실행 가능)            | `download-badge.yml`: 설치 파일 다운로드 합계(배지) + `ping-*` 관측 간 증가분 → `badges` 브랜치 `downloads.json`·`usage.csv`·`stats-state.json` (실제 구간은 `period_start_utc`~`period_end_utc`) |
+| 대상          | 트리거                                      | 방식                                                                                                                                                                                              |
+| ------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 앱            | main에 앱 파일 push                         | `release.yml`: 패치 버전 증가 → lint·i18n·테스트 → Win 빌드 → Release → Mac 빌드 자산 추가                                                                                                        |
+| 웹사이트      | main에 `website/**` push                    | Cloudflare Pages Git 연동이 자동 배포 (coin-peek.com, Actions 아님)                                                                                                                               |
+| 검사          | `src/`·`tests/`·`site/`·`website/` 변경, PR | `check.yml`: lint, 빌드, 단위 테스트, 번역 키, 생성 결과 최신 여부                                                                                                                                |
+| Mac 확인      | Release 성공 후 (수동 실행 가능)            | `mac-release-check.yml`: 배포된 zip·dmg를 Apple Silicon·Intel 맥에서 체크섬·universal·ad-hoc 서명·LSUIElement 확인 후 실행 검사 (`SMOKE_APP`). 실행 중 github.com 차단(통계 오염 방지)            |
+| 다운로드 배지 | 매일 (수동 실행 가능)                       | `download-badge.yml`: 설치 파일 다운로드 합계(배지) + `ping-*` 관측 간 증가분 → `badges` 브랜치 `downloads.json`·`usage.csv`·`stats-state.json` (실제 구간은 `period_start_utc`~`period_end_utc`) |
 
 - `badges`·`ci-screens` 브랜치는 데이터 저장용 (배지·사용 통계, Mac 스크린샷). 브랜치 정리 때 삭제 금지 (저장소 Rulesets로 삭제 차단)
 - 앱 파일: `src/`, `resources/`, `build/`, `package*.json`, `electron-builder.yml` 등. 문서만 바뀌면 릴리즈 안 됨
@@ -76,9 +82,15 @@ scripts/                  prepare-release.mjs, check-i18n.mjs, native-smoke.cjs,
 - 태그 수동 생성 금지. minor·major는 `package.json` 버전을 최신 태그보다 높여서 push
 - 실패 시 재시도: Actions → Release → Run workflow. Windows·Mac 자산을 초안에 올리고 모두 준비된 뒤 공개
 - `.gitattributes`(eol=lf) 유지. 없으면 Windows 러너에서 CRLF로 lint 실패
+- 웹사이트 버전·갱신일: 릴리즈 때 `sync:version`(= `build-site --touch`)이 `site/site.json`과 `website/`를 갱신해 버전 커밋에 포함
+- 웹사이트 수정: `site/` 고치고 `npm run build:site` 후 둘 다 커밋. `website/` 충돌은 손으로 풀지 말고 다시 생성
+- CSS·JS 변경 시 `site/site.json`의 `assetVersion` 올리기 (브라우저 캐시 무효화)
+- 웹 스타일: 몰래주식(그레이지 종이·잉크)과 일부러 다름. 가넷 바탕·크림 글자·코인 테두리 무늬(`--reed`)·Do Hyeon/Bricolage 제목. 데모 패널은 앱 화면과 같게 유지
+- 언어 자동 이동: 기준 언어 홈(`/`)에서만, 브라우저 언어 기준. 직접 고른 언어는 `localStorage cp-lang`
 
 ## 체크리스트
 
 - `npm run lint`, `npm run check:i18n`, `npm test`, `npm run build` 통과
+- 웹사이트 변경 시 `npm run build:site` 후 `npm run check:site`
 - 모든 지원 언어 UI 확인
 - 좌·우 도킹 hover 동작 확인

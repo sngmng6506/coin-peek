@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coin Peek — 無料のデスクトップ仮想通貨価格ウィジェット（Upbit・Binance）</title>
+  <meta name="description" content="画面の端にマウスを近づけると、Upbit・Binanceのウォッチリストの価格と評価損益が表示される無料のWindows・Macデスクトップウィジェット。" />
+  <meta name="keywords" content="仮想通貨 ウィジェット, ビットコイン 価格 デスクトップ, 暗号資産 価格表示, Binance 価格, Windows ウィジェット, Mac ウィジェット" />
+  <meta name="author" content="Sangmyeong Lee" />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://coin-peek.com/ja" />
+  <link rel="alternate" hreflang="ko" href="https://coin-peek.com/" />
+  <link rel="alternate" hreflang="en" href="https://coin-peek.com/en" />
+  <link rel="alternate" hreflang="ja" href="https://coin-peek.com/ja" />
+  <link rel="alternate" hreflang="ar" href="https://coin-peek.com/ar" />
+  <link rel="alternate" hreflang="x-default" href="https://coin-peek.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ko_KR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="ar_SA" />
+  <meta property="og:site_name" content="Coin Peek" />
+  <meta property="og:title" content="Coin Peek — デスクトップ仮想通貨価格ウィジェット" />
+  <meta property="og:description" content="画面の端にマウスを近づけるだけでUpbit・Binanceのコイン価格を表示。Windows・Mac対応、無料。" />
+  <meta property="og:url" content="https://coin-peek.com/ja" />
+  <meta property="og:image" content="https://coin-peek.com/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Coin Peek — デスクトップ仮想通貨価格ウィジェット" />
+  <meta name="twitter:description" content="画面の端に触れるだけでコイン価格をチェック。" />
+  <meta name="twitter:image" content="https://coin-peek.com/og.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Do+Hyeon&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Dela+Gothic+One&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/style.css?v=1" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://coin-peek.com/#website",
+        "url": "https://coin-peek.com/",
+        "name": "몰래코인",
+        "alternateName": "Coin Peek",
+        "inLanguage": [
+          "ko",
+          "en",
+          "ja",
+          "ar"
+        ],
+        "publisher": {
+          "@id": "https://coin-peek.com/#author"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://coin-peek.com/#author",
+        "name": "Sangmyeong Lee",
+        "email": "sngmng6506@gmail.com",
+        "url": "https://github.com/sngmng6506",
+        "sameAs": [
+          "https://github.com/sngmng6506"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://coin-peek.com/#software",
+        "name": "Coin Peek",
+        "alternateName": "몰래코인",
+        "description": "画面の端にマウスを近づけると、Upbit（KRW）・Binance（USDT）のコイン価格と評価損益を表示するWindows・Macデスクトップウィジェット。",
+        "url": "https://coin-peek.com/ja/",
+        "image": "https://coin-peek.com/og.png",
+        "operatingSystem": "Windows 10, Windows 11, macOS 12+",
+        "applicationCategory": "FinanceApplication",
+        "softwareVersion": "0.1.0",
+        "downloadUrl": "https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe",
+        "releaseNotes": "https://coin-peek.com/ja/releases/",
+        "license": "https://opensource.org/license/mit",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "JPY"
+        },
+        "author": {
+          "@id": "https://coin-peek.com/#author"
+        },
+        "sameAs": [
+          "https://github.com/sngmng6506/coin-peek"
+        ],
+        "featureList": [
+          "Upbit KRW市場の価格",
+          "Binance USDT市場の価格",
+          "直近90日の日足ミニチャート",
+          "小数の保有数量と評価損益",
+          "ドラッグで並べ替え",
+          "マルチモニターの左右に配置",
+          "システムトレイ常駐と自動起動",
+          "画面端のマウス検知"
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://coin-peek.com/ja/#webpage",
+        "url": "https://coin-peek.com/ja/",
+        "name": "Coin Peek — デスクトップ仮想通貨価格ウィジェット",
+        "description": "画面の端にマウスを近づけると、Upbit・Binanceのウォッチリストの価格と評価損益が表示される無料のWindows・Macデスクトップウィジェット。",
+        "inLanguage": "ja",
+        "dateModified": "2026-10-27",
+        "isPartOf": {
+          "@id": "https://coin-peek.com/#website"
+        },
+        "about": {
+          "@id": "https://coin-peek.com/#software"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <nav class="nav" aria-label="メインメニュー">
+    <div class="nav-inner">
+      <a href="/ja" class="brand"><img class="brand-mark" src="/apple-touch-icon.png" alt="" width="24" height="24" /><span class="brand-name">Coin Peek</span></a>
+      <div class="nav-right">
+        <a href="#features" class="muted">機能</a>
+        <a href="/ja/guide/" class="muted">ガイド</a>
+        <a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+        <a href="/" class="lang" lang="ko" hreflang="ko">한국어</a>
+        <a href="/en" class="lang" lang="en" hreflang="en">EN</a>
+        <a href="/ar" class="lang" lang="ar" hreflang="ar">العربية</a>
+        <a href="https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe" class="nav-dl" data-dl>ダウンロード</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><b>24/7</b>Upbit · Binance</div>
+          <h1>コインは、こっそり。<br /><em>マウスを端へ。</em></h1>
+          <p class="hero-sub">画面の端にマウスを当てるとコイン価格が現れ、離すと隠れます。取引所アプリもブラウザのタブも開く必要はありません。</p>
+          <div class="hero-cta">
+            <span class="dl-pair"><a href="https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe" class="btn-dl" data-dl-os="win">Windows版をダウンロード</a><a href="https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-mac.dmg" class="btn-dl btn-dl-alt" data-dl-os="mac">Mac版をダウンロード</a></span>
+            <span class="hero-meta">無料 · Windows 10・11、macOS 12以降 · 現在 <span class="mono" id="appVer">v0.1.0</span> · <a href="/ja/guide/#install">インストール方法</a></span>
+          </div>
+        </div>
+
+        <div class="demo" data-demo="hover" aria-hidden="true">
+          <div class="demo-hint">画面の端にマウスを当ててみてください</div>
+          <div class="sp-indicator" data-indicator></div>
+          <div class="sp-panel" data-panel><div class="sp-head"><span class="sp-handle"></span><span class="sp-icons"><i></i><i></i><i></i><i></i></span></div><div class="sp-cards"><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">Bitcoin</span><span class="sp-chg up">+1.24%</span></div><div class="sp-row"><span class="sp-price sp-num">₩114,820,000</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">Ethereum</span><span class="sp-chg down">-0.86%</span></div><div class="sp-row"><span class="sp-price sp-num">₩5,312,000</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div><div class="sp-row sp-hold"><span class="sp-qty">0.5 ETH</span><span class="up">+₩184,000 (+7.4%)</span></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">BTC</span><span class="sp-chg down">-0.44%</span></div><div class="sp-row"><span class="sp-price sp-num">$79,887.05</span><svg class="sp-spark down" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,5 8,4 15,7 22,6 29,9 36,8 43,11 50,10 55,13 60,14" /></svg></div></div><div class="sp-card"><div class="sp-actions"><i></i><i></i></div><div class="sp-row"><span class="sp-name">SOL</span><span class="sp-chg up">+2.31%</span></div><div class="sp-row"><span class="sp-price sp-num">$100.09</span><svg class="sp-spark" viewBox="0 0 60 18" preserveAspectRatio="none"><polyline points="0,14 7,12 13,13 20,9 27,10 34,6 41,8 48,4 54,5 60,2" /></svg></div></div></div></div>
+          <svg class="demo-cursor" data-cursor width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+      </section>
+    </div>
+
+    <section class="venues" aria-label="Upbit · Binance">
+      <div class="wrap venues-inner"><span class="venue"><strong>Upbit</strong><span class="mono">KRW</span></span><span class="venues-sep" aria-hidden="true"></span><span class="venue"><strong>Binance</strong><span class="mono">USDT</span></span><span class="venues-sep" aria-hidden="true"></span><span>キーもアカウントも不要、公開価格のみ</span></div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="wrap">
+        <div class="section-head"><p class="section-kicker">機能</p><h2 class="section-title">見たいときだけ、そこに</h2></div>
+        <div class="feat-grid">
+          <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="desk" data-demo="drag"><div class="mon"><div class="mon-screen" data-display></div></div><div class="mon"><div class="mon-screen" data-display></div></div><div class="sp-indicator mini" data-indicator></div><div class="sp-panel mini" data-panel><div class="sp-head"><span class="sp-handle"></span></div><div class="sp-cards"><i class="up"></i><i class="down"></i><i class="up"></i></div></div><svg class="demo-cursor" data-cursor width="13" height="16" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 2L2 18L6.5 13.8L9.4 20.5L12.3 19.2L9.4 12.7L15 12.5L2 2Z" fill="#fff" stroke="#111" stroke-width="1.3" stroke-linejoin="round"/></svg></div></div><div class="feat-body"><h3>近づけると現れ、離すと隠れる</h3><p>ショートカットもクリックも不要。パネル上部をつかんでドラッグすれば、反対側の端や別のモニターへ移動できます。</p></div></div>
+          <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="coin-list"><div class="coin-row"><span>UPBIT</span><b>BTC</b><span class="up">+1.2%</span></div><div class="coin-row"><span>UPBIT</span><b>XRP</b><span class="down">−0.6%</span></div><div class="coin-row"><span>BINANCE</span><b>SOL</b><span class="up">+2.3%</span></div><div class="coin-row"><span>BINANCE</span><b>DOGE</b><span class="up">+0.9%</span></div><div class="coin-row"><span>保有</span><b>0.5 ETH</b><span class="up">+7.4%</span></div></div></div><div class="feat-body"><h3>Upbit KRWとBinance USDTをひとつのリストに</h3><p>名前やティッカーで検索して追加。保有数量と平均取得単価を入れると評価損益も表示されます。</p></div></div>
+          <div class="feat"><div class="feat-vis" aria-hidden="true"><div class="decimals"><div>0.05 BTC<span>qty</span></div><div>$0.00000485<span>SHIB</span></div><div>₩0.0201<span>KRW</span></div></div></div><div class="feat-body"><h3>0.00000485まで、そのまま</h3><p>少額コインは有効数字4桁まで表示し、保有数量は小数点以下8桁まで入力できます。直近90日のチャートも付きます。</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust">
+      <div class="wrap">
+        <div class="trust-box">
+          <div><p class="section-kicker">安心</p><h2 class="section-title">APIキーも、<br />アカウントも不要。</h2></div>
+          <div class="trust-list">
+            <div class="trust-item"><strong>取引所との連携なし</strong><p>取引所へのログイン、APIキー、注文機能はありません。価格を見るだけです。</p></div>
+            <div class="trust-item"><strong>データはPCの中に</strong><p>ウォッチリスト、保有数量、平均取得単価、設定はPCにだけ保存され、収集されることはありません。</p></div>
+            <div class="trust-item"><strong>オープンソース</strong><p>コードはGitHubでMITライセンスとして公開しています。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="install">
+      <div class="wrap">
+        <h2>よくある質問</h2>
+        <details><summary>インストール時にWindowsの警告が出ます。</summary><div class="faq-a">個人開発のアプリでコード署名がないため、SmartScreenの警告が表示されます。「詳細情報」→「実行」でインストールできます。GitHubでソースを確認して自分でビルドすることもできます。</div></details>
+        <details><summary>価格はどこから取得していますか？</summary><div class="faq-a">UpbitとBinanceが公開している価格APIから直接取得し、3秒ごとに更新します。騰落率はUpbitが前日終値（韓国時間0時）比、Binanceが24時間比です。</div></details>
+        <details><summary>会社のPCでも使えますか？</summary><div class="faq-a">Windowsのプロキシ・証明書設定をそのまま使います。ただし取引所サイトをブロックしている会社も多く、社内ネットワークでUpbitやBinanceがブロックされていると価格は表示されません。</div></details>
+        <details><summary>Macにはどうやってインストールしますか？</summary><div class="faq-a">macOS 12以降で使えます。ダウンロードしたファイルを開き、アプリを「アプリケーション」フォルダへ移動してください。Appleの公証がないため初回起動がブロックされた場合は、システム設定 → プライバシーとセキュリティで「このまま開く」を押してください。Macは自動インストールに対応しておらず、新しいバージョンが出たら通知から再ダウンロードします。</div></details>
+        <p class="faq-more">インストール方法と詳しい使い方は<a href="/ja/guide/">ガイド</a>にあります。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <div class="foot"><div class="foot-left">© 2026 Coin Peek</div><div class="foot-links"><a href="/ja/guide/">ガイド</a><a href="/ja/releases/">リリース</a><a href="/ja/privacy/">プライバシー</a><a href="https://stock-peek.com/ja">Stock Peek</a><a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">サポート</a><a href="mailto:sngmng6506@gmail.com">お問い合わせ</a><a href="/" lang="ko">한국어</a><a href="/en" lang="en">English</a><a href="/ar" lang="ar">العربية</a></div></div>
+    <p class="disclaimer">表示される価格は公式の取引データではなく、投資助言でもありません。取引所やネットワークの状況により遅延したり、実際の取引価格と異なる場合があります。暗号資産は値動きが大きいため、取引前に取引所で必ずご確認ください。</p>
+  </footer>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://coin-peek.com/ja/#faq",
+    "isPartOf": {
+      "@id": "https://coin-peek.com/ja/#webpage"
+    },
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "インストール時にWindowsの警告が出ます。",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "個人開発のアプリでコード署名がないため、SmartScreenの警告が表示されます。「詳細情報」→「実行」でインストールできます。GitHubでソースを確認して自分でビルドすることもできます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "価格はどこから取得していますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "UpbitとBinanceが公開している価格APIから直接取得し、3秒ごとに更新します。騰落率はUpbitが前日終値（韓国時間0時）比、Binanceが24時間比です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "会社のPCでも使えますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Windowsのプロキシ・証明書設定をそのまま使います。ただし取引所サイトをブロックしている会社も多く、社内ネットワークでUpbitやBinanceがブロックされていると価格は表示されません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Macにはどうやってインストールしますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "macOS 12以降で使えます。ダウンロードしたファイルを開き、アプリを「アプリケーション」フォルダへ移動してください。Appleの公証がないため初回起動がブロックされた場合は、システム設定 → プライバシーとセキュリティで「このまま開く」を押してください。Macは自動インストールに対応しておらず、新しいバージョンが出たら通知から再ダウンロードします。"
+        }
+      }
+    ]
+  }
+  </script>
+  <script>
+  (function () {
+    var el = document.getElementById('appVer');
+    if (!el) return;
+    fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases/latest')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { if (j && j.tag_name) el.textContent = j.tag_name; })
+      .catch(function () {});
+  })();
+  </script>
+  <script src="/demo.js?v=1" defer></script>
+</body>
+</html>

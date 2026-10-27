@@ -1,0 +1,220 @@
+<!--
+{
+  "title": "몰래코인 사용법과 기능 — 무료 Windows·Mac 코인 시세 위젯",
+  "description": "몰래코인(Coin Peek)이 무엇인지, 설치 방법, 업비트·바이낸스 지원 범위, 시세 출처와 등락률 기준, 평가손익, 개인정보 저장 방식과 자주 묻는 질문을 정리했습니다.",
+  "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+  "ogType": "article",
+  "ogTitle": "몰래코인 사용법과 기능",
+  "ogDescription": "화면 끝에 마우스를 가져가 코인 시세를 확인하는 무료 Windows·Mac 위젯 가이드.",
+  "twitterTitle": "몰래코인 사용법과 기능",
+  "twitterDescription": "설치, 기능, 시세 출처, 개인정보와 FAQ를 한 번에 확인하세요."
+}
+-->
+
+<!-- @head -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://coin-peek.com/guide/#webpage",
+      "url": "https://coin-peek.com/guide/",
+      "name": "몰래코인 사용법과 기능",
+      "description": "몰래코인(Coin Peek)이 무엇인지, 설치 방법, 업비트·바이낸스 지원 범위, 시세 출처와 등락률 기준, 평가손익, 개인정보 저장 방식과 자주 묻는 질문을 정리했습니다.",
+      "inLanguage": "ko",
+      "dateModified": "{{dateModified}}",
+      "isPartOf": {
+        "@id": "https://coin-peek.com/#website"
+      },
+      "about": {
+        "@id": "https://coin-peek.com/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://coin-peek.com/guide/#breadcrumb"
+      },
+      "mainEntity": [
+        {
+          "@id": "https://coin-peek.com/guide/#howto"
+        },
+        {
+          "@id": "https://coin-peek.com/guide/#faq"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://coin-peek.com/guide/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "몰래코인",
+          "item": "https://coin-peek.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "제품 가이드",
+          "item": "https://coin-peek.com/guide/"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://coin-peek.com/guide/#howto",
+      "name": "설치하고 사용하는 방법",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "설치 파일 내려받기",
+          "text": "이 페이지나 GitHub Releases에서 최신 설치 파일을 내려받아 실행합니다. Windows는 .exe, Mac은 .dmg입니다.",
+          "url": "https://coin-peek.com/guide/#install"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "관심 코인 추가하기",
+          "text": "＋ 버튼을 누르고 업비트 또는 바이낸스를 고른 뒤 코인 이름이나 티커로 검색해 추가합니다. 필요하면 보유 수량과 평균 매입가도 입력합니다.",
+          "url": "https://coin-peek.com/guide/#watchlist"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "화면 가장자리에서 확인하기",
+          "text": "화면 가장자리로 마우스를 가져가면 패널이 나타납니다. 커서를 다른 곳으로 옮기면 자동으로 숨겨집니다.",
+          "url": "https://coin-peek.com/guide/#use"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://coin-peek.com/guide/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "몰래코인은 무료인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네. 앱 안에 광고, 결제, 회원가입이 없고 전체 소스 코드는 MIT 라이선스로 공개되어 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "어떤 코인을 지원하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "업비트 원화(KRW) 마켓과 바이낸스 USDT 마켓에 상장된 코인을 지원합니다. 상장폐지되거나 거래가 멈춘 코인은 조회되지 않습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "주식도 볼 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "주식은 같은 개발자가 만든 몰래주식에서 볼 수 있습니다. 두 앱은 따로 설치하고 따로 동작합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "회사 PC에서도 사용할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "시스템 프록시와 인증서를 사용하지만, 회사 네트워크가 거래소 사이트를 막아 두었다면 시세를 가져올 수 없습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "표시되는 시세로 거래해도 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "표시되는 시세는 공식 체결 데이터나 투자 조언이 아닙니다. 거래 전에 거래소에서 최신 시세를 다시 확인하세요."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- @nav -->
+<a href="/#features" class="muted">기능</a>
+<a href="/guide/" class="muted">가이드</a>
+<a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+
+<!-- @main -->
+<main class="doc">
+  <nav class="doc-breadcrumb" aria-label="현재 위치"><a href="/">몰래코인</a> / 제품 가이드</nav>
+  <h1>몰래코인은 어떤 프로그램인가요?</h1>
+  <p class="doc-lead">몰래코인(Coin Peek)은 일하는 중에도 창을 바꾸지 않고 관심 코인 시세를 확인할 수 있게 만든 무료 Windows·Mac 데스크톱 위젯입니다. 주식 버전인 <a href="https://stock-peek.com/">몰래주식</a>과 같은 방식으로 동작합니다.</p>
+
+  <div class="answer-box">
+    <strong>한 문장으로 답하면</strong>
+    <p>화면 오른쪽이나 왼쪽 끝으로 마우스를 가져가면 업비트·바이낸스 관심 코인의 시세, 최근 90일 흐름과 평가손익이 나타나는 무료 오픈소스 Windows·Mac 위젯입니다.</p>
+  </div>
+
+  <section>
+    <h2>핵심 기능</h2>
+    <ul>
+      <li>화면 가장자리로 마우스를 가져가면 패널이 나타나고, 커서를 옮기면 자동으로 숨겨집니다.</li>
+      <li>업비트 원화(KRW) 마켓은 한글·영문 이름과 티커로, 바이낸스 USDT 마켓은 티커로 검색합니다. 바이낸스 검색 결과는 24시간 거래대금 순입니다.</li>
+      <li>보유 수량(소수점 여덟 자리까지)과 평균 매입가를 넣으면 평가손익을 함께 보여줍니다.</li>
+      <li>소액 코인은 유효숫자 네 자리까지 표시합니다(예: $0.00000485).</li>
+      <li>최근 90일 일봉을 작은 차트로 보여줍니다.</li>
+      <li>화면 왼쪽·오른쪽과 여러 모니터 중 원하는 위치에 패널을 둘 수 있습니다.</li>
+      <li>시스템 트레이(Mac은 메뉴 막대)에 상주하고 컴퓨터를 켤 때 자동 실행할 수 있습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>설치하고 사용하는 방법</h2>
+    <ol>
+      <li id="install"><strong>설치 파일 내려받기:</strong> 이 페이지나 GitHub Releases에서 최신 설치 파일을 내려받아 실행합니다. Windows는 <code>.exe</code>, Mac은 <code>.dmg</code>입니다.</li>
+      <li id="watchlist"><strong>관심 코인 추가하기:</strong> ＋ 버튼을 누르고 업비트 또는 바이낸스를 고른 뒤 코인 이름이나 티커로 검색해 추가합니다. 필요하면 보유 수량과 평균 매입가도 입력합니다.</li>
+      <li id="use"><strong>화면 가장자리에서 확인하기:</strong> 화면 가장자리로 마우스를 가져가면 패널이 나타납니다. 커서를 다른 곳으로 옮기면 자동으로 숨겨집니다.</li>
+    </ol>
+    <p class="doc-note">개인이 개발한 앱이라 코드 서명이 없어 Windows SmartScreen 경고가 뜰 수 있습니다. “추가 정보”를 누른 뒤 “실행”을 고르면 설치됩니다. Mac은 Apple 공증이 없어서 처음 열 때 차단되면 시스템 설정 → 개인정보 보호 및 보안에서 “그래도 열기”를 누르면 됩니다.</p>
+  </section>
+
+  <section>
+    <h2>시세 출처와 갱신 주기</h2>
+    <p>업비트와 바이낸스가 공개한 시세 API에서 직접 가져옵니다. API 키나 거래소 계정은 쓰지 않습니다. 코인은 24시간 거래되므로 언제나 3초마다 갱신하고, 같은 거래소의 코인은 한 번의 요청으로 묶어서 가져옵니다.</p>
+    <p>등락률 기준이 거래소마다 다릅니다. 업비트는 전일 종가(한국 시간 0시) 대비, 바이낸스는 24시간 전 대비입니다. 차트는 두 거래소 모두 최근 90일 일봉입니다.</p>
+  </section>
+
+  <section>
+    <h2>개인정보와 로컬 저장</h2>
+    <p>거래소 계정에 로그인하거나 주문 기능과 연결하지 않습니다. 관심 코인, 보유 수량, 평균 매입가, 언어와 패널 위치 같은 설정은 사용자의 PC에 저장됩니다. 자세한 내용은 <a href="/privacy/">개인정보 안내</a>에 있습니다.</p>
+  </section>
+
+  <section id="faq">
+    <h2>자주 묻는 질문</h2>
+    <dl>
+      <div><dt>몰래코인은 무료인가요?</dt><dd>네. 앱 안에 광고, 결제, 회원가입이 없고 전체 소스 코드는 MIT 라이선스로 공개되어 있습니다.</dd></div>
+      <div><dt>어떤 코인을 지원하나요?</dt><dd>업비트 원화(KRW) 마켓과 바이낸스 USDT 마켓에 상장된 코인을 지원합니다. 상장폐지되거나 거래가 멈춘 코인은 조회되지 않습니다.</dd></div>
+      <div><dt>주식도 볼 수 있나요?</dt><dd>주식은 같은 개발자가 만든 <a href="https://stock-peek.com/">몰래주식</a>에서 볼 수 있습니다. 두 앱은 따로 설치하고 따로 동작합니다.</dd></div>
+      <div><dt>회사 PC에서도 사용할 수 있나요?</dt><dd>시스템 프록시와 인증서를 사용하지만, 회사 네트워크가 거래소 사이트를 막아 두었다면 시세를 가져올 수 없습니다.</dd></div>
+      <div><dt>표시되는 시세로 거래해도 되나요?</dt><dd>표시되는 시세는 공식 체결 데이터나 투자 조언이 아닙니다. 거래 전에 거래소에서 최신 시세를 다시 확인하세요.</dd></div>
+    </dl>
+  </section>
+
+  <div class="doc-cta">
+    {{downloadButtons}}
+    <a href="/releases/" class="btn-dl btn-dl-alt">업데이트 내역 보기</a>
+    <a href="https://github.com/sngmng6506/coin-peek" class="btn-dl btn-dl-alt">GitHub에서 소스 보기</a>
+  </div>
+</main>
+
+<!-- @footer -->
+<a href="/guide/">제품 가이드</a>
+<a href="/releases/">업데이트 내역</a>
+<a href="/privacy/">개인정보 안내</a>
+<a href="https://stock-peek.com/">몰래주식</a>
+<a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+<a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">후원</a>
+<a href="mailto:sngmng6506@gmail.com">문의</a>
+
+<!-- @after-footer -->
+<p class="disclaimer">표시되는 시세는 투자 판단이나 주문 체결을 위한 공식 거래 데이터가 아닙니다. 거래소와 네트워크 상황에 따라 지연되거나 실제 거래 가격과 차이가 있을 수 있습니다. 가상자산은 가격 변동이 크니 거래 전에 거래소에서 다시 확인하세요.</p>

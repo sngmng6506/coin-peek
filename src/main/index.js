@@ -44,7 +44,7 @@ import {
   setPanelSize
 } from './preferences.js'
 import electronUpdater from 'electron-updater'
-import { detectLanguage } from '../shared/languages.js'
+import { detectLanguage, getLanguageInfo } from '../shared/languages.js'
 import { translate } from '../shared/i18n/index.js'
 const { autoUpdater } = electronUpdater
 
@@ -123,9 +123,8 @@ function resolveLanguage() {
 
 const t = (key, vars) => translate(resolveLanguage(), key, vars)
 
-// 웹사이트가 생기기 전까지는 GitHub 최신 릴리즈 페이지
 function downloadPageUrl() {
-  return 'https://github.com/sngmng6506/coin-peek/releases/latest'
+  return `https://coin-peek.com${getLanguageInfo(resolveLanguage()).sitePath}`
 }
 
 function installUpdate() {

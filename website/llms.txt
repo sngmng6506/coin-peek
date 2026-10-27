@@ -1,0 +1,38 @@
+# Coin Peek (몰래코인)
+
+> Free, open-source desktop widget for Windows and Mac that shows Upbit (KRW) and Binance (USDT) cryptocurrency prices when you move the mouse to the screen edge. No account, no API key, no exchange connection. Current version: v0.1.0.
+
+Coin Peek lives in the system tray (menu bar on Mac). Moving the cursor to the left or right screen edge slides in a panel with the watchlist: price, change, a 90-day daily chart, and profit and loss when an amount and average price are entered. Moving the cursor away hides it. It is the crypto sibling of Stock Peek (https://stock-peek.com).
+
+Key facts:
+
+- Platforms: Windows 10 and 11; macOS 12 or later (universal build)
+- Price and license: free, MIT License
+- Markets: Upbit KRW market (search by Korean or English name or ticker) and Binance USDT market (search by ticker, ranked by 24-hour volume)
+- Price sources: Upbit and Binance public market data APIs, called directly from the user's computer. Binance uses data-api.binance.vision first and api.binance.com as a fallback
+- Change figure: Upbit is against the previous close (00:00 KST); Binance is against 24 hours ago
+- Refresh: every 3 seconds, around the clock; one batched request per exchange
+- Display: small-cap coins keep four significant digits (up to 8 decimals); holdings accept up to 8 decimals
+- Languages: Korean, English, Japanese, Arabic (app and website)
+- Data: watchlist, holdings and settings stay on the user's computer. Network requests are only for prices, update checks, and a once-a-day 1-byte download from GitHub used to count daily users (no data or identifier is sent). No analytics or advertising SDKs
+- Corporate networks: uses the system proxy and certificates, but networks that block exchange sites will not show prices
+- Installation warnings: the app is not code-signed. Windows SmartScreen shows a warning ("More info" → "Run anyway"). On Mac the first launch must be allowed in System Settings → Privacy & Security ("Open Anyway")
+- Updates: checked at launch, hourly, when the panel opens, and from Settings. Windows installs after a notification click; Mac opens the download page
+- Limitation: prices may be delayed and are not official trading data or investment advice
+
+## Pages
+
+- [Coin Peek — Desktop crypto price widget](https://coin-peek.com/en): A free Windows and Mac desktop widget: move the mouse to the screen edge to see prices and profit and loss for your Upbit and Binance coins. Also in [한국어](https://coin-peek.com/), [日本語](https://coin-peek.com/ja), [العربية](https://coin-peek.com/ar).
+- [Coin Peek guide](https://coin-peek.com/en/guide/): What Coin Peek is, how to install it, which Upbit and Binance markets it covers, where prices come from, how change is measured, profit and loss, local storage and FAQ. Also in [한국어](https://coin-peek.com/guide/), [日本語](https://coin-peek.com/ja/guide/), [العربية](https://coin-peek.com/ar/guide/).
+- [Coin Peek releases](https://coin-peek.com/en/releases/): The latest Coin Peek version for Windows and Mac, release notes, how updates work and system requirements. Also in [한국어](https://coin-peek.com/releases/), [日本語](https://coin-peek.com/ja/releases/), [العربية](https://coin-peek.com/ar/releases/).
+- [Coin Peek privacy](https://coin-peek.com/en/privacy/): What Coin Peek stores on your computer and which network requests it makes for prices and updates. Also in [한국어](https://coin-peek.com/privacy/), [日本語](https://coin-peek.com/ja/privacy/), [العربية](https://coin-peek.com/ar/privacy/).
+
+## Downloads
+
+- [Windows installer](https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe): latest .exe
+- [Mac disk image](https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-mac.dmg): latest .dmg
+- [GitHub releases](https://github.com/sngmng6506/coin-peek/releases): all versions with SHA256SUMS.txt and SHA256SUMS-mac.txt
+
+## Optional
+
+- [Source code](https://github.com/sngmng6506/coin-peek): Electron + React, MIT License

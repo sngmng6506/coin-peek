@@ -1,0 +1,140 @@
+<!--
+{
+  "title": "Coin Peek releases and latest version",
+  "description": "The latest Coin Peek version for Windows and Mac, release notes, how updates work and system requirements.",
+  "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+  "ogType": "article",
+  "ogTitle": "Coin Peek releases",
+  "ogDescription": "Latest version and release notes.",
+  "twitterTitle": "Coin Peek releases",
+  "twitterDescription": "Latest version and release notes."
+}
+-->
+
+<!-- @head -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://coin-peek.com/en/releases/#webpage",
+      "url": "https://coin-peek.com/en/releases/",
+      "name": "Coin Peek releases",
+      "description": "The latest Coin Peek version for Windows and Mac, release notes, how updates work and system requirements.",
+      "inLanguage": "en",
+      "dateModified": "{{dateModified}}",
+      "isPartOf": {
+        "@id": "https://coin-peek.com/#website"
+      },
+      "about": {
+        "@id": "https://coin-peek.com/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://coin-peek.com/en/releases/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://coin-peek.com/en/releases/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Coin Peek",
+          "item": "https://coin-peek.com/en/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Releases",
+          "item": "https://coin-peek.com/en/releases/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- @nav -->
+<a href="/en/#features" class="muted">Features</a>
+<a href="/en/guide/" class="muted">Guide</a>
+<a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+
+<!-- @main -->
+<main class="doc">
+  <nav class="doc-breadcrumb" aria-label="Breadcrumb"><a href="/en/">Coin Peek</a> / Releases</nav>
+  <h1>Latest version and releases</h1>
+  <p class="doc-lead">The current Windows and Mac version and what changed. Coin Peek is distributed through GitHub Releases and also checks for new versions inside the app.</p>
+
+  <div class="answer-box">
+    <strong>Latest · <span class="mono" id="appVer">v{{version}}</span></strong>
+    <p id="latestNote">First public release: Upbit KRW and Binance USDT prices, 90-day chart, fractional holdings with profit and loss, extra decimals for small-cap coins.</p>
+  </div>
+  <div class="doc-cta">
+    {{downloadButtons}}
+    <a href="https://github.com/sngmng6506/coin-peek/releases/latest" class="btn-dl btn-dl-alt">View on GitHub</a>
+  </div>
+
+  <section>
+    <h2>How updates work</h2>
+    <p>The app checks for a new version at launch, every hour after that, and when the panel opens (at most every 15 minutes). On Windows it downloads in the background and shows a notification; click it to install and restart. Mac builds are unsigned and cannot install themselves, so the notification opens the download page.</p>
+  </section>
+
+  <section>
+    <h2>Requirements and notes</h2>
+    <ul>
+      <li>Windows 10 or 11, macOS 12 or later</li>
+      <li>Needs an internet connection; networks that block exchanges will not show prices.</li>
+      <li>Not code-signed: Windows SmartScreen may warn, and on Mac the first launch must be allowed in System Settings.</li>
+      <li>SHA-256 checksums are attached to each GitHub release.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>All releases</h2>
+    <div id="releaseList">
+      <article class="release"><div class="release-head"><h2>v0.1.0</h2><time datetime="2026-10-27">2026-10-27</time></div><p>First public release: Upbit KRW and Binance USDT prices, 90-day chart, fractional holdings with profit and loss, extra decimals for small-cap coins.</p></article>
+      <p>The full history is on <a href="https://github.com/sngmng6506/coin-peek/releases">GitHub Releases</a>.</p>
+    </div>
+  </section>
+</main>
+
+<!-- @footer -->
+<a href="/en/guide/">Guide</a>
+<a href="/en/releases/">Releases</a>
+<a href="/en/privacy/">Privacy</a>
+<a href="https://stock-peek.com/en">Stock Peek</a>
+<a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+<a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">Support</a>
+<a href="mailto:sngmng6506@gmail.com">Contact</a>
+
+<!-- @scripts -->
+<script>
+// GitHub 릴리스 목록으로 최신 버전과 목록을 채움. 실패하면 원본에 적힌 내용 그대로
+(function () {
+  var list = document.getElementById('releaseList');
+  if (!list) return;
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', numberingSystem: 'latn' });
+  fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases?per_page=20')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rows) {
+      if (!Array.isArray(rows)) return;
+      rows = rows.filter(function (r) { return !r.draft; });
+      if (!rows.length) return;
+      var ver = document.getElementById('appVer');
+      if (ver) ver.textContent = rows[0].tag_name;
+      list.innerHTML = rows.map(function (r, i) {
+        var d = r.published_at ? new Date(r.published_at) : null;
+        var body = (r.body || '').split('\n').map(function (l) { return l.replace(/^[-*#\s]+/, '').trim(); }).filter(Boolean).slice(0, 6);
+        return '<article class="release"><div class="release-head"><h2>' + esc(r.tag_name) + '</h2>' +
+          (i === 0 ? '<span class="release-tag">Latest</span>' : '') +
+          (d ? '<time datetime="' + d.toISOString().slice(0, 10) + '">' + esc(fmt.format(d)) + '</time>' : '') +
+          '</div>' + (body.length ? '<ul>' + body.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>' : '') + '</article>';
+      }).join('') + list.lastElementChild.outerHTML;
+    })
+    .catch(function () {});
+})();
+</script>

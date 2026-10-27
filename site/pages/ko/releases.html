@@ -1,0 +1,140 @@
+<!--
+{
+  "title": "몰래코인 최신 버전과 업데이트 내역",
+  "description": "몰래코인 Windows·Mac 최신 버전, 변경 사항, 자동 업데이트 방식과 지원 환경을 안내합니다.",
+  "robots": "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1",
+  "ogType": "article",
+  "ogTitle": "몰래코인 업데이트 내역",
+  "ogDescription": "몰래코인 최신 버전과 변경 사항.",
+  "twitterTitle": "몰래코인 업데이트 내역",
+  "twitterDescription": "최신 버전과 변경 사항을 확인하세요."
+}
+-->
+
+<!-- @head -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://coin-peek.com/releases/#webpage",
+      "url": "https://coin-peek.com/releases/",
+      "name": "몰래코인 업데이트 내역",
+      "description": "몰래코인 Windows·Mac 최신 버전, 변경 사항, 자동 업데이트 방식과 지원 환경을 안내합니다.",
+      "inLanguage": "ko",
+      "dateModified": "{{dateModified}}",
+      "isPartOf": {
+        "@id": "https://coin-peek.com/#website"
+      },
+      "about": {
+        "@id": "https://coin-peek.com/#software"
+      },
+      "breadcrumb": {
+        "@id": "https://coin-peek.com/releases/#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://coin-peek.com/releases/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "몰래코인",
+          "item": "https://coin-peek.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "업데이트 내역",
+          "item": "https://coin-peek.com/releases/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- @nav -->
+<a href="/#features" class="muted">기능</a>
+<a href="/guide/" class="muted">가이드</a>
+<a href="https://github.com/sngmng6506/coin-peek" class="muted" target="_blank" rel="noopener">GitHub</a>
+
+<!-- @main -->
+<main class="doc">
+  <nav class="doc-breadcrumb" aria-label="현재 위치"><a href="/">몰래코인</a> / 업데이트 내역</nav>
+  <h1>최신 버전과 업데이트 내역</h1>
+  <p class="doc-lead">현재 배포 중인 Windows·Mac 버전과 변경 사항입니다. 몰래코인은 GitHub Releases로 배포되고, 앱 안에서도 새 버전을 자동으로 확인합니다.</p>
+
+  <div class="answer-box">
+    <strong>최신 · <span class="mono" id="appVer">v{{version}}</span></strong>
+    <p id="latestNote">첫 공개 버전. 업비트 원화·바이낸스 USDT 시세, 최근 90일 차트, 소수점 보유 수량과 평가손익, 소액 코인 자릿수 표시.</p>
+  </div>
+  <div class="doc-cta">
+    {{downloadButtons}}
+    <a href="https://github.com/sngmng6506/coin-peek/releases/latest" class="btn-dl btn-dl-alt">GitHub 릴리스 보기</a>
+  </div>
+
+  <section>
+    <h2>자동 업데이트 방식</h2>
+    <p>앱은 시작할 때, 그 뒤 1시간마다, 그리고 패널을 열 때(15분에 한 번까지) 새 버전을 확인합니다. Windows는 새 버전을 백그라운드에서 내려받은 뒤 알림을 띄우고, 알림을 누르면 바로 설치하고 다시 실행합니다. Mac은 서명이 없어 자동 설치가 안 되므로 알림을 누르면 다운로드 페이지가 열립니다.</p>
+  </section>
+
+  <section>
+    <h2>지원 환경과 주의사항</h2>
+    <ul>
+      <li>지원 운영체제: Windows 10·11, macOS 12 이상</li>
+      <li>인터넷 연결이 필요하고, 거래소 접속을 막아 둔 네트워크에서는 시세가 나오지 않습니다.</li>
+      <li>코드 서명이 없어 Windows SmartScreen 안내가 뜰 수 있고, Mac은 처음 실행할 때 시스템 설정에서 허용해야 합니다.</li>
+      <li>파일 확인용 SHA-256 체크섬은 GitHub 릴리스에 함께 있습니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>릴리스 목록</h2>
+    <div id="releaseList">
+      <article class="release"><div class="release-head"><h2>v0.1.0</h2><time datetime="2026-10-27">2026-10-27</time></div><p>첫 공개 버전. 업비트 원화·바이낸스 USDT 시세, 최근 90일 차트, 소수점 보유 수량과 평가손익, 소액 코인 자릿수 표시.</p></article>
+      <p>전체 변경 내역은 <a href="https://github.com/sngmng6506/coin-peek/releases">GitHub Releases</a>에서 볼 수 있습니다.</p>
+    </div>
+  </section>
+</main>
+
+<!-- @footer -->
+<a href="/guide/">제품 가이드</a>
+<a href="/releases/">업데이트 내역</a>
+<a href="/privacy/">개인정보 안내</a>
+<a href="https://stock-peek.com/">몰래주식</a>
+<a href="https://github.com/sngmng6506/coin-peek" target="_blank" rel="noopener">GitHub</a>
+<a href="https://github.com/sngmng6506/coin-peek/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+<a href="https://ko-fi.com/sngmng" target="_blank" rel="noopener">후원</a>
+<a href="mailto:sngmng6506@gmail.com">문의</a>
+
+<!-- @scripts -->
+<script>
+// GitHub 릴리스 목록으로 최신 버전과 목록을 채움. 실패하면 원본에 적힌 내용 그대로
+(function () {
+  var list = document.getElementById('releaseList');
+  if (!list) return;
+  var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+  var fmt = new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', numberingSystem: 'latn' });
+  fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases?per_page=20')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rows) {
+      if (!Array.isArray(rows)) return;
+      rows = rows.filter(function (r) { return !r.draft; });
+      if (!rows.length) return;
+      var ver = document.getElementById('appVer');
+      if (ver) ver.textContent = rows[0].tag_name;
+      list.innerHTML = rows.map(function (r, i) {
+        var d = r.published_at ? new Date(r.published_at) : null;
+        var body = (r.body || '').split('\n').map(function (l) { return l.replace(/^[-*#\s]+/, '').trim(); }).filter(Boolean).slice(0, 6);
+        return '<article class="release"><div class="release-head"><h2>' + esc(r.tag_name) + '</h2>' +
+          (i === 0 ? '<span class="release-tag">최신</span>' : '') +
+          (d ? '<time datetime="' + d.toISOString().slice(0, 10) + '">' + esc(fmt.format(d)) + '</time>' : '') +
+          '</div>' + (body.length ? '<ul>' + body.map(function (l) { return '<li>' + esc(l) + '</li>'; }).join('') + '</ul>' : '') + '</article>';
+      }).join('') + list.lastElementChild.outerHTML;
+    })
+    .catch(function () {});
+})();
+</script>
