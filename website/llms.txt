@@ -32,8 +32,6 @@ Key facts:
 
 - [Windows installer](https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-setup.exe): latest .exe
 - [Mac disk image](https://github.com/sngmng6506/coin-peek/releases/latest/download/coin-peek-mac.dmg): latest .dmg
-- [GitHub releases](https://github.com/sngmng6506/coin-peek/releases): all versions with SHA256SUMS.txt and SHA256SUMS-mac.txt
 
 ## Optional
 
-- [Source code](https://github.com/sngmng6506/coin-peek): Electron + React, MIT License
