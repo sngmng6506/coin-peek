@@ -555,33 +555,67 @@
     var near = e.clientX >= right - TRIGGER
     edge.classList.toggle('is-near', near && !open)
     if (!open) {
-      if (near && !openTimer) openTimer = setTimeout(function () { openTimer = null; setOpen(true) }, HOVER_DELAY)
-      if (!near && openTimer) { clearTimeout(openTimer); openTimer = null }
+      if (near && !openTimer)
+        openTimer = setTimeout(function () {
+          openTimer = null
+          setOpen(true)
+        }, HOVER_DELAY)
+      if (!near && openTimer) {
+        clearTimeout(openTimer)
+        openTimer = null
+      }
       return
     }
     var r = panel.getBoundingClientRect()
     var inside = e.clientX >= r.left - 16 && e.clientY >= r.top - 16 && e.clientY <= r.bottom + 16
     if (inside || near) {
-      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null }
+      if (closeTimer) {
+        clearTimeout(closeTimer)
+        closeTimer = null
+      }
     } else if (!closeTimer) {
-      closeTimer = setTimeout(function () { closeTimer = null; setOpen(false) }, HOVER_DELAY)
+      closeTimer = setTimeout(function () {
+        closeTimer = null
+        setOpen(false)
+      }, HOVER_DELAY)
     }
   })
   // 스크롤만 하고 마우스를 움직이지 않은 경우: 마지막 위치가 패널 밖이면 닫음
   var last = null
-  document.addEventListener('mousemove', function (e) { last = e }, { passive: true })
-  window.addEventListener('scroll', function () {
-    if (!open || !last) return
-    var r = panel.getBoundingClientRect()
-    if (last.clientX < r.left - 16 && !closeTimer) closeTimer = setTimeout(function () { closeTimer = null; setOpen(false) }, HOVER_DELAY)
-  }, { passive: true })
+  document.addEventListener(
+    'mousemove',
+    function (e) {
+      last = e
+    },
+    { passive: true }
+  )
+  window.addEventListener(
+    'scroll',
+    function () {
+      if (!open || !last) return
+      var r = panel.getBoundingClientRect()
+      if (last.clientX < r.left - 16 && !closeTimer)
+        closeTimer = setTimeout(function () {
+          closeTimer = null
+          setOpen(false)
+        }, HOVER_DELAY)
+    },
+    { passive: true }
+  )
   document.documentElement.addEventListener('mouseleave', function () {
-    if (openTimer) { clearTimeout(openTimer); openTimer = null }
+    if (openTimer) {
+      clearTimeout(openTimer)
+      openTimer = null
+    }
     edge.classList.remove('is-near')
   })
   // 카드 hover 표시도 앱처럼
   Array.prototype.forEach.call(panel.querySelectorAll('.sp-card'), function (c) {
-    c.addEventListener('mouseenter', function () { c.classList.add('is-hover') })
-    c.addEventListener('mouseleave', function () { c.classList.remove('is-hover') })
+    c.addEventListener('mouseenter', function () {
+      c.classList.add('is-hover')
+    })
+    c.addEventListener('mouseleave', function () {
+      c.classList.remove('is-hover')
+    })
   })
 })()
