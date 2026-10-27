@@ -7,7 +7,7 @@ import { rankMatches } from './search.js'
 const BASE = 'https://api.upbit.com/v1'
 const TICKER_URL = (markets) => `${BASE}/ticker?markets=${markets.join(',')}`
 const CANDLES_URL = (market) => `${BASE}/candles/days?market=${market}&count=90`
-const MARKETS_URL = `${BASE}/market/all?isDetails=false`
+const MARKETS_URL = `${BASE}/market/all`
 
 const LIST_TTL = 6 * 60 * 60 * 1000
 const CHART_TTL = 600_000
@@ -70,7 +70,8 @@ export function createUpbitProvider({ fetchJson, now = () => Date.now() }) {
 
   const loadTicker = createBatcher(async (symbols) => {
     const res = await fetchJson(TICKER_URL(symbols.map(toMarket)), { headers })
-    // 없는 마켓이 섞이면 404 → batcher가 하나씩 다시 조회
+    // 없는 마켓이 섞이면 400/404 → batcher가 하나씩 다시 조회. 단건 400/404 = 없는 코인
+    if (res.status === 400 || res.status === 404) throw new Error('Upbit ticker: market not found')
     if (!res.ok) throw new Error(`Upbit ticker: ${res.status}`)
     const out = new Map()
     for (const t of Array.isArray(res.data) ? res.data : []) out.set(fromMarket(t.market), t)

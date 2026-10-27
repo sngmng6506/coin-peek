@@ -155,3 +155,19 @@ test('Binance search keeps active USDT pairs ranked by volume', async () => {
     ['BTC', 'BTCDOM', 'WBTC']
   )
 })
+
+test('Upbit: unknown market (400 or 404) becomes "not found" without breaking the batch', async () => {
+  for (const status of [400, 404]) {
+    const upbit = createUpbitProvider({
+      fetchJson: (url) => {
+        if (url.includes('NOPE')) return fail(status)
+        if (url.includes('/ticker?'))
+          return ok([{ market: 'KRW-BTC', trade_price: 1, signed_change_rate: 0, change: 'EVEN' }])
+        return fail(404)
+      }
+    })
+    const [btc, nope] = await Promise.allSettled([upbit.fetch('BTC'), upbit.fetch('NOPE')])
+    assert.equal(btc.value.price, 1)
+    assert.match(nope.reason.message, /not found/)
+  }
+})
