@@ -1,0 +1,13 @@
+// Cloudflare Workers 정적 사이트 설정 (coin-peek.com). 빌드 없이 website/를 그대로 올림.
+// name은 Cloudflare 대시보드의 Worker 이름과 같아야 함.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "coin-peek",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./website",
+    // /en → en.html, /guide/ → guide/index.html (Pages와 같은 주소)
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}

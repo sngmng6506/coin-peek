@@ -11,6 +11,6 @@
 
 ## 웹사이트 (coin-peek.com)
 
-- [ ] Cloudflare Pages 프로젝트 만들기: Git 연동 → `sngmng6506/coin-peek`, 프로덕션 브랜치 `main`, 빌드 명령 비움, 출력 디렉터리 `website`
+- [ ] Cloudflare Worker(Git 연동, `sngmng6506/coin-peek`, 브랜치 `main`, 빌드 명령 비움, 배포 명령 `npx wrangler deploy`) — 설정은 `wrangler.jsonc`
 - [ ] Custom domains에 `coin-peek.com`(과 `www.coin-peek.com`) 추가. 도메인이 Cloudflare에 없으면 네임서버를 Cloudflare로 옮기기
 - [ ] Google Search Console·네이버 서치어드바이저에 사이트 등록 후 `https://coin-peek.com/sitemap.xml` 제출
