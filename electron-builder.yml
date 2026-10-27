@@ -1,0 +1,51 @@
+appId: com.coinpeek.app
+productName: Coin Peek
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+asarUnpack:
+  - resources/**
+win:
+  executableName: coin-peek
+nsis:
+  artifactName: ${name}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  category: public.app-category.finance
+  target:
+    - target: dmg
+      arch: universal
+    - target: zip
+      arch: universal
+  artifactName: ${name}-mac.${ext}
+  # Apple 개발자 인증서 없음: ad-hoc 서명 (Apple Silicon 실행에 필요), 공증 없음
+  identity: '-'
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    # 메뉴 막대 상주 앱: Dock 아이콘 없음
+    LSUIElement: true
+  notarize: false
+dmg:
+  artifactName: ${name}-mac.${ext}
+linux:
+  target:
+    - AppImage
+    - snap
+    - deb
+  maintainer: electronjs.org
+  category: Utility
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish:
+  provider: github
+  owner: sngmng6506
+  repo: coin-peek
+  releaseType: release

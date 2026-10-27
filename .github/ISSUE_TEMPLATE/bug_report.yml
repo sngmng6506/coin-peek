@@ -1,0 +1,80 @@
+name: Bug report
+description: Report a reproducible problem in Coin Peek
+title: '[Bug] '
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a problem. Remove sensitive company or account information from screenshots and logs.
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      placeholder: v1.6.2
+    validations:
+      required: true
+  - type: input
+    id: os-version
+    attributes:
+      label: OS version
+      placeholder: Windows 11 24H2 / macOS 15.1
+    validations:
+      required: true
+  - type: dropdown
+    id: monitor-count
+    attributes:
+      label: Monitor count
+      options:
+        - '1'
+        - '2'
+        - '3 or more'
+    validations:
+      required: true
+  - type: dropdown
+    id: dock-edge
+    attributes:
+      label: Dock position
+      options:
+        - Right edge
+        - Left edge
+        - Both / not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: network
+    attributes:
+      label: Network environment
+      options:
+        - Home or personal network
+        - Corporate network or VPN
+        - Other / not sure
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the app
+        2. Move the cursor to...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add screenshots or sanitized logs if useful.

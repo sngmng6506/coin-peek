@@ -1,0 +1,185 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'data/**'
+      - 'resources/**'
+      - 'build/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'electron-builder.yml'
+      - 'electron.vite.config.*'
+      - 'eslint.config.*'
+      - 'scripts/prepare-release.mjs'
+      - '.gitattributes'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: coin-peek-release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build-win:
+    runs-on: windows-latest
+    outputs:
+      publish: ${{ steps.version.outputs.publish }}
+      tag: ${{ steps.version.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Select release version
+        id: version
+        run: node scripts/prepare-release.mjs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - if: steps.version.outputs.publish == 'true'
+        run: npm ci
+
+      - if: steps.version.outputs.publish == 'true'
+        run: npm run lint -- --max-warnings 0
+
+      - if: steps.version.outputs.publish == 'true'
+        run: npm run check:i18n
+
+      - if: steps.version.outputs.publish == 'true'
+        run: npm test
+
+      - name: Build Windows installer without publishing
+        if: steps.version.outputs.publish == 'true'
+        run: npm run build:win -- --publish never
+
+      - name: Verify assets and generate checksums
+        if: steps.version.outputs.publish == 'true'
+        shell: pwsh
+        run: |
+          $assets = @('coin-peek-setup.exe', 'coin-peek-setup.exe.blockmap', 'latest.yml')
+          $lines = foreach ($name in $assets) {
+            $path = Join-Path dist $name
+            if (!(Test-Path $path) -or (Get-Item $path).Length -eq 0) { throw "Missing asset: $name" }
+            $hash = (Get-FileHash $path -Algorithm SHA256).Hash.ToLower()
+            "$hash  $name"
+          }
+          $lines | Set-Content dist/SHA256SUMS.txt -Encoding utf8
+
+      - name: Save version and tag after successful build
+        if: steps.version.outputs.publish == 'true'
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+          built=$(git rev-parse HEAD)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add package.json package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: release $RELEASE_TAG"
+          fi
+          if ! git rev-parse --verify "refs/tags/$RELEASE_TAG" >/dev/null 2>&1; then
+            git tag "$RELEASE_TAG"
+          fi
+          if ! git push --atomic origin HEAD:main "refs/tags/$RELEASE_TAG"; then
+            # main moved during the build. If the new commits touch no app files (docs), rebase the version commit onto them and retry. Otherwise stop: the
+            # queued run triggered by those commits builds the newer source.
+            git fetch origin main
+            if git diff --name-only "$built" origin/main | grep -Eq '^(src/|resources/|build/|package(-lock)?\.json$|electron-builder\.yml$|electron\.vite\.config\.|eslint\.config\.|scripts/prepare-release\.mjs$|\.gitattributes$|\.github/workflows/release\.yml$)'; then
+              echo "App files changed on main during the build; leaving this release to the newer run."
+              exit 1
+            fi
+            # Rebuild the version commit on top of the new main (no rebase).
+            versioned=$(git rev-parse HEAD)
+            git tag -d "$RELEASE_TAG"
+            git reset --hard origin/main
+            git checkout "$versioned" -- package.json package-lock.json
+            git add package.json package-lock.json
+            git commit -m "chore: release $RELEASE_TAG"
+            git tag "$RELEASE_TAG"
+            git push --atomic origin HEAD:main "refs/tags/$RELEASE_TAG"
+          fi
+
+      - name: Stage Windows assets in draft release
+        if: steps.version.outputs.publish == 'true'
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          set -euo pipefail
+          if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
+            gh release create "$RELEASE_TAG" --verify-tag --draft --title "$RELEASE_TAG" --generate-notes
+          fi
+          # 하루 사용자 수 집계용 1바이트 파일 (앱이 하루 한 번 받음, download-badge.yml이 집계)
+          printf '1' > dist/ping-win
+          printf '1' > dist/ping-mac
+          gh release upload "$RELEASE_TAG" dist/coin-peek-setup.exe dist/coin-peek-setup.exe.blockmap dist/latest.yml dist/SHA256SUMS.txt dist/ping-win dist/ping-mac --clobber
+
+  # Mac: ad-hoc 서명(공증 없음). Windows 자산이 담긴 비공개 초안에 Mac 자산 추가.
+  # latest-mac.yml은 앱의 새 버전 알림용 (Mac은 자동 설치 없이 다운로드 페이지 안내)
+  build-mac:
+    needs: build-win
+    if: needs.build-win.outputs.publish == 'true'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ needs.build-win.outputs.tag }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build macOS app without publishing
+        run: npm run build:mac -- --publish never
+
+      - name: Verify assets and upload to release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ needs.build-win.outputs.tag }}
+        run: |
+          set -euo pipefail
+          assets=(dist/coin-peek-mac.dmg dist/coin-peek-mac.zip dist/latest-mac.yml)
+          for f in "${assets[@]}"; do
+            [ -s "$f" ] || { echo "Missing asset: $f"; ls dist; exit 1; }
+          done
+          [ -f dist/coin-peek-mac.zip.blockmap ] && assets+=(dist/coin-peek-mac.zip.blockmap)
+          (cd dist && shasum -a 256 coin-peek-mac.dmg coin-peek-mac.zip latest-mac.yml > SHA256SUMS-mac.txt)
+          gh release upload "$RELEASE_TAG" "${assets[@]}" dist/SHA256SUMS-mac.txt --clobber
+
+  publish:
+    needs: [build-win, build-mac]
+    if: needs.build-win.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish only after both platforms are ready
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ needs.build-win.outputs.tag }}
+        run: |
+          set -euo pipefail
+          names=$(gh release view "$RELEASE_TAG" --json assets --jq '.assets[].name')
+          for required in coin-peek-setup.exe latest.yml ping-win ping-mac coin-peek-mac.dmg coin-peek-mac.zip latest-mac.yml; do
+            grep -Fxq "$required" <<< "$names" || { echo "Missing asset: $required"; exit 1; }
+          done
+          gh release edit "$RELEASE_TAG" --draft=false --latest

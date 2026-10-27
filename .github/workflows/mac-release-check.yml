@@ -1,0 +1,113 @@
+name: Mac release check
+
+# 실제로 배포된 Mac 파일(zip·dmg)을 내려받아 Apple Silicon·Intel 맥에서 확인:
+# 체크섬, universal(arm64+x86_64), ad-hoc 서명, Dock 숨김(LSUIElement), dmg 구성,
+# 그리고 패키지된 앱을 실행해 native-smoke와 같은 동작 검사.
+on:
+  workflow_run:
+    workflows: [Release]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '확인할 릴리즈 태그 (비우면 최신)'
+        required: false
+
+permissions:
+  contents: write # 스크린샷을 ci-screens 브랜치에 올림
+
+jobs:
+  mac:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Download release
+        run: |
+          TAG="${{ inputs.tag }}"
+          [ -z "$TAG" ] && TAG=$(gh release view --json tagName -q .tagName)
+          echo "Checking $TAG on $(uname -m)"
+          mkdir rel && cd rel
+          echo "TAG=$TAG" >> "$GITHUB_ENV"
+          gh release download "$TAG" -p 'coin-peek-mac.zip' -p 'coin-peek-mac.dmg' -p 'SHA256SUMS-mac.txt' -p 'latest-mac.yml'
+
+      - name: Checksums
+        working-directory: rel
+        run: shasum -a 256 -c SHA256SUMS-mac.txt
+
+      # 이후 앱이 github.com에 접속하지 못하게 막음: 업데이트 확인·하루 사용자 신호가 통계에 잡히지 않게
+      - name: Block github.com for the app
+        run: echo '127.0.0.1 github.com' | sudo tee -a /etc/hosts
+
+      - name: Inspect app
+        working-directory: rel
+        run: |
+          ditto -x -k coin-peek-mac.zip app
+          APP=$(ls -d app/*.app)
+          BIN="$APP/Contents/MacOS/$(defaults read "$PWD/$APP/Contents/Info" CFBundleExecutable)"
+          echo "APP=$PWD/$APP" >> "$GITHUB_ENV"
+          echo "BIN=$PWD/$BIN" >> "$GITHUB_ENV"
+          ARCHS=$(lipo -archs "$BIN"); echo "archs: $ARCHS"
+          [[ "$ARCHS" == *arm64* && "$ARCHS" == *x86_64* ]] || { echo 'not universal'; exit 1; }
+          codesign --verify --deep --strict --verbose=2 "$APP"
+          codesign -dv "$APP" 2>&1 | grep -E 'Signature=adhoc|Identifier'
+          [ "$(defaults read "$PWD/$APP/Contents/Info" LSUIElement)" = 1 ] || { echo 'LSUIElement missing'; exit 1; }
+          ls "$APP"/Contents/Resources/app.asar.unpacked/resources/trayTemplate*.png || { echo 'tray icon missing'; exit 1; }
+          grep -q "$(defaults read "$PWD/$APP/Contents/Info" CFBundleShortVersionString)" latest-mac.yml || { echo 'version mismatch with latest-mac.yml'; exit 1; }
+          # 공증이 없으므로 Gatekeeper 거부가 정상. 참고용 출력
+          spctl -a -vv "$APP" || true
+
+      - name: Inspect dmg
+        working-directory: rel
+        run: |
+          MNT=$(hdiutil attach -nobrowse -readonly coin-peek-mac.dmg | awk -F'\t' '/\/Volumes\//{print $NF}')
+          ls -la "$MNT"
+          ls -d "$MNT"/*.app && [ -L "$MNT/Applications" ]
+          hdiutil detach "$MNT"
+
+      # 실패 시 출력 끝부분을 오류 주석으로 남김 (로그 없이도 원인 확인)
+      - name: Run packaged app
+        run: |
+          set -o pipefail
+          if ! SMOKE_APP="$BIN" SMOKE_SHOTS="$PWD/shots" node scripts/native-smoke.cjs 2>&1 | tee smoke.log; then
+            tail -c 12000 smoke.log | node -e "const s=require('fs').readFileSync(0,'utf8');console.log('::error title=Packaged app smoke ($(uname -m))::'+s.replace(/%/g,'%25').replace(/\\r/g,'%0D').replace(/\\n/g,'%0A'))"
+            exit 1
+          fi
+
+      # 사용자처럼 Finder 방식(open)으로 실행: Dock에 안 뜨는지(UIElement) 확인 + 화면 저장
+      - name: Dock check (open)
+        run: |
+          pkill -f "$BIN" || true
+          open -n "$APP"
+          sleep 10
+          INFO=$(lsappinfo info -only ApplicationType -app "$(defaults read "$APP/Contents/Info" CFBundleIdentifier)")
+          echo "$INFO"
+          mkdir -p shots && screencapture -x shots/screen-open.png || true
+          pkill -f "$BIN" || true
+          echo "$INFO" | grep -q UIElement || { echo "::error title=Dock ($(uname -m))::Dock에 앱이 표시됨: $INFO"; exit 1; }
+
+      # 앱이 직접 그린 패널(언어별)과 전체 화면을 ci-screens 브랜치 <태그>/<arm64|x86_64>/에 올림
+      - name: Publish screenshots
+        if: always() && hashFiles('shots/*.png') != ''
+        run: |
+          sudo sed -i '' '/github.com/d' /etc/hosts
+          DEST="$TAG/$(uname -m)"
+          # git 대신 REST API로 파일마다 올림 (두 맥이 동시에 올려도 충돌 없음)
+          for f in shots/*.png; do
+            P="$DEST/$(basename "$f")"
+            SHA=$(gh api "repos/${{ github.repository }}/contents/$P?ref=ci-screens" --jq .sha 2>/dev/null || true)
+            node -e "const fs=require('fs');const b={message:'screens: '+process.argv[1],branch:'ci-screens',content:fs.readFileSync(process.argv[2]).toString('base64')};if(process.argv[3])b.sha=process.argv[3];fs.writeFileSync('body.json',JSON.stringify(b))" "$P" "$f" "$SHA"
+            for i in 1 2 3 4 5; do gh api -X PUT "repos/${{ github.repository }}/contents/$P" --input body.json --jq .content.path && break; sleep $((i * 2)); done
+          done
+          echo "https://github.com/${{ github.repository }}/tree/ci-screens/$DEST" >> "$GITHUB_STEP_SUMMARY"

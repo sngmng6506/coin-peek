@@ -1,0 +1,28 @@
+name: Check
+
+# 번역 키가 빠진 곳이 없는지.
+# 단위 테스트(tests/)도 여기서. 앱 코드 lint·빌드는 release.yml이 담당.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/check-i18n.mjs'
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - '.github/workflows/check.yml'
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run lint -- --max-warnings 0
+      - run: npm run build
+      - run: npm test
+      - run: node scripts/check-i18n.mjs

@@ -1,0 +1,43 @@
+name: Native app smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/native-smoke.yml'
+      - 'scripts/native-smoke.cjs'
+      - 'src/**'
+      - 'data/**'
+      - 'resources/**'
+      - 'build/**'
+      - 'package*.json'
+      - 'electron-builder.yml'
+      - 'electron.vite.config.*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  app:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      # 실패 시 출력 끝부분을 오류 주석으로 남김 (로그 없이도 원인 확인)
+      - name: Smoke
+        shell: bash
+        run: |
+          set -o pipefail
+          if ! node scripts/native-smoke.cjs 2>&1 | tee smoke.log; then
+            tail -c 12000 smoke.log | node -e "const s=require('fs').readFileSync(0,'utf8');console.log('::error title=Native smoke (${{ matrix.os }})::'+s.replace(/%/g,'%25').replace(/\\r/g,'%0D').replace(/\\n/g,'%0A'))"
+            exit 1
+          fi

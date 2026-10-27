@@ -1,0 +1,60 @@
+name: Download badge
+
+# 매일: README 다운로드 배지 + 사용 추이(usage.csv)를 badges 브랜치에 기록.
+# 배지는 설치 파일(.exe·.dmg)만 합산 — latest.yml 등은 앱이 업데이트 확인 때 받아가서 부풀려짐.
+# usage.csv는 관측 간 ping 다운로드 증가분과 실제 관측 시각을 기록 (scripts/download_stats.py).
+# stats-state.json은 자산별 마지막 수와 누적 합계를 보존해 오래된 파일 삭제에도 수치가 감소하지 않게 함.
+# date는 관측 종료일(UTC)이며, 정확한 집계 구간은 period_start_utc~period_end_utc.
+# badges 브랜치만 바뀌므로 main 기록·릴리즈·웹사이트 배포에 영향 없음.
+on:
+  schedule:
+    - cron: '17 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: download-badge
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          path: main
+
+      - name: Check out badges branch (keeps usage history)
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          if git ls-remote --exit-code --heads "$url" badges >/dev/null; then
+            git clone -q --depth 1 --branch badges "$url" badges
+          else
+            mkdir badges && git -C badges init -q -b badges && git -C badges remote add origin "$url"
+          fi
+
+      - name: Update badge and usage
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --paginate --slurp "repos/${{ github.repository }}/releases?per_page=100" \
+            | python3 main/scripts/download_stats.py badges
+          cat badges/downloads.json
+          tail -3 badges/usage.csv
+
+      - name: Push badges branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd badges
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add downloads.json usage.csv stats-state.json
+          git diff --cached --quiet && exit 0
+          git commit -qm "stats: $(date -u +%F)"
+          git push -q origin HEAD:badges
