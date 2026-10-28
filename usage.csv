@@ -1,2 +1,3 @@
 date,period_start_utc,period_end_utc,daily_users,daily_users_win,daily_users_mac,ping_win_total,ping_mac_total,update_checks_total,installer_downloads_total,update_checks_day,installer_downloads_day,active_users_estimate
 2026-10-27,,2026-10-27T09:39:16Z,,,,0,0,4,17,,,
+2026-10-28,2026-10-27T09:39:16Z,2026-10-28T05:52:01Z,0,0,0,0,0,8,30,4,13,0
