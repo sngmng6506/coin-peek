@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
 
+// 화면(renderer)이 쓸 수 있는 IPC 전부. 채널을 바꾸면 docs/IPC.md도 함께 수정
 const api = {
   startPanelResize: (axis) => ipcRenderer.send('panel:resize-start', axis),
   endPanelResize: () => ipcRenderer.send('panel:resize-end'),
@@ -10,19 +10,17 @@ const api = {
     ipcRenderer.on('panel:resize-ended', handler)
     return () => ipcRenderer.off('panel:resize-ended', handler)
   },
-  getStocks: () => ipcRenderer.invoke('stocks:get-cache'),
-  refreshStocks: () => ipcRenderer.invoke('stocks:refresh'),
-  onStocksUpdate: (cb) => {
+  getQuotes: () => ipcRenderer.invoke('quotes:get-cache'),
+  refreshQuotes: () => ipcRenderer.invoke('quotes:refresh'),
+  onQuotesUpdate: (cb) => {
     const handler = (_e, data) => cb(data)
-    ipcRenderer.on('stocks:update', handler)
-    return () => ipcRenderer.off('stocks:update', handler)
+    ipcRenderer.on('quotes:update', handler)
+    return () => ipcRenderer.off('quotes:update', handler)
   },
   checkWelcome: () => ipcRenderer.invoke('welcome:check'),
   dismissWelcome: () => ipcRenderer.invoke('welcome:dismiss'),
-  panelLock: () => ipcRenderer.send('panel:lock'),
-  panelUnlock: () => ipcRenderer.send('panel:unlock'),
   setPanelHeight: (h) => ipcRenderer.send('panel:set-height', h),
-  addStock: (market, symbol, holding) =>
+  addCoin: (market, symbol, holding) =>
     ipcRenderer.invoke('watchlist:add', { market, symbol, ...(holding || {}) }),
   updateHolding: (market, symbol, holding) =>
     ipcRenderer.invoke('watchlist:update-holding', {
@@ -30,9 +28,9 @@ const api = {
       symbol,
       ...(holding || {})
     }),
-  searchStocks: (market, keyword) => ipcRenderer.invoke('search:stocks', { market, keyword }),
-  removeStock: (market, symbol) => ipcRenderer.invoke('watchlist:remove', { market, symbol }),
-  reorderStocks: (items) => ipcRenderer.invoke('watchlist:reorder', items),
+  searchCoins: (market, keyword) => ipcRenderer.invoke('search:coins', { market, keyword }),
+  removeCoin: (market, symbol) => ipcRenderer.invoke('watchlist:remove', { market, symbol }),
+  reorderCoins: (items) => ipcRenderer.invoke('watchlist:reorder', items),
   getUpdate: () => ipcRenderer.invoke('app:get-update'),
   checkUpdate: () => ipcRenderer.invoke('app:check-update'),
   installUpdate: () => ipcRenderer.send('app:install-update'),
@@ -68,14 +66,5 @@ const api = {
   }
 }
 
-if (process.contextIsolated) {
-  try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
-  } catch (error) {
-    console.error(error)
-  }
-} else {
-  window.electron = electronAPI
-  window.api = api
-}
+// sandbox 창이라 preload는 electron 모듈만 쓸 수 있다. 화면에는 이 api만 노출
+contextBridge.exposeInMainWorld('api', api)

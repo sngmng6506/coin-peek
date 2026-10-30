@@ -1,6 +1,7 @@
 import { finiteNumber, positivePrice } from './numbers.js'
 import { createBatcher } from './batch.js'
 import { rankMatches } from './search.js'
+import { notListed } from './errors.js'
 
 // 업비트 KRW 마켓. 키 없는 공개 시세 API (IP당 초당 10회 → 시세는 묶음 조회).
 // 등락률은 업비트 기준 전일 종가(한국 시간 0시) 대비.
@@ -71,7 +72,7 @@ export function createUpbitProvider({ fetchJson, now = () => Date.now() }) {
   const loadTicker = createBatcher(async (symbols) => {
     const res = await fetchJson(TICKER_URL(symbols.map(toMarket)), { headers })
     // 없는 마켓이 섞이면 400/404 → batcher가 하나씩 다시 조회. 단건 400/404 = 없는 코인
-    if (res.status === 400 || res.status === 404) throw new Error('Upbit ticker: market not found')
+    if (res.status === 400 || res.status === 404) throw notListed('Upbit ticker')
     if (!res.ok) throw new Error(`Upbit ticker: ${res.status}`)
     const out = new Map()
     for (const t of Array.isArray(res.data) ? res.data : []) out.set(fromMarket(t.market), t)

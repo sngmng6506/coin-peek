@@ -26,7 +26,7 @@ import {
   subscribe,
   refreshAll,
   reorderCache
-} from './stockService.js'
+} from './quoteService.js'
 import { addItem, removeItem, reorderWatchlist, seedWatchlist, updateHolding } from './watchlist.js'
 import { getProvider } from './markets/index.js'
 import { eFetch } from './markets/http.js'
@@ -474,6 +474,11 @@ function createIndicatorWindow() {
   indicatorWindow.loadURL(`data:text/html;charset=utf-8,${encodeURIComponent(INDICATOR_HTML)}`)
 }
 
+// 화면에서 오는 주소는 웹·메일 링크만 연다 (file:, 앱 실행 프로토콜 등 차단)
+function openExternalSafe(url) {
+  if (typeof url === 'string' && /^(https?:\/\/|mailto:)/i.test(url)) shell.openExternal(url)
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: currentGeometry().width,
@@ -494,7 +499,7 @@ function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: true
     }
   })
 
@@ -543,7 +548,7 @@ function createWindow() {
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
-    shell.openExternal(details.url)
+    openExternalSafe(details.url)
     return { action: 'deny' }
   })
 
@@ -706,15 +711,8 @@ app.whenReady().then(() => {
     Menu.setApplicationMenu(Menu.buildFromTemplate([{ role: 'appMenu' }, { role: 'editMenu' }]))
   }
 
-  ipcMain.handle('stocks:get-cache', () => getCache())
-  ipcMain.handle('stocks:refresh', () => refreshAll({ force: true }))
-
-  ipcMain.on('panel:lock', () => {
-    panelLocked = true
-  })
-  ipcMain.on('panel:unlock', () => {
-    panelLocked = false
-  })
+  ipcMain.handle('quotes:get-cache', () => getCache())
+  ipcMain.handle('quotes:refresh', () => refreshAll({ force: true }))
 
   ipcMain.on('panel:resize-start', (_e, axis) => beginPanelResize(axis))
   ipcMain.on('panel:resize-end', () => {
@@ -763,23 +761,22 @@ app.whenReady().then(() => {
     refreshTrayMenu()
     return app.getLoginItemSettings().openAtLogin
   })
-  ipcMain.on('shell:open-external', (_e, url) => {
-    if (typeof url === 'string' && /^(https?:\/\/|mailto:)/.test(url)) {
-      shell.openExternal(url)
-    }
-  })
+  ipcMain.on('shell:open-external', (_e, url) => openExternalSafe(url))
 
-  ipcMain.handle('watchlist:add', async (_e, { market, symbol, quantity, avgPrice }) => {
+  ipcMain.handle('watchlist:add', async (_e, { market, symbol, quantity, avgPrice } = {}) => {
     const list = addItem(market, symbol, { quantity, avgPrice })
     refreshAll()
     return list
   })
-  ipcMain.handle('watchlist:update-holding', async (_e, { market, symbol, quantity, avgPrice }) => {
-    const list = updateHolding(market, symbol, { quantity, avgPrice })
-    refreshAll()
-    return list
-  })
-  ipcMain.handle('watchlist:remove', async (_e, { market, symbol }) => {
+  ipcMain.handle(
+    'watchlist:update-holding',
+    async (_e, { market, symbol, quantity, avgPrice } = {}) => {
+      const list = updateHolding(market, symbol, { quantity, avgPrice })
+      refreshAll()
+      return list
+    }
+  )
+  ipcMain.handle('watchlist:remove', async (_e, { market, symbol } = {}) => {
     const list = removeItem(market, symbol)
     refreshAll()
     return list
@@ -797,11 +794,17 @@ app.whenReady().then(() => {
     panelLocked = false
     return true
   })
-  ipcMain.handle('search:stocks', async (_e, { market, keyword }) => {
+  ipcMain.handle('search:coins', async (_e, { market, keyword } = {}) => {
     const kw = String(keyword || '').trim()
     if (!kw) return []
     const provider = getProvider(market)
-    return provider ? await provider.search(kw) : []
+    if (!provider) return []
+    try {
+      return await provider.search(kw)
+    } catch (e) {
+      console.error('search failed:', e)
+      throw new Error('ERR_SEARCH_FAILED')
+    }
   })
 
   ipcMain.handle('dock:get-edge', () => getDock().edge)
@@ -868,7 +871,7 @@ app.whenReady().then(() => {
 
   subscribe((data) => {
     if (mainWindow && !mainWindow.isDestroyed()) {
-      mainWindow.webContents.send('stocks:update', data)
+      mainWindow.webContents.send('quotes:update', data)
     }
   })
 })

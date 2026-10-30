@@ -15,11 +15,11 @@ import {
   useSortable
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import StockCard from './components/StockCard'
+import CoinCard from './components/CoinCard'
 import ResizeHandles from './components/ResizeHandles'
 import { PANEL_BASE_WIDTH } from '../../shared/panelSize.js'
 import Icon from './components/Icon'
-import AddStockModal from './components/AddStockModal'
+import AddCoinModal from './components/AddCoinModal'
 import SettingsModal from './components/SettingsModal'
 import WelcomeModal from './components/WelcomeModal'
 import HoldingEditModal from './components/HoldingEditModal'
@@ -29,9 +29,9 @@ import { marketOrder } from '../../shared/markets.js'
 const idOf = (s) => `${s.market}-${s.symbol}`
 
 // 시장별 묶음 (화면 언어의 기본 시장 먼저, 나머지는 markets.js 순서). 같은 시장 안은 저장 순서
-function groupByMarket(stocks, lang) {
+function groupByMarket(coins, lang) {
   const byMarket = new Map()
-  for (const s of stocks) {
+  for (const s of coins) {
     if (!byMarket.has(s.market)) byMarket.set(s.market, [])
     byMarket.get(s.market).push(s)
   }
@@ -40,9 +40,9 @@ function groupByMarket(stocks, lang) {
     .map(([market, items]) => ({ market, items }))
 }
 
-function SortableCard({ stock, onRemove, onEditHolding }) {
+function SortableCard({ coin, onRemove, onEditHolding }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: idOf(stock)
+    id: idOf(coin)
   })
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -52,7 +52,7 @@ function SortableCard({ stock, onRemove, onEditHolding }) {
   }
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <StockCard stock={stock} onRemove={onRemove} onEditHolding={onEditHolding} />
+      <CoinCard coin={coin} onRemove={onRemove} onEditHolding={onEditHolding} />
     </div>
   )
 }
@@ -68,7 +68,7 @@ function App() {
     window.addEventListener('resize', update)
     return () => window.removeEventListener('resize', update)
   }, [])
-  const [stocks, setStocks] = useState([])
+  const [coins, setCoins] = useState([])
   const [showAdd, setShowAdd] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
   const [showWelcome, setShowWelcome] = useState(false)
@@ -90,12 +90,12 @@ function App() {
 
   useEffect(() => {
     window.api
-      .getStocks()
+      .getQuotes()
       .then((data) => {
-        if (Array.isArray(data) && data.length) setStocks(data)
+        if (Array.isArray(data) && data.length) setCoins(data)
       })
       .catch(() => {})
-    const unsub = window.api.onStocksUpdate((data) => setStocks(data))
+    const unsub = window.api.onQuotesUpdate((data) => setCoins(data))
     window.api
       .checkWelcome()
       .then((shouldShow) => {
@@ -163,14 +163,14 @@ function App() {
   }, [showAdd, showSettings, showWelcome, editingHolding])
 
   const handleAdd = async (market, symbol, holding) => {
-    await window.api.addStock(market, symbol, holding)
+    await window.api.addCoin(market, symbol, holding)
   }
 
-  const handleRemove = async (stock) => {
-    await window.api.removeStock(stock.market, stock.symbol)
+  const handleRemove = async (coin) => {
+    await window.api.removeCoin(coin.market, coin.symbol)
   }
 
-  const handleEditHolding = (stock) => setEditingHolding(stock)
+  const handleEditHolding = (coin) => setEditingHolding(coin)
 
   const handleSaveHolding = async (holding) => {
     if (!editingHolding) return
@@ -181,7 +181,7 @@ function App() {
     if (refreshing) return
     setRefreshing(true)
     try {
-      await window.api.refreshStocks()
+      await window.api.refreshQuotes()
     } finally {
       setTimeout(() => setRefreshing(false), 400)
     }
@@ -194,26 +194,26 @@ function App() {
     setSorting(false)
     const { active, over } = event
     if (!over || active.id === over.id) return
-    const marketA = stocks.find((s) => idOf(s) === active.id)?.market
-    const marketB = stocks.find((s) => idOf(s) === over.id)?.market
+    const marketA = coins.find((s) => idOf(s) === active.id)?.market
+    const marketB = coins.find((s) => idOf(s) === over.id)?.market
     // 순서 변경은 같은 시장 안에서만
     if (!marketA || marketA !== marketB) return
 
-    const groupA = stocks.filter((s) => s.market === marketA)
+    const groupA = coins.filter((s) => s.market === marketA)
     const oldIndex = groupA.findIndex((s) => idOf(s) === active.id)
     const newIndex = groupA.findIndex((s) => idOf(s) === over.id)
     if (oldIndex < 0 || newIndex < 0) return
     const reordered = arrayMove(groupA, oldIndex, newIndex)
 
-    const next = groupByMarket(stocks, lang).flatMap((g) =>
+    const next = groupByMarket(coins, lang).flatMap((g) =>
       g.market === marketA ? reordered : g.items
     )
-    setStocks(next)
-    window.api.reorderStocks(next.map((s) => ({ market: s.market, symbol: s.symbol })))
+    setCoins(next)
+    window.api.reorderCoins(next.map((s) => ({ market: s.market, symbol: s.symbol })))
   }
 
-  const groups = groupByMarket(stocks, lang)
-  const existingKeys = new Set(stocks.map(idOf))
+  const groups = groupByMarket(coins, lang)
+  const existingKeys = new Set(coins.map(idOf))
 
   return (
     <>
@@ -306,7 +306,7 @@ function App() {
         >
           <div className="cards" ref={cardsRef}>
             <div className="cards-inner" ref={cardsInnerRef}>
-              {stocks.length === 0 ? (
+              {coins.length === 0 ? (
                 <div className="empty-state">
                   <div className="empty-text">{t('app.empty')}</div>
                   <button type="button" className="empty-btn" onClick={() => setShowAdd(true)}>
@@ -325,7 +325,7 @@ function App() {
                         {g.items.map((s) => (
                           <SortableCard
                             key={idOf(s)}
-                            stock={s}
+                            coin={s}
                             onRemove={handleRemove}
                             onEditHolding={handleEditHolding}
                           />
@@ -340,7 +340,7 @@ function App() {
         </DndContext>
 
         {showAdd && (
-          <AddStockModal
+          <AddCoinModal
             onClose={() => setShowAdd(false)}
             onAdd={handleAdd}
             existingKeys={existingKeys}
@@ -350,7 +350,7 @@ function App() {
         {showWelcome && <WelcomeModal onClose={() => setShowWelcome(false)} />}
         {editingHolding && (
           <HoldingEditModal
-            stock={editingHolding}
+            coin={editingHolding}
             onClose={() => setEditingHolding(null)}
             onSave={handleSaveHolding}
           />

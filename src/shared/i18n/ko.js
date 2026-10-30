@@ -23,7 +23,7 @@ export default {
   'app.emptyAdd': '+ 코인 추가',
   'help.chart':
     '차트는 최근 90일 일봉입니다. 등락률: 업비트는 전일(0시) 대비, 바이낸스와 bitbank는 24시간 대비.',
-  // StockCard
+  // CoinCard
   'card.remove': '삭제',
   'card.editHolding': '보유 정보 편집',
   'card.stale': '갱신 실패 · 마지막 가격',
@@ -33,10 +33,11 @@ export default {
   'holding.avgPrice': '평단가',
   'holding.qtyPlaceholder': '예: 0.05',
   'holding.save': '저장',
+  'holding.saving': '저장 중…',
   'holding.cancel': '취소',
   'holding.hint': '평단가는 나중에 편집 가능 · 입력 안 해도 OK',
   'holding.clear': '지우기',
-  // AddStockModal
+  // AddCoinModal
   'add.title': '코인 추가',
   'add.searching': '검색 중…',
   'add.noResult': '결과 없음',
@@ -46,13 +47,13 @@ export default {
   'add.back': '← 뒤로',
   'add.skip': '건너뛰기',
   'add.add': '추가',
+  'add.adding': '추가 중…',
   'add.close': '닫기',
   'add.searchPlaceholder.UPBIT': '예: 비트코인, Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': '예: BTC, SOL',
   'add.searchPlaceholder.BITBANK': '예: BTC, XRP',
   'add.alreadyAdded': '이미 추가됨',
   'add.alreadyAddedTitle': '이미 추가된 코인',
-  'add.searchFail': '검색 실패',
   // SettingsModal
   'settings.title': '설정',
   'settings.autostart': '컴퓨터를 켤 때 자동 실행',
@@ -96,7 +97,6 @@ export default {
   'error.ERR_NOT_LISTED': '조회할 수 없는 코인이에요. 상장폐지나 거래 중단일 수 있어요',
   'error.ERR_FETCH': '시세를 불러오지 못했어요',
   // 시세 지연 표시
-  'card.delayed': '{n}분 지연',
   // 트레이·알림 (main 프로세스)
   'tray.autostart': '자동 시작',
   'tray.quit': '종료',

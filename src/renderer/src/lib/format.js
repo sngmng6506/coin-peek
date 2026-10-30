@@ -85,7 +85,7 @@ export function examplePrice(marketId) {
 }
 
 // 종목명: 화면 언어가 시장 원어와 같으면 원어 이름(예: 일본어 UI의 トヨタ自動車), 아니면 기본 이름
-export function displayName(stock, lang) {
-  if (stock.localName && stock.localLang === lang) return stock.localName
-  return stock.name || stock.localName || stock.symbol
+export function displayName(coin, lang) {
+  if (coin.localName && coin.localLang === lang) return coin.localName
+  return coin.name || coin.localName || coin.symbol
 }

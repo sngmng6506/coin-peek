@@ -2,7 +2,6 @@ import { getLanguageInfo } from './languages.js'
 
 // 시장 정의 — main(데이터·폴링)과 renderer(표기·탭 순서)가 함께 쓰는 순수 데이터.
 // 시장 추가: 여기에 항목 하나 + src/main/markets/index.js에 provider 연결 + 번역 키(market.<ID> 등).
-// 코인 시장은 alwaysOpen(24시간 거래)이라 장 시간 대신 항상 빠른 폴링.
 // autoDecimals: 가격 크기에 따라 소수 자릿수를 늘림 (0.00001234 같은 소액 코인).
 // localLang: 원어 종목명 언어 (업비트 한글 이름, bitbank 일본어 이름).
 // 심볼은 기준 통화를 뺀 코인 티커만 저장 (BTC). 기준 통화는 시장이 정함 (KRW, USDT).
@@ -22,7 +21,6 @@ export const MARKETS = [
     quote: 'KRW',
     decimals: 0,
     autoDecimals: true,
-    alwaysOpen: true,
     localLang: 'ko', // 업비트 korean_name
     examplePrice: 150000000,
     symbolPattern: COIN_SYMBOL,
@@ -36,7 +34,6 @@ export const MARKETS = [
     quote: 'USDT',
     decimals: 2,
     autoDecimals: true,
-    alwaysOpen: true,
     examplePrice: 100000,
     symbolPattern: COIN_SYMBOL,
     // 'BTCUSDT', 'btc' → 'BTC'
@@ -48,7 +45,6 @@ export const MARKETS = [
     quote: 'JPY',
     decimals: 0,
     autoDecimals: true,
-    alwaysOpen: true,
     localLang: 'ja', // 일본어 코인 이름 (주요 코인만)
     examplePrice: 12000000,
     symbolPattern: COIN_SYMBOL,
@@ -74,43 +70,4 @@ export function marketOrder(id, lang) {
 
 export function marketsFor(lang) {
   return [...MARKETS].sort((a, b) => marketOrder(a.id, lang) - marketOrder(b.id, lang))
-}
-
-const WEEKDAY = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 }
-const formatters = new Map()
-
-function localClock(timeZone, now) {
-  let f = formatters.get(timeZone)
-  if (!f) {
-    f = new Intl.DateTimeFormat('en-US', {
-      timeZone,
-      weekday: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
-      hourCycle: 'h23'
-    })
-    formatters.set(timeZone, f)
-  }
-  const parts = Object.fromEntries(f.formatToParts(now).map((p) => [p.type, p.value]))
-  return {
-    weekday: WEEKDAY[parts.weekday],
-    minutes: Number(parts.hour) * 60 + Number(parts.minute)
-  }
-}
-
-const toMinutes = (hhmm) => {
-  const [h, m] = hhmm.split(':').map(Number)
-  return h * 60 + m
-}
-
-// 정규장 여부 (현지 시간대 기준, 서머타임 자동 반영). 공휴일은 판단하지 않음.
-export function isMarketOpen(market, now = new Date()) {
-  const m = typeof market === 'string' ? getMarket(market) : market
-  if (!m) return false
-  if (m.alwaysOpen) return true
-  const { weekday, minutes } = localClock(m.timeZone, now)
-  if (!m.weekdays.includes(weekday)) return false
-  return m.sessions.some(
-    ([open, close]) => minutes >= toMinutes(open) && minutes < toMinutes(close)
-  )
 }

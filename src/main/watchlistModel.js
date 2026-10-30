@@ -51,6 +51,6 @@ export function reorderItems(current, order) {
     seen.add(id)
     next.push(byKey.get(id))
   }
-  // A stale renderer must not remove a stock that was added in the meantime.
+  // A stale renderer must not remove a coin that was added in the meantime.
   return [...next, ...current.filter((item) => !seen.has(key(item)))]
 }

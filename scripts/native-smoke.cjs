@@ -97,20 +97,20 @@ const probe = `(async () => {
   while ((!window.api || !document.querySelector('.panel')) && Date.now() < until)
     await new Promise(resolve => setTimeout(resolve, 100));
   if (!window.api) throw new Error('Preload API unavailable');
-  const up = await window.api.searchStocks('UPBIT', '비트코인');
-  const bn = await window.api.searchStocks('BINANCE', 'sol');
+  const up = await window.api.searchCoins('UPBIT', '비트코인');
+  const bn = await window.api.searchCoins('BINANCE', 'sol');
   if (!up.some(item => item.symbol === 'BTC')) throw new Error('Upbit search failed');
   if (!bn.some(item => item.symbol === 'SOL')) throw new Error('Binance search failed');
-  await window.api.addStock('UPBIT', 'XRP', { quantity: 10, avgPrice: 2000 });
-  await window.api.addStock('BINANCE', 'DOGE');
-  let quotes = await window.api.refreshStocks();
-  const reordered = await window.api.reorderStocks(quotes.map(q => ({market:q.market,symbol:q.symbol})).reverse());
+  await window.api.addCoin('UPBIT', 'XRP', { quantity: 10, avgPrice: 2000 });
+  await window.api.addCoin('BINANCE', 'DOGE');
+  let quotes = await window.api.refreshQuotes();
+  const reordered = await window.api.reorderCoins(quotes.map(q => ({market:q.market,symbol:q.symbol})).reverse());
   if (reordered.find(q => q.symbol === 'XRP')?.quantity !== 10) throw new Error('Reorder erased holding');
   let rejected = false;
   try { await window.api.updateHolding('UPBIT', 'XRP', {quantity:-1, avgPrice:2000}); }
   catch { rejected = true; }
   if (!rejected) throw new Error('Invalid holding accepted');
-  quotes = await window.api.refreshStocks();
+  quotes = await window.api.refreshQuotes();
   if (quotes.find(q => q.symbol === 'XRP')?.quantity !== 10) throw new Error('Invalid edit erased holding');
   // Dismiss welcome in both React and main before exercising settings.
   document.querySelector('.welcome-modal .modal-actions button')?.click();
@@ -271,8 +271,8 @@ async function screenshots(mainUrl, dir) {
     await rendererTarget(),
     `(async () => {
     for (const [m, s] of [['UPBIT','BTC'], ['BINANCE','ETH']])
-      await window.api.addStock(m, s).catch(() => {});
-    await window.api.refreshStocks();
+      await window.api.addCoin(m, s).catch(() => {});
+    await window.api.refreshQuotes();
   })()`
   )
   const saved = []

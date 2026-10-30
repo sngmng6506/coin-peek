@@ -26,12 +26,14 @@
 
 ## 문서
 
-| 문서                       | 내용                  |
-| -------------------------- | --------------------- |
-| [AGENTS.md](AGENTS.md)     | 개발·릴리즈·배포 규칙 |
-| [PRIVACY.md](PRIVACY.md)   | 개인정보·데이터 처리  |
-| [SECURITY.md](SECURITY.md) | 보안 취약점 제보      |
-| [LICENSE](LICENSE)         | MIT                   |
+| 문서                                 | 내용                         |
+| ------------------------------------ | ---------------------------- |
+| [AGENTS.md](AGENTS.md)               | 개발·릴리즈·배포 규칙        |
+| [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) | 색상·글꼴·간격·컴포넌트 기준 |
+| [docs/IPC.md](docs/IPC.md)           | 화면↔본체 IPC 명세           |
+| [PRIVACY.md](PRIVACY.md)             | 개인정보·데이터 처리         |
+| [SECURITY.md](SECURITY.md)           | 보안 취약점 제보             |
+| [LICENSE](LICENSE)                   | MIT                          |
 
 ## 라이선스·문의
 

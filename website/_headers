@@ -3,3 +3,9 @@
   Content-Type: text/plain; charset=utf-8
 /robots.txt
   Content-Type: text/plain; charset=utf-8
+
+# 모든 페이지: 파일 형식 추측 금지, 다른 사이트로 전체 주소 안 보냄, 다른 사이트의 프레임 안에 넣기 금지
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY

@@ -23,7 +23,7 @@ export default {
   'app.emptyAdd': '+ Add coin',
   'help.chart':
     'Charts show the last 90 days of daily prices. Change: Upbit vs. previous close (00:00 KST), Binance and bitbank vs. 24 hours ago.',
-  // StockCard
+  // CoinCard
   'card.remove': 'Remove',
   'card.editHolding': 'Edit holding',
   'card.stale': 'Update failed · last price',
@@ -33,10 +33,11 @@ export default {
   'holding.avgPrice': 'Avg. Price',
   'holding.qtyPlaceholder': 'e.g. 0.05',
   'holding.save': 'Save',
+  'holding.saving': 'Saving…',
   'holding.cancel': 'Cancel',
   'holding.hint': 'You can edit this later · Optional',
   'holding.clear': 'Clear',
-  // AddStockModal
+  // AddCoinModal
   'add.title': 'Add Coin',
   'add.searching': 'Searching…',
   'add.noResult': 'No results',
@@ -46,13 +47,13 @@ export default {
   'add.back': '← Back',
   'add.skip': 'Skip',
   'add.add': 'Add',
+  'add.adding': 'Adding…',
   'add.close': 'Close',
   'add.searchPlaceholder.UPBIT': 'e.g. Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': 'e.g. BTC, SOL',
   'add.searchPlaceholder.BITBANK': 'e.g. BTC, XRP',
   'add.alreadyAdded': 'Already added',
   'add.alreadyAddedTitle': 'Already in watchlist',
-  'add.searchFail': 'Search failed',
   // SettingsModal
   'settings.title': 'Settings',
   'settings.autostart': 'Launch at login',
@@ -96,7 +97,6 @@ export default {
   'error.ERR_NOT_LISTED': "Can't find this coin. It may be delisted or trading may be suspended",
   'error.ERR_FETCH': "Couldn't load the price",
   // Quote delay label
-  'card.delayed': '{n} min delay',
   // Tray and notifications (main process)
   'tray.autostart': 'Launch at login',
   'tray.quit': 'Quit',

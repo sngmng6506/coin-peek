@@ -32,11 +32,13 @@ src/shared/languages.js   지원 언어 (코드·로케일·방향·시장 순�
 src/shared/i18n/          언어별 번역 (ko.js가 키 기준) — main·renderer 공용
 src/main/markets/         거래소 provider (upbit.js, binance.js, bitbank.js 팩토리, batch.js 같은 틱 시세 묶음 조회, search.js 목록 검색 순위, index.js 등록)
 src/main/index.js         창·트레이·IPC 핸들러·자동 업데이트
-src/main/stockService.js  폴링, lastGood 캐시, 시세·보유 병합
+src/main/quoteService.js  폴링·구독 (시세 조회는 quoteFetcher.js: lastGood 캐시, stale, 재시도 대기, 시세·보유 병합)
 src/main/watchlist.js     관심종목 CRUD (검증은 markets.js 규칙). 첫 실행 기본 목록은 화면 언어별 `watchlistModel.js` `defaultItems`
 src/main/preferences.js   도킹·언어·welcome 설정
 src/preload/index.js      contextBridge IPC 화이트리스트
-src/renderer/src/         App.jsx, components/, i18n/ (Provider), lib/ (금액 포맷·오류 번역)
+src/renderer/src/         App.jsx, components/ (모달은 Dialog.jsx 공통), i18n/ (Provider), lib/ (금액 포맷·오류 번역)
+docs/IPC.md               화면↔본체 IPC 명세 (채널·입출력·오류 코드)
+DESIGN_SYSTEM.md          앱·웹 색상 토큰·글꼴·간격·컴포넌트 기준
 site/                     웹사이트 원본 (site.json, strings/<lang>.json, pages/<lang>/<page>.html, llms.md)
 website/                  생성 결과 — HTML·sitemap·llms.txt 직접 수정 금지 (demo.js, style.css, robots.txt, 이미지는 직접)
 scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, native-smoke.cjs, download_stats.py
@@ -48,10 +50,12 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 - 시장·언어 하드코딩 금지: `'KR'`, `'원'`, `'ko-KR'` 같은 분기 대신 `src/shared/` 레지스트리와 `lib/format.js` 사용
 - 시세 병합: `{...quote, ...holding}` 순서 유지. 사용자 입력(수량·평단)이 API 값에 덮이면 안 됨
 - 네트워크 실패: `lastGood` 값 유지 + stale 표시
-- 폴링: 코인 시장은 `alwaysOpen`이라 항상 3초. 시세는 거래소별로 한 번에 묶어 조회(`batch.js`, 업비트 IP당 초당 10회 제한). 묶음이 실패하면 심볼별로 다시 조회해 문제 코인만 오류 처리. 차트(90일 일봉) 10분 캐시
+- 폴링: 코인은 24시간 거래라 항상 3초. 시세는 거래소별로 한 번에 묶어 조회(`batch.js`, 업비트 IP당 초당 10회 제한). 없는 코인은 provider가 `notListed()`(`ERR_NOT_LISTED`)로 던지고, 묶음이 이 오류로 실패할 때만 심볼별로 다시 조회해 문제 코인만 오류 처리. 요청 제한·네트워크 오류는 다시 조회하지 않음. 차트(90일 일봉) 10분 캐시
 - 가격 표기: `autoDecimals` 시장은 유효숫자 4자리까지 소수 확장(최대 8자리). USDT는 ISO 통화가 아니라 `currency: 'USD'` + 입력 라벨 `currencyLabel: 'USDT'`
 - 멀티모니터: `displayId` 저장, 해당 모니터 없으면 primary로 폴백
-- IPC 추가: `main/index.js` 핸들러와 `preload/index.js` 화이트리스트 둘 다 수정
+- IPC 추가·변경: `main/index.js` 핸들러, `preload/index.js` 화이트리스트, `docs/IPC.md` 함께 수정. 메인 창은 `sandbox: true`라 preload는 `electron` 모듈만 사용
+- 외부 링크: `openExternalSafe()`로만 연다 (`http(s):`·`mailto:`만 허용)
+- 화면 색·간격: `base.css`의 `--color-*` 토큰 사용. 값·컴포넌트를 바꾸면 `DESIGN_SYSTEM.md` 함께 수정
 - UI 문구: `src/shared/i18n/ko.js`에 키 추가 후 모든 언어 파일에 같은 키. `{v}`·`{n}` 자리표시자는 언어 간 동일
 - main 오류: 문구 대신 코드(`ERR_*`)로 던지고 화면에서 `error.<CODE>`로 번역
 - 미니멀: 기능 추가보다 제거·단순화 우선
@@ -85,7 +89,7 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 - 웹사이트 버전·갱신일: 릴리즈 때 `sync:version`(= `build-site --touch`)이 `site/site.json`과 `website/`를 갱신해 버전 커밋에 포함
 - 웹사이트 수정: `site/` 고치고 `npm run build:site` 후 둘 다 커밋. `website/` 충돌은 손으로 풀지 말고 다시 생성
 - CSS·JS 변경 시 `site/site.json`의 `assetVersion` 올리기 (브라우저 캐시 무효화)
-- 웹 스타일: 흰 종이·잉크, 빨강은 앱 아이콘에만. 제목 나눔고딕코딩(일본어 M PLUS 1 Code, 아랍어 Noto Kufi Arabic), 본문 Gothic A1. 카드·그라데이션·작은 대문자 라벨 같은 템플릿 장식 쓰지 않기. 데모 패널은 앱 화면과 같게 유지. 홈에서는 실제 창 오른쪽 끝에 패널이 나옴(`data-edge`)
+- 웹 스타일: [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) 웹사이트 절. 홈에서는 실제 창 오른쪽 끝에 패널이 나옴(`data-edge`)
 - 언어 자동 이동: 기준 언어 홈(`/`)에서만, 브라우저 언어 기준. 직접 고른 언어는 `localStorage cp-lang`
 
 ## 체크리스트
