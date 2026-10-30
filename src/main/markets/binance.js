@@ -1,6 +1,7 @@
 import { finiteNumber, positivePrice } from './numbers.js'
 import { createBatcher } from './batch.js'
 import { rankMatches } from './search.js'
+import { notListed } from './errors.js'
 
 // 바이낸스 USDT 마켓. 키 없는 공개 시세 API.
 // data-api.binance.vision은 시세 전용 공식 도메인 (api.binance.com이 막힌 지역에서도 열림) → 실패하면 api.binance.com.
@@ -81,7 +82,7 @@ export function createBinanceProvider({ fetchJson, now = () => Date.now() }) {
     const pairs = encodeURIComponent(JSON.stringify(symbols.map(toPair)))
     const res = await get(`/api/v3/ticker/24hr?symbols=${pairs}`)
     // 없는 심볼이 섞이면 400 → batcher가 하나씩 다시 조회
-    if (res.status === 400) throw new Error(`Binance ticker: symbol not found`)
+    if (res.status === 400) throw notListed('Binance ticker')
     if (!res.ok) throw new Error(`Binance ticker: ${res.status}`)
     const out = new Map()
     for (const t of Array.isArray(res.data) ? res.data : []) out.set(fromPair(t.symbol), t)

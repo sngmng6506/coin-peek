@@ -1,7 +1,6 @@
 import Sparkline from './Sparkline'
 import { useI18n } from '../i18n'
 import { displayName, formatMoney, formatNumber, formatRatio } from '../lib/format'
-import { getMarket } from '../../../shared/markets.js'
 
 function profitOf(stock) {
   if (!Number.isFinite(stock.price) || !stock.quantity || !stock.avgPrice) return null
@@ -58,7 +57,6 @@ function StockCard({ stock, onRemove, onEditHolding }) {
   }
 
   const cls = stock.isUp ? 'up' : 'down'
-  const delay = getMarket(stock.market)?.delayMinutes
   const profit = profitOf(stock)
   return (
     <div className="card">
@@ -90,7 +88,6 @@ function StockCard({ stock, onRemove, onEditHolding }) {
         <span className="price">
           {stock.stale && <span className="stale-dot" title={t('card.stale')} />}
           <span className="num">{formatMoney(stock.price, stock.market, lang)}</span>
-          {delay ? <span className="delay">{t('card.delayed', { n: delay })}</span> : null}
         </span>
         <Sparkline prices={stock.prices} isUp={stock.isUp} />
       </div>

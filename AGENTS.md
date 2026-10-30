@@ -48,7 +48,7 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 - 시장·언어 하드코딩 금지: `'KR'`, `'원'`, `'ko-KR'` 같은 분기 대신 `src/shared/` 레지스트리와 `lib/format.js` 사용
 - 시세 병합: `{...quote, ...holding}` 순서 유지. 사용자 입력(수량·평단)이 API 값에 덮이면 안 됨
 - 네트워크 실패: `lastGood` 값 유지 + stale 표시
-- 폴링: 코인 시장은 `alwaysOpen`이라 항상 3초. 시세는 거래소별로 한 번에 묶어 조회(`batch.js`, 업비트 IP당 초당 10회 제한). 묶음이 실패하면 심볼별로 다시 조회해 문제 코인만 오류 처리. 차트(90일 일봉) 10분 캐시
+- 폴링: 코인은 24시간 거래라 항상 3초. 시세는 거래소별로 한 번에 묶어 조회(`batch.js`, 업비트 IP당 초당 10회 제한). 없는 코인은 provider가 `notListed()`(`ERR_NOT_LISTED`)로 던지고, 묶음이 이 오류로 실패할 때만 심볼별로 다시 조회해 문제 코인만 오류 처리. 요청 제한·네트워크 오류는 다시 조회하지 않음. 차트(90일 일봉) 10분 캐시
 - 가격 표기: `autoDecimals` 시장은 유효숫자 4자리까지 소수 확장(최대 8자리). USDT는 ISO 통화가 아니라 `currency: 'USD'` + 입력 라벨 `currencyLabel: 'USDT'`
 - 멀티모니터: `displayId` 저장, 해당 모니터 없으면 primary로 폴백
 - IPC 추가: `main/index.js` 핸들러와 `preload/index.js` 화이트리스트 둘 다 수정

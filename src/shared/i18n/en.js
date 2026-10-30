@@ -96,7 +96,6 @@ export default {
   'error.ERR_NOT_LISTED': "Can't find this coin. It may be delisted or trading may be suspended",
   'error.ERR_FETCH': "Couldn't load the price",
   // Quote delay label
-  'card.delayed': '{n} min delay',
   // Tray and notifications (main process)
   'tray.autostart': 'Launch at login',
   'tray.quit': 'Quit',

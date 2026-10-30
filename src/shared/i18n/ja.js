@@ -96,7 +96,6 @@ export default {
   'error.ERR_NOT_LISTED': '取得できないコインです。上場廃止や取引停止の可能性があります',
   'error.ERR_FETCH': '価格を取得できませんでした',
   // 株価の遅延表示
-  'card.delayed': '{n}分遅延',
   // トレイ・通知（main プロセス）
   'tray.autostart': 'ログイン時に起動',
   'tray.quit': '終了',

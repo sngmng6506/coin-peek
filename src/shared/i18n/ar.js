@@ -95,7 +95,6 @@ export default {
   'error.ERR_NOT_LISTED': 'تعذّر العثور على هذه العملة. ربما أُلغي إدراجها أو أُوقف تداولها',
   'error.ERR_FETCH': 'تعذّر تحميل السعر',
   // Quote delay label
-  'card.delayed': 'متأخر {n} دقيقة',
   // Tray and notifications (main process)
   'tray.autostart': 'التشغيل عند بدء النظام',
   'tray.quit': 'إنهاء',

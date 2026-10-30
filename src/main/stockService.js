@@ -1,10 +1,9 @@
 import { getProvider } from './markets/index.js'
-import { isMarketOpen } from '../shared/markets.js'
+import { isNotListed } from './markets/errors.js'
 import { getItems } from './watchlist.js'
 import { createRefreshCoordinator } from './refreshCoordinator.js'
 
-const REFRESH_FAST = 3_000 // 관심 종목의 시장 중 하나라도 열려 있을 때 (코인은 항상)
-const REFRESH_SLOW = 60_000 // 모두 닫혔을 때
+const REFRESH_INTERVAL = 3_000 // 코인은 24시간 거래라 항상 같은 간격
 const JITTER = 250 // ms, 다중 사용자 호출 분산용
 const CHART_TTL = 600_000 // 차트는 일봉(90일)이라 10분 캐시로 충분
 
@@ -15,13 +14,6 @@ const listeners = new Set()
 
 // 일봉 prices 캐시. key: "UPBIT-BTC", value: { prices, ts }
 const chartCache = new Map()
-
-// 관심 종목이 있는 시장 기준으로 판단 (없는 시장의 장중 여부로 빨리 돌지 않게)
-function anyMarketOpen() {
-  const markets = new Set(getItems().map((i) => i.market))
-  for (const id of markets) if (isMarketOpen(id)) return true
-  return false
-}
 
 // --- Fetch logic --------------------------------------------------
 
@@ -77,8 +69,7 @@ async function fetchOne(item, { force = false } = {}) {
     return withCurrentHolding(quote, item)
   } catch (e) {
     const message = e.message || String(e)
-    const notListed = /\b404\b|no data|not found|empty payload/i.test(message)
-    const errorCode = notListed ? 'ERR_NOT_LISTED' : 'ERR_FETCH'
+    const errorCode = isNotListed(e) ? 'ERR_NOT_LISTED' : 'ERR_FETCH'
     const count = (failures.get(key)?.count || 0) + 1
     failures.set(key, {
       count,
@@ -110,14 +101,13 @@ export const refreshAll = createRefreshCoordinator({
   }
 })
 
-// --- Adaptive scheduling -----------------------------------------
+// --- Scheduling -----------------------------------------
 
 function scheduleNext() {
   if (!polling) return
   if (timer) clearTimeout(timer)
-  const base = anyMarketOpen() ? REFRESH_FAST : REFRESH_SLOW
   const jitter = Math.floor(Math.random() * (JITTER * 2)) - JITTER
-  timer = setTimeout(tick, base + jitter)
+  timer = setTimeout(tick, REFRESH_INTERVAL + jitter)
 }
 
 function tick() {

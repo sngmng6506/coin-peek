@@ -96,7 +96,6 @@ export default {
   'error.ERR_NOT_LISTED': '조회할 수 없는 코인이에요. 상장폐지나 거래 중단일 수 있어요',
   'error.ERR_FETCH': '시세를 불러오지 못했어요',
   // 시세 지연 표시
-  'card.delayed': '{n}분 지연',
   // 트레이·알림 (main 프로세스)
   'tray.autostart': '자동 시작',
   'tray.quit': '종료',

@@ -5,7 +5,8 @@ import { createBinanceProvider } from '../src/main/markets/binance.js'
 import { createBitbankProvider } from '../src/main/markets/bitbank.js'
 import { createBatcher } from '../src/main/markets/batch.js'
 import { rankMatches } from '../src/main/markets/search.js'
-import { getMarket, isMarketOpen } from '../src/shared/markets.js'
+import { isNotListed, notListed } from '../src/main/markets/errors.js'
+import { getMarket } from '../src/shared/markets.js'
 
 const ok = (data) => Promise.resolve({ ok: true, status: 200, data })
 const fail = (status) => Promise.resolve({ ok: false, status })
@@ -19,14 +20,13 @@ test('symbols normalize to the bare coin ticker', () => {
   assert.equal(getMarket('BINANCE').normalizeSymbol('1000SATS'), '1000SATS')
   assert.equal(getMarket('BITBANK').normalizeSymbol('btc_jpy'), 'BTC')
   assert.equal(getMarket('BITBANK').normalizeSymbol('xrp'), 'XRP')
-  assert.ok(isMarketOpen('UPBIT', new Date('2026-10-25T03:00:00Z'))) // 일요일도 장중
 })
 
 test('batcher coalesces same-tick requests and isolates a bad symbol', async () => {
   const calls = []
   const load = createBatcher(async (symbols) => {
     calls.push(symbols)
-    if (symbols.includes('BAD')) throw new Error('404')
+    if (symbols.includes('BAD')) throw notListed('BAD')
     return new Map(symbols.map((s) => [s, { s }]))
   })
   const [a, b, c] = await Promise.allSettled([load('BTC'), load('ETH'), load('BAD')])
@@ -34,6 +34,25 @@ test('batcher coalesces same-tick requests and isolates a bad symbol', async () 
   assert.equal(a.value.s, 'BTC')
   assert.equal(b.value.s, 'ETH')
   assert.equal(c.status, 'rejected')
+  assert.ok(isNotListed(c.reason))
+})
+
+test('batcher does not split a batch that failed for another reason (rate limit, timeout)', async () => {
+  const calls = []
+  const load = createBatcher(async (symbols) => {
+    calls.push(symbols)
+    throw new Error('Upbit ticker: 429')
+  })
+  const results = await Promise.allSettled([load('BTC'), load('ETH'), load('XRP')])
+  assert.equal(calls.length, 1)
+  assert.ok(results.every((r) => r.status === 'rejected' && !isNotListed(r.reason)))
+})
+
+test('batcher reports a symbol missing from the response as not listed', async () => {
+  const load = createBatcher(async () => new Map([['BTC', { s: 'BTC' }]]))
+  const [btc, gone] = await Promise.allSettled([load('BTC'), load('GONE')])
+  assert.equal(btc.value.s, 'BTC')
+  assert.ok(isNotListed(gone.reason))
 })
 
 test('search ranks exact, then prefix, then contains; weight breaks ties', () => {
@@ -108,7 +127,7 @@ test('Upbit search only returns KRW markets', async () => {
   )
 })
 
-test('Binance: falls back to api.binance.com, unknown symbol is "not found"', async () => {
+test('Binance: falls back to api.binance.com, unknown symbol is not listed', async () => {
   const urls = []
   const fetchJson = (url) => {
     urls.push(url)
@@ -137,7 +156,7 @@ test('Binance: falls back to api.binance.com, unknown symbol is "not found"', as
   assert.equal(sol.value.price, 100.5)
   assert.equal(sol.value.changeRatio, -1.47)
   assert.equal(sol.value.isUp, false)
-  assert.match(nope.reason.message, /not found/)
+  assert.ok(isNotListed(nope.reason))
   assert.ok(urls.some((u) => u.startsWith('https://api.binance.com')))
 })
 
@@ -159,7 +178,7 @@ test('Binance search keeps active USDT pairs ranked by volume', async () => {
   )
 })
 
-test('Upbit: unknown market (400 or 404) becomes "not found" without breaking the batch', async () => {
+test('Upbit: unknown market (400 or 404) is not listed without breaking the batch', async () => {
   for (const status of [400, 404]) {
     const upbit = createUpbitProvider({
       fetchJson: (url) => {
@@ -171,7 +190,7 @@ test('Upbit: unknown market (400 or 404) becomes "not found" without breaking th
     })
     const [btc, nope] = await Promise.allSettled([upbit.fetch('BTC'), upbit.fetch('NOPE')])
     assert.equal(btc.value.price, 1)
-    assert.match(nope.reason.message, /not found/)
+    assert.ok(isNotListed(nope.reason))
   }
 })
 
@@ -212,7 +231,7 @@ test('bitbank: one /tickers_jpy call for many coins, change vs 24h open, Japanes
   assert.equal(btc.value.localName, 'ビットコイン')
   assert.equal(xrp.value.isUp, false)
   assert.equal(bch.value.name, 'Bitcoin Cash')
-  assert.match(nope.reason.message, /not found/)
+  assert.ok(isNotListed(nope.reason))
   // 올해 캔들이 90개 미만이면 작년 것도 가져와 이어 붙임
   await tick()
   assert.ok(urls.some((u) => u.endsWith('/btc_jpy/candlestick/1day/2026')))

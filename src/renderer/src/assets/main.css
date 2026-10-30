@@ -607,7 +607,7 @@ body,
   top: 50%;
   transform: translateY(-50%);
   font-size: 16px;
-  color: var(--ev-c-text-2, rgba(120, 160, 220, 0.7));
+  color: rgba(235, 235, 245, 0.6);
 }
 
 @keyframes slide-in-demo {
@@ -833,13 +833,6 @@ body,
 }
 
 /* 시세 지연 시장 (일본 등) */
-.price .delay {
-  margin-inline-start: 6px;
-  font-size: 10px;
-  font-weight: 500;
-  color: rgba(235, 235, 245, 0.4);
-}
-
 /* 설정 > 버전: 업데이트 확인 버튼 */
 
 .check-update:hover:not(:disabled) {
