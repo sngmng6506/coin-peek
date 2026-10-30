@@ -25,14 +25,14 @@ function Sparkline({ prices, isUp }) {
     })
     .join(' ')
 
-  const stroke = isUp ? '#0F6E56' : '#A32D2D'
+  const stroke = isUp ? 'var(--color-chart-up)' : 'var(--color-chart-down)'
 
   return (
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
       <polyline
         points={points}
         fill="none"
-        stroke={stroke}
+        style={{ stroke }}
         strokeWidth={STROKE}
         strokeLinejoin="round"
         strokeLinecap="round"

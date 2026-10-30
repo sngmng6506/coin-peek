@@ -22,7 +22,7 @@ export default {
   'app.emptyAdd': '+ إضافة عملة',
   'help.chart':
     'تعرض الرسوم البيانية الأسعار اليومية لآخر 90 يومًا. التغير: Upbit مقارنة بإغلاق اليوم السابق (منتصف الليل بتوقيت كوريا)، وBinance وbitbank مقارنة بآخر 24 ساعة.',
-  // StockCard
+  // CoinCard
   'card.remove': 'حذف',
   'card.editHolding': 'تعديل المركز',
   'card.stale': 'تعذّر تحديث السعر · آخر سعر',
@@ -32,10 +32,11 @@ export default {
   'holding.avgPrice': 'متوسط السعر',
   'holding.qtyPlaceholder': 'مثال: 0.05',
   'holding.save': 'حفظ',
+  'holding.saving': 'جارٍ الحفظ…',
   'holding.cancel': 'إلغاء',
   'holding.hint': 'يمكنك تعديله لاحقًا · اختياري',
   'holding.clear': 'مسح',
-  // AddStockModal
+  // AddCoinModal
   'add.title': 'إضافة عملة',
   'add.searching': 'جارٍ البحث…',
   'add.noResult': 'لا توجد نتائج',
@@ -45,13 +46,13 @@ export default {
   'add.back': '→ رجوع',
   'add.skip': 'تخطٍّ',
   'add.add': 'إضافة',
+  'add.adding': 'جارٍ الإضافة…',
   'add.close': 'إغلاق',
   'add.searchPlaceholder.UPBIT': 'مثال: Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': 'مثال: BTC, SOL',
   'add.searchPlaceholder.BITBANK': 'مثال: BTC, XRP',
   'add.alreadyAdded': 'مضاف بالفعل',
   'add.alreadyAddedTitle': 'موجودة في قائمة المتابعة',
-  'add.searchFail': 'فشل البحث',
   // SettingsModal
   'settings.title': 'الإعدادات',
   'settings.autostart': 'التشغيل عند بدء النظام',

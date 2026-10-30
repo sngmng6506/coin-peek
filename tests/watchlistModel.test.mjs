@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { holdingFields, reorderItems, defaultItems } from '../src/main/watchlistModel.js'
 
-test('reordering retains holdings and does not lose newly added stocks', () => {
+test('reordering retains holdings and does not lose newly added coins', () => {
   const a = { market: 'US', symbol: 'AAPL', quantity: 10, avgPrice: 150 }
   const b = { market: 'JP', symbol: '7203', quantity: 5, avgPrice: 2000 }
   const c = { market: 'SA', symbol: '2222' }

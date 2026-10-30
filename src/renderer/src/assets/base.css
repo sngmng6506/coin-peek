@@ -1,6 +1,25 @@
 :root {
-  --color-background: #1b1b1f;
-  --color-text: rgba(255, 255, 245, 0.86);
+  /* 색상 — 값과 사용처는 DESIGN_SYSTEM.md */
+  --color-panel: rgba(23, 25, 29, 0.96);
+  --color-overlay-1: rgba(255, 255, 255, 0.04);
+  --color-overlay-2: rgba(255, 255, 255, 0.06);
+  --color-overlay-3: rgba(255, 255, 255, 0.08);
+  --color-text: rgba(235, 235, 245, 0.92);
+  --color-text-muted: rgba(235, 235, 245, 0.6);
+  --color-text-faint: rgba(235, 235, 245, 0.5);
+  --color-up: #2eb872;
+  --color-down: #e0584a;
+  --color-error: #e0584a;
+  --color-chart-up: #0f6e56;
+  --color-chart-down: #a32d2d;
+  --color-accent: #2d6cdf;
+  --color-focus: #7ba8f4;
+  --color-stale: rgba(235, 180, 80, 0.8);
+
+  /* 글꼴 */
+  --font-body:
+    Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 *,
@@ -18,21 +37,8 @@ ul {
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

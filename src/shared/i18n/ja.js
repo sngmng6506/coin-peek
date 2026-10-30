@@ -23,7 +23,7 @@ export default {
   'app.emptyAdd': '+ コインを追加',
   'help.chart':
     'チャートは直近90日の日足です。騰落率: Upbitは前日終値(韓国時間0時)比、Binanceとbitbankは24時間比。',
-  // StockCard
+  // CoinCard
   'card.remove': '削除',
   'card.editHolding': '保有情報を編集',
   'card.stale': '更新失敗 · 前回の価格',
@@ -33,10 +33,11 @@ export default {
   'holding.avgPrice': '平均取得単価',
   'holding.qtyPlaceholder': '例: 0.05',
   'holding.save': '保存',
+  'holding.saving': '保存中…',
   'holding.cancel': 'キャンセル',
   'holding.hint': 'あとから編集できます · 入力は任意です',
   'holding.clear': 'クリア',
-  // AddStockModal
+  // AddCoinModal
   'add.title': 'コインを追加',
   'add.searching': '検索中…',
   'add.noResult': '見つかりません',
@@ -46,13 +47,13 @@ export default {
   'add.back': '← 戻る',
   'add.skip': 'スキップ',
   'add.add': '追加',
+  'add.adding': '追加中…',
   'add.close': '閉じる',
   'add.searchPlaceholder.UPBIT': '例: Bitcoin, BTC',
   'add.searchPlaceholder.BINANCE': '例: BTC, SOL',
   'add.searchPlaceholder.BITBANK': '例: ビットコイン, BTC',
   'add.alreadyAdded': '追加済み',
   'add.alreadyAddedTitle': 'ウォッチリストに追加済み',
-  'add.searchFail': '検索に失敗しました',
   // SettingsModal
   'settings.title': '設定',
   'settings.autostart': 'ログイン時に自動起動',
