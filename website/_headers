@@ -9,3 +9,19 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
+
+# CSS·JS: HTML이 내용 해시(?v=)로 부르므로 바뀌면 주소도 바뀜 → 1년 캐시, 재검증 없음 (scripts/build-site.mjs assetHash)
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+/demo.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# 이미지·아이콘: 주소가 고정이라 하루만 캐시
+/brand-mark.png
+  Cache-Control: public, max-age=86400
+/apple-touch-icon.png
+  Cache-Control: public, max-age=86400
+/og.png
+  Cache-Control: public, max-age=86400
+/favicon.ico
+  Cache-Control: public, max-age=86400

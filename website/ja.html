@@ -35,7 +35,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Gothic+A1:wght@400;700;800&family=Noto+Sans+JP:wght@400;500;700&family=M+PLUS+1+Code:wght@700&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=11" />
+  <link rel="stylesheet" href="/style.css?v=3d40d9b1dd" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -125,7 +125,7 @@
 <body>
   <nav class="nav" aria-label="メインメニュー">
     <div class="nav-inner">
-      <a href="/ja" class="brand"><img class="brand-mark" src="/apple-touch-icon.png" alt="" width="24" height="24" /><span class="brand-name">Coin Peek</span></a>
+      <a href="/ja" class="brand"><img class="brand-mark" src="/brand-mark.png" alt="" width="24" height="24" /><span class="brand-name">Coin Peek</span></a>
       <div class="nav-right">
         <a href="#features" class="muted">機能</a>
         <a href="/ja/guide/" class="muted">ガイド</a>
@@ -235,16 +235,6 @@
     ]
   }
   </script>
-  <script>
-  (function () {
-    var el = document.getElementById('appVer');
-    if (!el) return;
-    fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases/latest')
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { if (j && j.tag_name) el.textContent = j.tag_name; })
-      .catch(function () {});
-  })();
-  </script>
-  <script src="/demo.js?v=11" defer></script>
+  <script src="/demo.js?v=821379695f" defer></script>
 </body>
 </html>

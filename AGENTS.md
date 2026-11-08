@@ -88,7 +88,7 @@ scripts/                  prepare-release.mjs, build-site.mjs, check-i18n.mjs, n
 - `.gitattributes`(eol=lf) 유지. 없으면 Windows 러너에서 CRLF로 lint 실패
 - 웹사이트 버전·갱신일: 릴리즈 때 `sync:version`(= `build-site --touch`)이 `site/site.json`과 `website/`를 갱신해 버전 커밋에 포함
 - 웹사이트 수정: `site/` 고치고 `npm run build:site` 후 둘 다 커밋. `website/` 충돌은 손으로 풀지 말고 다시 생성
-- CSS·JS 변경 시 `site/site.json`의 `assetVersion` 올리기 (브라우저 캐시 무효화)
+- CSS·JS 주소의 `?v=`는 `build-site`가 `website/style.css`·`demo.js` 내용 해시로 넣음 → CSS·JS 고친 뒤 `npm run build:site` 필수 (`_headers`가 1년 캐시)
 - 웹 스타일: [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md) 웹사이트 절. 홈에서는 실제 창 오른쪽 끝에 패널이 나옴(`data-edge`)
 - 언어 자동 이동: 기준 언어 홈(`/`)에서만, 브라우저 언어 기준. 직접 고른 언어는 `localStorage cp-lang`
 

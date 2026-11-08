@@ -3,6 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+  (function () {
+    try {
+      if (/bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|whatsapp|telegram|discord/i.test(navigator.userAgent)) return;
+      if (localStorage.getItem('cp-lang')) return;
+      if (document.referrer && new URL(document.referrer).host === location.host) return;
+      var targets = {"ko":"","en":"/en","ja":"/ja","ar":"/ar"};
+      var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      var to = "/en";
+      for (var i = 0; i < prefs.length; i++) {
+        var code = String(prefs[i]).toLowerCase().split('-')[0];
+        if (code in targets) { to = targets[code]; break; }
+      }
+      if (to) location.replace(to + location.search + location.hash);
+    } catch (e) {}
+  })();
+  </script>
   <title>몰래코인 — 데스크톱 코인 시세 위젯 (업비트·바이낸스·bitbank 무료)</title>
   <meta name="description" content="화면 끝으로 마우스를 가져가면 업비트·바이낸스·bitbank 관심 코인의 시세와 평가손익이 나타나는 무료 Windows·Mac 데스크톱 위젯." />
   <meta name="keywords" content="코인 시세 위젯, 비트코인 시세 위젯, 데스크톱 코인 시세, 업비트 시세, 바이낸스 시세, 윈도우 코인 위젯, 맥 코인 위젯, 몰래 코인 보기, 몰래주식" />
@@ -36,24 +53,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Gothic+A1:wght@400;700;800&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="/style.css?v=11" />
-  <script>
-  (function () {
-    try {
-      if (/bot|crawl|spider|slurp|preview|facebookexternalhit|embedly|whatsapp|telegram|discord/i.test(navigator.userAgent)) return;
-      if (localStorage.getItem('cp-lang')) return;
-      if (document.referrer && new URL(document.referrer).host === location.host) return;
-      var targets = {"ko":"","en":"/en","ja":"/ja","ar":"/ar"};
-      var prefs = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
-      var to = "/en";
-      for (var i = 0; i < prefs.length; i++) {
-        var code = String(prefs[i]).toLowerCase().split('-')[0];
-        if (code in targets) { to = targets[code]; break; }
-      }
-      if (to) location.replace(to + location.search + location.hash);
-    } catch (e) {}
-  })();
-  </script>
+  <link rel="stylesheet" href="/style.css?v=3d40d9b1dd" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -143,7 +143,7 @@
 <body>
   <nav class="nav" aria-label="주요 메뉴">
     <div class="nav-inner">
-      <a href="/" class="brand"><img class="brand-mark" src="/apple-touch-icon.png" alt="" width="24" height="24" /><span class="brand-name">몰래코인</span></a>
+      <a href="/" class="brand"><img class="brand-mark" src="/brand-mark.png" alt="" width="24" height="24" /><span class="brand-name">몰래코인</span></a>
       <div class="nav-right">
         <a href="#features" class="muted">기능</a>
         <a href="/guide/" class="muted">가이드</a>
@@ -253,16 +253,6 @@
     ]
   }
   </script>
-  <script>
-  (function () {
-    var el = document.getElementById('appVer');
-    if (!el) return;
-    fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases/latest')
-      .then(function (r) { return r.ok ? r.json() : null; })
-      .then(function (j) { if (j && j.tag_name) el.textContent = j.tag_name; })
-      .catch(function () {});
-  })();
-  </script>
-  <script src="/demo.js?v=11" defer></script>
+  <script src="/demo.js?v=821379695f" defer></script>
 </body>
 </html>

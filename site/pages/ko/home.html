@@ -211,13 +211,3 @@
   ]
 }
 </script>
-<script>
-(function () {
-  var el = document.getElementById('appVer');
-  if (!el) return;
-  fetch('https://api.github.com/repos/sngmng6506/coin-peek/releases/latest')
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (j) { if (j && j.tag_name) el.textContent = j.tag_name; })
-    .catch(function () {});
-})();
-</script>

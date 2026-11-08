@@ -7,6 +7,7 @@
 //   node scripts/build-site.mjs           생성
 //   node scripts/build-site.mjs --check   결과물이 최신인지 검사 (CI)
 //   node scripts/build-site.mjs --touch   갱신일을 오늘로 바꾸고 생성 (릴리즈 때)
+import { createHash } from 'node:crypto'
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -62,6 +63,16 @@ const fileOf = (lang, page) =>
     : `${prefix(lang).slice(1)}${prefix(lang) ? '/' : ''}${site.pages[page]}index.html`
 const langsWith = (page) => langs.filter((l) => pages[l.code][page])
 
+// website/style.css·demo.js 내용 해시. 파일이 바뀌면 주소가 바뀌어 오래 캐시해도 안전 (website/_headers)
+const assetHash = {}
+for (const [key, file] of [
+  ['style', 'style.css'],
+  ['demo', 'demo.js']
+]) {
+  const body = await readFile(join(root, 'website', file))
+  assetHash[key] = createHash('sha256').update(body).digest('hex').slice(0, 10)
+}
+
 // 첫 화면(기준 언어 홈)에 처음 온 방문자를 브라우저 언어의 홈으로 보냄.
 // 국가(IP)가 아니라 브라우저 언어 기준. 크롤러, 사이트 안에서 온 이동, 직접 고른 언어(cp-lang)는 그대로.
 function languageRedirect() {
@@ -114,6 +125,8 @@ function render(lang, page) {
   const head = [
     `<meta charset="UTF-8" />`,
     `<meta name="viewport" content="width=device-width, initial-scale=1.0" />`,
+    // 스타일시트보다 앞: 뒤에 있으면 CSS를 다 받은 뒤에야 실행돼 다른 언어 방문자가 그만큼 늦게 이동
+    isDefault(lang) && page === 'home' && languageRedirect(),
     `<title>${meta.title}</title>`,
     `<meta name="description" content="${esc(meta.description)}" />`,
     meta.keywords && `<meta name="keywords" content="${esc(meta.keywords)}" />`,
@@ -145,11 +158,10 @@ function render(lang, page) {
     `<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Gothic+A1:wght@400;700;800${s.font ? `&family=${s.font}` : ''}&display=swap" rel="stylesheet" />`,
     `<link rel="icon" href="/favicon.ico" sizes="any" />`,
     `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`,
-    `<link rel="stylesheet" href="/style.css?v=${site.assetVersion}" />`,
+    `<link rel="stylesheet" href="/style.css?v=${assetHash.style}" />`,
     site.adsenseClient && `<meta name="google-adsense-account" content="${site.adsenseClient}" />`,
     site.adsenseClient &&
       `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${site.adsenseClient}" crossorigin="anonymous"></script>`,
-    isDefault(lang) && page === 'home' && languageRedirect(),
     slots.head
   ].filter(Boolean)
 
@@ -173,7 +185,7 @@ ${indent(head.join('\n'), 2)}
 <body>
   <nav class="nav" aria-label="${esc(s.navAria)}">
     <div class="nav-inner">
-      <a href="${pathOf(lang, 'home')}" class="brand"><img class="brand-mark" src="/apple-touch-icon.png" alt="" width="24" height="24" /><span class="brand-name">${s.brand}</span></a>
+      <a href="${pathOf(lang, 'home')}" class="brand"><img class="brand-mark" src="/brand-mark.png" alt="" width="24" height="24" /><span class="brand-name">${s.brand}</span></a>
       <div class="nav-right">
 ${indent(nav.join('\n'), 8)}
       </div>
@@ -185,7 +197,7 @@ ${indent(slots.main || '', 2)}
   <footer class="wrap">
     <div class="foot"><div class="foot-left">© ${site.updated.slice(0, 4)} ${s.copyright}</div><div class="foot-links">${footLinks}</div></div>
 ${slots['after-footer'] ? indent(slots['after-footer'], 4) + '\n' : ''}  </footer>
-${slots.scripts ? indent(slots.scripts, 2) + '\n' : ''}  <script src="/demo.js?v=${site.assetVersion}" defer></script>
+${slots.scripts ? indent(slots.scripts, 2) + '\n' : ''}  <script src="/demo.js?v=${assetHash.demo}" defer></script>
 </body>
 </html>
 `

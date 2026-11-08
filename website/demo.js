@@ -56,6 +56,8 @@
     })
     this.pw = this.panel.offsetWidth
     this.ph = this.panel.offsetHeight
+    // 표시줄 너비는 고정값: render에서 매 프레임 재면 레이아웃이 강제로 다시 계산됨
+    this.iw = this.indicator ? this.indicator.offsetWidth : 0
     if (!this.dockInit) {
       this.dockInit = true
       this.dock.y = this.cfg.dockY(this.displays[this.dock.display], this.ph)
@@ -202,7 +204,7 @@
     var hidden = this.state === 'hidden' && !this.slide && !this.dragging
     if (this.indicator) {
       var tr = this.trigger()
-      var iw = this.indicator.offsetWidth
+      var iw = this.iw
       var ix = this.dock.edge === 'left' ? tr.x : tr.x + tr.w - iw
       this.indicator.style.transform =
         'translate(' + ix + 'px,' + (this.panelY() + (this.cfg.indicatorOffset || 0)) + 'px)'
@@ -353,15 +355,32 @@
     } else {
       var cards = hero.querySelectorAll('.sp-card')
       var hovered = null
+      // 카드 위치는 패널 기준으로 한 번만 재고(창 크기가 바뀌면 다시), 매 프레임은 패널 이동량만 뺌.
+      // 프레임마다 getBoundingClientRect를 부르면 방금 바꾼 transform 때문에 레이아웃이 강제로 돎
+      var boxes = null
+      window.addEventListener('resize', function () {
+        boxes = null
+      })
       hs.cfg.onRender = function (s) {
         var hit = null
         if (s.state === 'shown' && !s.slide) {
-          for (var i = 0; i < cards.length; i++) {
-            var b = cards[i].getBoundingClientRect()
-            var r = hero.getBoundingClientRect()
-            var cx = s.cur.x + r.left
-            var cy = s.cur.y + r.top
-            if (cx >= b.left && cx < b.right && cy >= b.top && cy < b.bottom) hit = cards[i]
+          if (!boxes) {
+            var p = s.panel.getBoundingClientRect()
+            boxes = Array.prototype.map.call(cards, function (c) {
+              var b = c.getBoundingClientRect()
+              return {
+                l: b.left - p.left,
+                t: b.top - p.top,
+                r: b.right - p.left,
+                b: b.bottom - p.top
+              }
+            })
+          }
+          var x = s.cur.x - s.px
+          var y = s.cur.y - s.py
+          for (var i = 0; i < boxes.length; i++) {
+            var k = boxes[i]
+            if (x >= k.l && x < k.r && y >= k.t && y < k.b) hit = cards[i]
           }
         }
         if (hit !== hovered) {
