@@ -19,7 +19,6 @@ body,
   display: flex;
   flex-direction: column;
   background: var(--color-panel);
-  backdrop-filter: blur(18px);
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   border: 1px solid var(--color-overlay-2);
@@ -335,7 +334,6 @@ body,
   justify-content: center;
   padding: 18px;
   z-index: 10;
-  backdrop-filter: blur(10px);
 }
 
 .modal {
@@ -1069,4 +1067,15 @@ body,
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(235, 235, 245, 0.3);
+}
+
+/* OS의 '움직임 줄이기' 설정: 반복·장식 애니메이션과 전환 효과를 끔 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

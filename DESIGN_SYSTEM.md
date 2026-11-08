@@ -21,8 +21,8 @@
 | `--color-text-faint` | `rgba(235, 235, 245, 0.5)`  | 힌트, 비활성                                            |
 | `--color-up`         | `#2eb872`                   | 상승 등락률·손익 글자                                   |
 | `--color-down`       | `#e0584a`                   | 하락 등락률·손익 글자                                   |
-| `--color-chart-up`   | `#0f6e56`                   | 상승 스파크라인 (글자보다 어둡게: 숫자가 먼저 보이도록) |
-| `--color-chart-down` | `#a32d2d`                   | 하락 스파크라인                                         |
+| `--color-chart-up`   | `#178a68`                   | 상승 스파크라인 (글자보다 어둡게: 숫자가 먼저 보이도록. 배경 대비 3:1 이상) |
+| `--color-chart-down` | `#c03a3a`                   | 하락 스파크라인                                         |
 | `--color-error`      | `#e0584a`                   | 모달 오류 문구                                          |
 | `--color-accent`     | `#2d6cdf`                   | 주요 버튼, 켜진 스위치                                  |
 | `--color-focus`      | `#7ba8f4`                   | 키보드 포커스 테두리, 링크                              |
