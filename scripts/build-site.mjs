@@ -153,9 +153,12 @@ function render(lang, page) {
     `<meta name="twitter:title" content="${esc(meta.twitterTitle)}" />`,
     `<meta name="twitter:description" content="${esc(meta.twitterDescription)}" />`,
     `<meta name="twitter:image" content="${site.origin}/og.png" />`,
-    `<link rel="preconnect" href="https://fonts.googleapis.com" />`,
-    `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`,
-    `<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&family=Gothic+A1:wght@400;700;800${s.font ? `&family=${s.font}` : ''}&display=optional" rel="stylesheet" />`,
+    // 한글·영문은 Pretendard 직접 호스팅 (website/fonts/, dynamic subset이라 페이지에 쓰인 글자 조각만 받음)
+    `<link rel="stylesheet" href="/fonts/pretendard-1.3.9/pretendard.css" />`,
+    // 일본어·아랍어 전용 글꼴만 Google Fonts
+    s.font && `<link rel="preconnect" href="https://fonts.googleapis.com" />`,
+    s.font && `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`,
+    s.font && `<link href="https://fonts.googleapis.com/css2?family=${s.font}&display=optional" rel="stylesheet" />`,
     `<link rel="icon" href="/favicon.ico" sizes="any" />`,
     `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`,
     `<link rel="stylesheet" href="/style.css?v=${assetHash.style}" />`,

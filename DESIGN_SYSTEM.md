@@ -66,6 +66,6 @@
 
 - 흰 종이·잉크 (`--paper` `#fbfbfa`, `--ink` `#222124`). 빨강은 앱 아이콘에만.
 - 등락 색은 밝은 배경용 `--up` `#138a52`, `--down` `#d9162f`.
-- 제목 나눔고딕코딩(일본어 M PLUS 1 Code, 아랍어 Noto Kufi Arabic), 본문 Gothic A1.
+- 한글·영문 제목·본문 Pretendard (`website/fonts/` 직접 호스팅, dynamic subset). 일본어 제목 M PLUS 1 Code·본문 Noto Sans JP, 아랍어 제목 Noto Kufi Arabic·본문 Noto Sans Arabic (Google Fonts).
 - 카드·그라데이션·작은 대문자 라벨 같은 템플릿 장식은 쓰지 않는다.
 - 데모 패널은 앱 화면과 같게 유지한다. 앱 색상·문구를 바꾸면 `website/demo.js`·`style.css`의 데모도 확인한다.
