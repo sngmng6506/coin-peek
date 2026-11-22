@@ -19,6 +19,7 @@ export const MARKETS = [
     id: 'UPBIT',
     currency: 'KRW',
     quote: 'KRW',
+    changeBasis: 'prevCloseKST',
     decimals: 0,
     autoDecimals: true,
     localLang: 'ko', // 업비트 korean_name
@@ -32,6 +33,7 @@ export const MARKETS = [
     currency: 'USD', // USDT는 ISO 통화 코드가 아니라 Intl 포맷에 못 씀 → 달러 기호로 표기
     currencyLabel: 'USDT',
     quote: 'USDT',
+    changeBasis: 'rolling24h',
     decimals: 2,
     autoDecimals: true,
     examplePrice: 100000,
@@ -43,6 +45,7 @@ export const MARKETS = [
     id: 'BITBANK',
     currency: 'JPY',
     quote: 'JPY',
+    changeBasis: 'rolling24h',
     decimals: 0,
     autoDecimals: true,
     localLang: 'ja', // 일본어 코인 이름 (주요 코인만)
