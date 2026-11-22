@@ -1,6 +1,6 @@
 import Sparkline from './Sparkline'
 import { useI18n } from '../i18n'
-import { displayName, formatMoney, formatNumber, formatRatio } from '../lib/format'
+import { displayName, formatMoney, formatNumber, formatRatio, quoteContext } from '../lib/format'
 
 function profitOf(coin) {
   if (!Number.isFinite(coin.price) || !coin.quantity || !coin.avgPrice) return null
@@ -58,6 +58,7 @@ function CoinCard({ coin, onRemove, onEditHolding }) {
 
   const cls = coin.isUp ? 'up' : 'down'
   const profit = profitOf(coin)
+  const context = quoteContext(coin)
   return (
     <div className="card">
       <div className="card-actions">
@@ -78,22 +79,30 @@ function CoinCard({ coin, onRemove, onEditHolding }) {
           />
         )}
       </div>
-      <div className="row">
-        <span className="name" title={coin.symbol}>
-          {displayName(coin, lang)}
-        </span>
+      <div className="row card-head">
+        <div className="coin-identity">
+          <span className="name" title={coin.symbol}>
+            {displayName(coin, lang)}
+          </span>
+          {context && (
+            <span className="coin-meta">
+              <span>{t(`market.${context.marketId}`)}</span>
+              <span aria-hidden="true">·</span>
+              <span dir="ltr">{context.pair}</span>
+              <span aria-hidden="true">·</span>
+              <span>{t(`changeBasis.${context.changeBasis}`)}</span>
+              {coin.stale && (
+                <span className="stale-note" title={t('card.stale')}>
+                  {t('card.staleShort')}
+                </span>
+              )}
+            </span>
+          )}
+        </div>
         <span className={`change ${cls}`}>{formatRatio(coin.changeRatio)}</span>
       </div>
       <div className="row">
         <span className="price">
-          {coin.stale && (
-            <span
-              className="stale-dot"
-              role="img"
-              aria-label={t('card.stale')}
-              title={t('card.stale')}
-            />
-          )}
           <span className="num">{formatMoney(coin.price, coin.market, lang)}</span>
         </span>
         <Sparkline prices={coin.prices} isUp={coin.isUp} />
