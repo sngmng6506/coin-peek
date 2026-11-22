@@ -27,6 +27,9 @@ export default {
   'card.remove': 'Remove',
   'card.editHolding': 'Edit holding',
   'card.stale': 'Update failed · last price',
+  'card.staleShort': 'Update failed',
+  'changeBasis.prevCloseKST': 'Previous close (00:00 KST)',
+  'changeBasis.rolling24h': 'Rolling 24h change',
   // HoldingEditModal
   'holding.title': 'Edit Holding',
   'holding.quantity': 'Quantity',
