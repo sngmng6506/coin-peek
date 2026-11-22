@@ -229,6 +229,47 @@ body,
   justify-content: space-between;
 }
 
+.card .row.card-head {
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.coin-identity {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.coin-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 4px;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--color-text-faint);
+}
+
+.coin-meta .stale-note {
+  color: var(--color-stale);
+}
+
+.coin-meta .stale-note::before {
+  content: '·';
+  color: var(--color-text-faint);
+  margin-inline-end: 4px;
+}
+
+.card-head .change {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.card-head .name {
+  overflow-wrap: anywhere;
+}
+
 .name {
   font-weight: 600;
   color: var(--color-text);
@@ -712,17 +753,6 @@ body,
 /* 언어 선택 세그먼트 */
 
 /* Ko-fi 버튼 */
-
-/* 연결 끊김 시 마지막 가격 옆 흐린 점 */
-.stale-dot {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 5px;
-  background: var(--color-stale);
-  margin-inline-end: 5px;
-  vertical-align: middle;
-}
 
 /* ? 도움말 버튼 + 팝오버 */
 .help-btn.active {
