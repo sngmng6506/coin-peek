@@ -158,7 +158,8 @@ function render(lang, page) {
     // 일본어·아랍어 전용 글꼴만 Google Fonts
     s.font && `<link rel="preconnect" href="https://fonts.googleapis.com" />`,
     s.font && `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`,
-    s.font && `<link href="https://fonts.googleapis.com/css2?family=${s.font}&display=optional" rel="stylesheet" />`,
+    s.font &&
+      `<link href="https://fonts.googleapis.com/css2?family=${s.font}&display=optional" rel="stylesheet" />`,
     `<link rel="icon" href="/favicon.ico" sizes="any" />`,
     `<link rel="apple-touch-icon" href="/apple-touch-icon.png" />`,
     `<link rel="stylesheet" href="/style.css?v=${assetHash.style}" />`,
