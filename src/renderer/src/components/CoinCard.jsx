@@ -1,12 +1,6 @@
 import Sparkline from './Sparkline'
 import { useI18n } from '../i18n'
-import {
-  displayName,
-  formatMoney,
-  formatNumber,
-  formatRatio,
-  quoteContext
-} from '../lib/format'
+import { displayName, formatMoney, formatNumber, formatRatio, quoteContext } from '../lib/format'
 
 function profitOf(coin) {
   if (!Number.isFinite(coin.price) || !coin.quantity || !coin.avgPrice) return null
