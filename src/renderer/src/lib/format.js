@@ -84,6 +84,17 @@ export function examplePrice(marketId) {
   return m ? m.examplePrice.toFixed(m.decimals) : ''
 }
 
+// 거래소·거래 페어·등락률 기준은 시세 API마다 다르므로 시장 정의를 기준으로 표시
+export function quoteContext(coin) {
+  const market = getMarket(coin?.market)
+  if (!market || !coin?.symbol) return null
+  return {
+    marketId: market.id,
+    pair: `${coin.symbol}/${market.quote}`,
+    changeBasis: market.changeBasis
+  }
+}
+
 // 종목명: 화면 언어가 시장 원어와 같으면 원어 이름(예: 일본어 UI의 トヨタ自動車), 아니면 기본 이름
 export function displayName(coin, lang) {
   if (coin.localName && coin.localLang === lang) return coin.localName
