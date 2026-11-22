@@ -27,6 +27,9 @@ export default {
   'card.remove': '削除',
   'card.editHolding': '保有情報を編集',
   'card.stale': '更新失敗 · 前回の価格',
+  'card.staleShort': '更新失敗',
+  'changeBasis.prevCloseKST': '前日終値(韓国0時)比',
+  'changeBasis.rolling24h': '直近24時間比',
   // HoldingEditModal
   'holding.title': '保有情報の編集',
   'holding.quantity': '数量',
