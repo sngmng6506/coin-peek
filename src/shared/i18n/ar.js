@@ -26,6 +26,9 @@ export default {
   'card.remove': 'حذف',
   'card.editHolding': 'تعديل المركز',
   'card.stale': 'تعذّر تحديث السعر · آخر سعر',
+  'card.staleShort': 'فشل التحديث',
+  'changeBasis.prevCloseKST': 'مقارنة بإغلاق أمس (00:00 KST)',
+  'changeBasis.rolling24h': 'التغير خلال آخر 24 ساعة',
   // HoldingEditModal
   'holding.title': 'تعديل المركز',
   'holding.quantity': 'الكمية',
